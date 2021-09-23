@@ -8,6 +8,7 @@
 This browser based web application to ...
 * Hi, my name is Brytton
 * Hi, my name is Pedro. I'm excited about this project because we could help a lot of students adapt to life in Canada.
+* Hi my name is Benjamin Chen. I'm excited in collborating and working on this project.
 	
 ## Technologies
 Technologies used for this project:
