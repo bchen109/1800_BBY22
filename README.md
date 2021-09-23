@@ -6,6 +6,7 @@
 
 ## General Info
 This browser based web application to ...
+* Hi, my name is Pedro. I'm excited about this project because we could help a lot of students adapt to life in Canada.
 	
 ## Technologies
 Technologies used for this project:
