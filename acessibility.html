@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Acessibility</title>
+    <meta name="comp1800 boilerplate code" content="my bcit project">
+    <meta name="author" content="BCIT">
+
+    <!-- Bootstrap, firebase-auth-ui -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
+    <link rel="stylesheet" href="styles/accessibility.css">
+
+    <!-- Optional styles and scripts of your own -->
+    
+</head>
+
+<body>
+
+    <!-------------------------------------->
+    <!-- The following is HTML for layout -->
+    <!-------------------------------------->
+    <!-- Header Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">Logo</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Connect!</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Support</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- welcome and main part of the page -->
+    
+
+    <section id="headings">
+        <h1>Acessibility</h1>
+        <h3>All you need in one place</h3>
+    </section>
+
+    <section id="content">
+        <div id="arriving" class="card">
+            <a href="#headings">
+                <img src="https://dummyimage.com/400x400/0d6efd/fff&text=Arriving">
+            </a>
+            <div class="card-text">
+                <h3>Arriving</h3>
+                <p>Discover all the steps necessary to become a student in Canada. This section covers Student visas, College 
+                    requirements and much more.</p>
+                <button class="card-button">See more</button>
+            </div>
+        </div>
+        <div id="adapting" class="card">
+            <a href="#headings">
+                <img src="https://dummyimage.com/400x400/0d6efd/ffffff&text=Adapting">
+            </a>
+            <div class="card-text">
+                <h3>Adapting</h3>
+                <p>Get a detailed guide on what to do once you arrive in Canada. This section covers aspects such as student 
+                    life, public services and weather.</p>
+                    <button class="card-button">See more</button>
+            </div>
+        </div>
+        <div id="faculty" class="card">
+            <a href="#headings">
+                <img src="https://dummyimage.com/400x400/0d6efd/ffffff&text=Find+Faculty">
+            </a>
+            <div class="card-text">
+                <h3>Find Faculty</h3>
+                <p>Find out which sector from college you shoud contact by answering a few questions about your concern.</p>
+                <button class="card-button">See more</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!----------------------------------------------->
+    <!-- JS: Boostrap, Firebase, API related, add Jquery    -->
+    <!----------------------------------------------->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.js"></script>
+    <!-- Link to the api keys for your firebase project -->
+    <script src="scripts/firebase_api_elmo.js"></script>
+
+    <!--------------------------------------------------------------------->
+    <!-- JS files: Your own JavaScript functions included here    -->
+    <!--------------------------------------------------------------------->
+
+</body>
+
+</html>
