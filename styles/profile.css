@@ -1,227 +1,153 @@
 #container {
+  height: 550px;
   display: grid;
-  grid-template-rows: 15% 70% 15%;
+  grid-template-rows: 20% 55% 20%;
   text-align: left;
+  row-gap: 10px;
+
+  justify-items: center;
+  align-items: center;
 }
 
-#heading {
+#heading  {
   grid-row: 1;
-  padding-left: 1.5%;
+}
+
+#heading h1 {
+  font-size: 4vw;
 }
 
 #picture {
   grid-row: 2;
-  padding-left: 1%;
+}
+
+#picture img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
 }
 
 #button {
   grid-row: 3;
-  padding-left: 3%;
 }
 
 #container2 {
+  height: 2150px;
   display: grid;
-  grid-template-rows: 20% 20% 20% 20% 20% 20% 20%;
-  row-gap: 0;
+  grid-template-rows: repeat(3, 7%) 21.75% repeat(8, 7%);
+  row-gap: 10px;
+
+  justify-items: center;
+  align-self: center;
 }
 
-#container3 {
-  display: none;
+.font {
+  font-size: 1.5vw;
 }
 
-#names {
+.inputFormat {
+  background: #f1f1f1;
+  display: inline-block;
+  width: 600px;
+}
+
+#firstName {
   grid-row: 1;
-  display: grid;
-  grid-template-columns: 20% 80%;
 }
 
-#name1 {
-  grid-column: 1;
-  text-align: left;
-  padding-bottom: 1%;
-  padding-left: 10%;
-}
-
-#name2 {
-  grid-column: 2;
-  text-align: left;
-  padding-bottom: 1%;
-}
-
-#address {
+#lastName {
   grid-row: 2;
-  display: grid;
-  grid-template-columns: 20% 80%;
 }
 
-#address1 {
-  grid-column: 1;
-  text-align: left;
-  padding-bottom: 1%;
-  padding-left: 10%;
-}
-
-#address2 {
-  grid-column: 2;
-  text-align: left;
-  padding-bottom: 1%;
-}
-
-#living {
+#age {
   grid-row: 3;
-  display: grid;
-  grid-template-columns: 20% 80%;
 }
 
-#city {
-  grid-column: 1;
-  text-align: left;
-  padding-bottom: 1%;
-  padding-left: 10%;
-}
-
-#province {
-  grid-column: 2;
-  text-align: left;
-  padding-bottom: 1%;
-}
-
-#postalCode {
+#bio {
   grid-row: 4;
-  text-align: left;
-  padding-left: 2%;
 }
 
-#background {
+#occupation {
   grid-row: 5;
-  display: grid;
-  grid-template-columns: 20% 80%;
 }
 
-#national {
-  grid-column: 1;
-  text-align: left;
-  padding-bottom: 1%;
-  padding-left: 10%;
-}
-
-#origin {
-  grid-column: 2;
-  text-align: left;
-  padding-bottom: 1%;
-}
-
-#school {
+#education {
   grid-row: 6;
-  grid-column: 1;
-  text-align: left;
-  padding-bottom: 1%;
-  padding-left: 2%;
 }
 
-#contact {
+#fieldOfStudy {
   grid-row: 7;
+}
+
+#nationality {
+  grid-row: 8;
+}
+
+#languages {
+  grid-row: 9;
+}
+
+#hobbiesActivities {
+  grid-row: 10;
+}
+
+#volunteer {
+  grid-row: 11;
+}
+
+#check {
+  width:600px;
+  height:40px;
+  border-radius:5px;
+  border:2px solid #555;
+}
+
+.submission {
+  height: auto;
+  width: 600px;
+  grid-row: 12;
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: repeat(4, 25%);
 }
 
-#email {
+#submit {
   grid-column: 1;
-  text-align: left;
-  padding-bottom: 1%;
-  padding-left: 10%;
+  height: 80%;
 }
 
-#mobile {
-  grid-column: 2;
-  text-align: left;
-  padding-bottom: 1%;
+#cancel {
+  grid-column: 4;
+  height: 80%;
 }
 
-@media (max-width: 1075px) {
-  #container {
-    text-align: center;
+@media (max-width: 1250px) {
+  #heading h1 {
+    font-size: 6vw;
+  }
+  .font {
+    font-size: 3.5vw;
+  }
+}
+
+@media (max-width: 750px) {
+  #heading h1 {
+    font-size: 8vw;
+  }
+  .font {
+    font-size: 5vw;
+  }
+}
+
+@media (max-width: 650px) {
+  .inputFormat {
+    width: 400px;
   }
 
-  #container2 {
-    display: none
+  #check {
+    width: 400px;
   }
 
-  #container3 {
-    display: grid;
-    grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
-    row-gap: 0;
-  }
-
-  #mName1 {
-    grid-row: 1;
-    text-align: center;
-    padding-bottom: 1%;
-  }
-
-  #mName2 {
-    grid-row: 2;
-    text-align: center;
-    padding-bottom: 1%;
-  }
-
-  #mAddress1 {
-    grid-row: 3;
-    text-align: center;
-    padding-bottom: 1%;
-  }
-
-  #mAddress2 {
-    grid-row: 4;
-    text-align: center;
-    padding-bottom: 1%;
-  }
-
-  #mCity {
-    grid-row: 5;
-    text-align: center;
-    padding-bottom: 1%;
-  }
-
-  #mProvince {
-    grid-row: 6;
-    text-align: center;
-    padding-bottom: 1%;
-  }
-
-  #mPostalCode {
-    grid-row: 7;
-    text-align: center;
-    padding-bottom: 1%;
-  }
-
-  #mNational {
-    grid-row: 8;
-    text-align: center;
-    padding-bottom: 1%;
-  }
-
-  #mOrigin {
-    grid-row: 9;
-    text-align: center;
-    padding-bottom: 1%;
-  }
-
-  #mSchool {
-    grid-row: 10;
-    text-align: center;
-    padding-bottom: 1%;
-  }
-
-  #mEmail {
-    grid-row: 11;
-    text-align: center;
-    padding-bottom: 1%;
-  }
-
-  #mMobile {
-    grid-row: 12;
-    text-align: center;
-    padding-bottom: 1%;
+  .submission {
+    width: 400px;
   }
 }
