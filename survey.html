@@ -57,51 +57,63 @@
         <div id="header" class="p-2">
             <h1>Personal Information</h1>
         </div>
-        <div class="mb-0 p-2">
-            <label for="exampleFormControlInput1" class="form-label">Enter your age:</label>
-            <input type="number" class="form-control" id="age" placeholder="21">
-        </div>
-        <div class="mb-0 p-2">
-            <input class="form-check-input" type="checkbox" value="" id="volunteer">
-            <label class="form-check-label" for="defaultCheck1">Signup as volunteer?</label>
-        </div>
-        <div class="mb-0 p-2">
-            <label for="exampleFormControlInput1" class="form-label">Languages:</label>
-            <input type="text" class="form-control" id="languages" placeholder="English, French">
-        </div>
+        <form class="needs-validation">
+            <div class="mb-0 p-2">
+                <label for="exampleFormControlInput1" class="form-label">Enter your age:</label>
+                <input type="number" class="form-control" id="age" placeholder="21" required>
+            </div>
+            <div class="mb-0 p-2">
+                <input class="form-check-input" type="checkbox" value="" id="volunteer">
+                <label class="form-check-label" for="defaultCheck1">Signup as volunteer?</label>
+            </div>
+            <div class="mb-0 p-2">
+                <label for="exampleFormControlInput1" class="form-label">Languages:</label>
+                <input type="text" class="form-control" id="languages" placeholder="English, French" required>
+            </div>
 
-        <div class="mb-0 p-2">
-            <label for="exampleFormControlInput1" class="form-label">Occupation:</label>
-            <input type="text" class="form-control" id="occupation" placeholder="Software Engineer">
-        </div>
+            <div class="mb-0 p-2">
+                <label for="exampleFormControlInput1" class="form-label">Nationality:</label>
+                <input type="text" class="form-control" id="nationality" placeholder="Canadian, Japanese" required>
+            </div>
 
-        <div class="mb-0 p-2">
-            <label for="exampleFormControlInput1" class="form-label">Hobbies:</label>
-            <input type="text" class="form-control" id="hobbies" placeholder="Badminton, Tennis, Baseball">
-        </div>
+            <div class="mb-0 p-2">
+                <label for="exampleFormControlInput1" class="form-label">Occupation:</label>
+                <input type="text" class="form-control" id="occupation" placeholder="Software Engineer" required>
+            </div>
 
-        <div class="mb-0 p-2">
-            <label for="exampleFormControlInput1" class="form-label">Area of Study:</label>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Open this select menu</option>
-                <option value="1">Applied &amp; Natural Sciences</option>
-                <option value="2">Business &amp; Media</option>
-                <option value="3">Computing &amp; Information Technology</option>
-                <option value="4">Engineering</option>
-                <option value="5">Health Sciences</option>
-                <option value="6">Trades</option>
-            </select>
-        </div>
+            <div class="mb-0 p-2">
+                <label for="exampleFormControlInput1" class="form-label">Hobbies:</label>
+                <input type="text" class="form-control" id="hobbies" placeholder="Badminton, Tennis, Baseball" required>
+            </div>
 
-        <div class="mb-0 p-2">
-            <label for="exampleFormControlInput1" class="form-label">Your quote:</label>
-            <input type="text" class="form-control" id="quote" placeholder="Hi, my name is bob and I love reading mystery novels!">
-        </div>
+            <div class="mb-0 p-2">
+                <label for="exampleFormControlInput1" class="form-label">Area of Study:</label>
+                <select class="form-select" aria-label="Default select example" required>
+                    <option selected value="">Click here to select an option</option>
+                    <option value="1">Applied &amp; Natural Sciences</option>
+                    <option value="2">Business &amp; Media</option>
+                    <option value="3">Computing &amp; Information Technology</option>
+                    <option value="4">Engineering</option>
+                    <option value="5">Health Sciences</option>
+                    <option value="6">Trades</option>
+                </select>
+            </div>
 
-        <div class="mb-0 p-2">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+            <div class="mb-0 p-2">
+                <label for="exampleFormControlInput1" class="form-label">Profile Picture</label>
+                <input type="file" class="form-control" aria-label="file example">
+            </div>
 
+            <div class="mb-0 p-2">
+                <label for="exampleFormControlInput1" class="form-label">Your quote:</label>
+                <input type="text" class="form-control" id="quote"
+                    placeholder="Hi, my name is bob and I love reading mystery novels!">
+            </div>
+
+            <div class="mb-0 p-2">
+                <button type="submit" id="submit-button" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
     </div>
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related, add Jquery    -->
@@ -127,7 +139,72 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script>
+        function checkValidityForm() {
+            const forms = document.querySelectorAll('.needs-validation');
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms).forEach((form) => {
+                form.addEventListener('submit', (event) => {
+                    if (!form.checkValidity()) {
+                        console.log("Invalid!");
+                        event.preventDefault();
+                        event.stopPropagation();
+                    } else {
+                        updateUser();
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                }, false);
+            });
+        }
+        function updateUser() {
+            var userId = getParameter("user");
+            if (userId) {
+                const userDoc = getUserDocument(userId);
+                db.collection("userdata").doc(userId)
+                    .update({ //write to firestore. We are using the UID for the ID in users collection
+                        // fullname: "hello world", //"users" collection
+                        // email: "hello world" //with authenticated user's ID (user.uid)
+                        age: Number(document.getElementById("age").value),
+                        hobbies: String(document.getElementById("hobbies").value),
+                        languages: String(document.getElementById("languages").value),
+                        nationality: String(document.getElementById("nationality").value),
+                        profilepicture: String("temp"),
+                        volunteer: String(document.getElementById("volunteer").checked),
+                        quote: String(document.getElementById("quote").value),
+                        connections: "",
+                        notifications: "",
+                        settings: ""
+                    }).then(function () {
+                        console.log("User data updated");
+                        window.location.assign("profile.html"); //re-direct to main.html after signup
+                    })
+                    .catch(function (error) {
+                        window.location.assign("login.html"); //re-direct to main.html after signup
+                        console.log("Error updating user data: " + error);
+                    });
+            } else {
+                console.log("Error no user parameter detected");
+            }
+        }
 
+        function getUserDocument(id) {
+            return db.doc("userdata/" + id);
+        }
+
+        function getParameter(name) {
+            var url_string = window.location.href;
+            var url = new URL(url_string);
+            var paramValue = url.searchParams.get(name);
+            return paramValue;
+        }
+
+        function handleButtonClick(e) {
+            if (e instanceof MouseEvent) {
+                checkValidityForm();
+            }
+        }
+        document.getElementById("submit-button").addEventListener("click", handleButtonClick, false);
+        console.log("Loaded");
     </script>
 
 </body>
