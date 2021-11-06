@@ -1,5 +1,5 @@
 #container {
-  height: 550px;
+  height: 350px;
   display: grid;
   grid-template-rows: 20% 55% 20%;
   text-align: left;
@@ -14,14 +14,14 @@
 }
 
 #heading h1 {
-  font-size: 4vw;
+  font-size: 3vw;
 }
 
 #picture {
   grid-row: 2;
 }
 
-#picture img {
+#profilePicture {
   width: 100%;
   height: auto;
   border-radius: 50%;
@@ -122,7 +122,7 @@
 
 @media (max-width: 1250px) {
   #heading h1 {
-    font-size: 6vw;
+    font-size: 5vw;
   }
   .font {
     font-size: 3.5vw;
@@ -131,7 +131,7 @@
 
 @media (max-width: 750px) {
   #heading h1 {
-    font-size: 8vw;
+    font-size: 7vw;
   }
   .font {
     font-size: 5vw;
@@ -139,6 +139,10 @@
 }
 
 @media (max-width: 650px) {
+  #container2 {
+    height: 1200px;
+  }
+
   .inputFormat {
     width: 400px;
   }
