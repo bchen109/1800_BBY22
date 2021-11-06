@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <!-- Third party CSS source for header-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles/home.css"/>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#">Logo</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="profile.html">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">About</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Settings</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Logout</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container-fluid justify-content-evenly">
+          <img src="./images/house-icon.png" style="width: 45px; height: auto">
+          <img src="./images/group-people.png" style="width: 45px; height: auto">
+          <img src="./images/bell-icon.png" style="width: 45px; height: auto">
+      </div>
+  </nav>
+
+  <h1 id="title">Home</h1>
+  <section id="banner">
+    <h3>Welcome back John!</h3>
+    <form action="post.html">
+      <button id="newPost" type="submit" class="btn btn-primary btn-lg">New Post</button>
+    </form>
+  </section>
+
+  <div id="post">
+    <div id="postHeader">
+      <img id="profileImage" src="images/profile_image_placeholder.jpeg" alt="" width="48px" height="48px">
+      <p id="name">John Doe</p>
+      <img id="menu" src="images/menu.png" alt="" width="24px" height="24px">
+    </div>
+    <div id="body">
+      <p name="postText" id="postText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, cum numquam.
+        Itaque vel illum libero magni perferendis, officiis,
+        ipsam quod error reprehenderit illo natus deleniti architecto suscipit corrupti exercitationem sapiente.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        In enim, aliquid consequatur quas maiores animi dolorum! Repellat autem quo, soluta dolore,
+        deserunt recusandae iusto impedit eveniet nihil nesciunt, facilis qui?
+      </p>
+      <img id="postPic" src="images/post.jpg" alt="" width="400px" height="400px">
+    </div>
+    <div id="bottom">
+      <img id="like" src="images/like-icon.png" alt="" width="48px" height="48px">
+      <p id="counter">16</p>
+      <p id="comment">Comments</p>
+    </div>
+    <div id="comments">
+      <img id="commenter" src="images/commenter.jpg" alt="" width="48px" height="48px">
+      <p id="commenterName">Jim Rayner</p>
+      <p id="commentText">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Blanditiis, error tempora veritatis esse est amet temporibus numquam suscipit accusamus consequuntur ducimus aliquam voluptates,
+          ipsam illum minima dicta facilis, sunt fuga!
+      </p>
+    </div>
+  </div>
+
+    <!----------------------------------------------->
+    <!-- JS: Boostrap, Firebase, API related, add Jquery-->
+    <!----------------------------------------------->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <!-- Included the Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <!-- Link to the api keys for your firebase project -->
+    <script src="scripts/firebaseAPI.js"></script>
+  </body>
+</html>
