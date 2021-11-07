@@ -11,3 +11,4 @@ var firebaseConfig = {
 
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+console.log("Loaded API Keys");
