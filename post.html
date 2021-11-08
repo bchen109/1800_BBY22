@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css" />
     <link rel="stylesheet" href="styles/post.css"/>
 
   </head>
@@ -54,8 +55,16 @@
       <div id="editor">
         <p>Start a post...</p>
       </div>
+
+      <div class="field">
+        <div class="ui left icon input large">
+          <i class="image icon"></i>
+          <input type="file" id="fileUploader" />
+        </div>
+      </div>
+
       <div class="submission mb-0 p-2">
-      <input type="submit" value="Submit" id="submit" class="btn btn-success btn-lg"/>
+        <input type="submit" value="Submit" id="submit" class="btn btn-success btn-lg"/>
       </div>
     </div>
 
@@ -71,9 +80,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <!-- Included the Quill library -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <!-- Link to the api keys for your firebase project -->
     <script src="scripts/firebaseAPI.js"></script>
