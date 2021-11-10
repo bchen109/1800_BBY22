@@ -40,7 +40,7 @@
                         <a class="nav-link" href="#">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Settings</a>
+                        <a class="nav-link" href="settings.html">Settings</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Logout</a>
@@ -51,8 +51,12 @@
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid justify-content-evenly">
-            <img src="./images/house-icon.png" style="width: 45px; height: auto">
-            <img src="./images/group-people.png" style="width: 45px; height: auto">
+            <a href="home.html" class="home">
+                <img src="./images/house-icon.png" style="width: 45px; height: auto">
+            </a>
+            <a href="connect.html">
+                <img src="./images/group-people.png" style="width: 45px; height: auto">
+            </a>
             <img src="./images/bell-icon.png" style="width: 45px; height: auto">
         </div>
     </nav>
@@ -136,27 +140,39 @@
     <script>
         ///////////To be implemented/////////////////
         var currentUser;
+        var privacyStatus;
+        var connectionsStatus;
+        var commentsStatus;
+        var userSettingsId;
 
         firebase.auth().onAuthStateChanged(user => {
             // Check if user is signed in:
             if (user) {
                 //go to the correct user document by referencing to the user uid
                 currentUser = db.collection("userdata").doc(user.uid);
+                console.log("User: " + user);
+                currentUser.get()
+                        .then(userDoc => {
+                            //get the data fields of the user
+                            userSettingsId = userDoc.data().settings;
+                            console.log(userSettingsId + typeof(userSettingsId));
+                        })
+            } else {
+                console.log("User is not logged in.");
             }
         });
         //////////////////////////////////////////////
-
         function privacyToggle() {
-            db.collection("settings").doc("template")
+            db.collection("settings").doc(userSettingsId)
                 .get()
                 .then(function (doc) {
                     const privacyStatus = doc.data()["privacy"];
                     if (privacyStatus) {
-                        db.collection("settings").doc("template").update({
+                        db.collection("settings").doc(userSettingsId).update({
                             privacy: false
                         });
                     } else {
-                        db.collection("settings").doc("template").update({
+                        db.collection("settings").doc(userSettingsId).update({
                             privacy: true
                         });
                     }
@@ -164,16 +180,16 @@
         }
 
         function connectionsToggle() {
-            db.collection("settings").doc("template")
+            db.collection("settings").doc(userSettingsId)
                 .get()
                 .then(function (doc) {
                     const connectionsStatus = doc.data()["connections"];
                     if (connectionsStatus) {
-                        db.collection("settings").doc("template").update({
+                        db.collection("settings").doc(userSettingsId).update({
                             connections: false
                         });
                     } else {
-                        db.collection("settings").doc("template").update({
+                        db.collection("settings").doc(userSettingsId).update({
                             connections: true
                         });
                     }
@@ -181,16 +197,16 @@
         }
 
         function commentsToggle() {
-            db.collection("settings").doc("template")
+            db.collection("settings").doc(userSettingsId)
                 .get()
                 .then(function (doc) {
                     const commentsStatus = doc.data()["comments"];
                     if (commentsStatus) {
-                        db.collection("settings").doc("template").update({
+                        db.collection("settings").doc(userSettingsId).update({
                             comments: false
                         });
                     } else {
-                        db.collection("settings").doc("template").update({
+                        db.collection("settings").doc(userSettingsId).update({
                             comments: true
                         });
                     }
