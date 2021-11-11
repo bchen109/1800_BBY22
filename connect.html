@@ -79,12 +79,12 @@
 
     <section id="buttons">
         <button type="button" class="btn btn-success btn-lg">Connect!</button>
-        <button type="button" class="btn btn-primary btn-lg">Next</button>
+        <button id="next-button" type="button" class="btn btn-primary btn-lg">Next</button>
     </section>
 
     <h3>Your connections</h3>
     <section id="connection-list">
-        <div class="connection">
+        <!-- <div class="connection">
             <div class="img-connection">
                 <img alt="" class="connection-img" src="images/random_guy.jpg">
             </div>
@@ -143,7 +143,7 @@
                 <h4>Program / College</h4>
                 <h4>Nationality / Languages</h4>
             </div>
-        </div>
+        </div> -->
     </section>
 
     <br><br>
@@ -198,39 +198,62 @@
             })
         }
 
-        async function getUserDoc(userId) {
+        async function getVolunteers() {
+            let userId = localStorage.getItem("userId");
             let userDoc = db.collection('userdata').doc(userId);
             let doc = await userDoc.get();
             let volunteerId;
+            var result = [];
             if (!doc.exists) {
                 console.log('No such document!');
             } else {
-                const data = doc.data();
+                let data = doc.data();
                 let volunteerData;
                 let volunteerId;
-                const volunteers = db.collection('userdata').where("volunteer", "==", true).where("fieldofstudy",
-                    "==", data.fieldofstudy);
-                volunteers.get().then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        volunteerId = doc.id;
-                        volunteerData = doc.data();
-                        document.getElementById("fullname").innerText = volunteerData.fullname;
-                        document.getElementById("occupation").innerText = volunteerData.occupation;
-                        document.getElementById("nationality-languages").innerText = volunteerData
-                            .nationality + "/ " + volunteerData.languages;
-                        document.getElementById("quote").innerText = volunteerData.quote;
-                        console.log(volunteerId + "/profile.jpg");
-                        firebase.app().storage().ref("users").child(volunteerId + "/profile.jpg").getDownloadURL().then(imgUrl => {
-                            console.log(imgUrl);
-                            document.getElementById("volunteer-img").src = imgUrl;
-                        }).catch(function (error) {
-                        console.log("No profile picture found so using default picture");
-                        });
+                await db.collection('userdata').where("volunteer", "==", true).where("fieldofstudy",
+                    "==", data.fieldofstudy).get().then(function (queryVolunteers) {
+                    queryVolunteers.forEach((doc) => {
+                        result.push(doc.data());
+                        volunteerIds.push(doc.id);
                     })
                 });
+                return result;
             }
         }
-        insertData();
+
+        function onLoad() {
+            currentIndex = currentIndex % maxIndex;
+            let volunteerData = volunteers[currentIndex];
+            let volunteerId = volunteerIds[currentIndex];
+            document.getElementById("fullname").innerText = volunteerData.fullname;
+            document.getElementById("occupation").innerText = volunteerData.occupation;
+            document.getElementById("nationality-languages").innerText = volunteerData.nationality + "/ " + volunteerData.languages;
+            document.getElementById("quote").innerText = volunteerData.quote;
+
+            console.log(volunteerId + "/profile.jpg");
+
+            firebase.app().storage().ref("users").child(volunteerId + "/profile.jpg").getDownloadURL().then(imgUrl => {
+                console.log(imgUrl);
+                document.getElementById("volunteer-img").src = imgUrl;
+            }).catch(function (error) {
+                console.log("No profile picture found so using default picture");
+            });
+            currentIndex++;
+        }
+
+        var currentIndex;
+        var maxIndex;
+        var volunteers;
+        var volunteerIds = [];
+        async function main() {
+            volunteers = await getVolunteers();
+            currentIndex = 0;
+            maxIndex = volunteers.length - 1;
+            console.log(volunteers);
+            onLoad();
+            document.getElementById("next-button").addEventListener('click', onLoad, false);
+        }
+        main();
     </script>
 
 </body>
