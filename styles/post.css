@@ -74,6 +74,19 @@ Set the font-family content used for the HTML content.
   margin: 0 auto 0 auto;
 }
 
+#innerField {
+  width: 100%;
+  height: auto;
+}
+
+#picture {
+  max-height: 200px;
+  max-width: 200px;
+  width: 80%;
+  height: auto;
+  display: none;
+}
+
 .submission {
   height: auto;
   width: 80%;
@@ -83,6 +96,17 @@ Set the font-family content used for the HTML content.
 }
 
 #submit {
-  width: 80%;
   font-size: 1vw;
+}
+
+@media only screen and (max-width: 1200px) {
+  #submit {
+    font-size: 2vw;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #submit {
+    font-size: 3vw;
+  }
 }
