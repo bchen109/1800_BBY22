@@ -137,8 +137,28 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
 
+    <!--For the sign up page
+        db.collection(settings).add({
+                privacy: true,
+                connections: true,
+                comments: false
+            })
+            .then(function (docRef) {
+                let settingsId = docRef.id;
+                console.log("Document written with ID: ", settingsId);
+                db.collection('userdata').doc(user.uid).set({
+                    settings: settingsId
+                }, {merge: true});
+            })
+            .catch(function (error) {
+                console.error("Error adding document: ", error);
+            });
+        
+    -->
     <script>
-        ///////////To be implemented/////////////////
+        ///////////To be implemented in  signup page/////////////////
+        
+        //////////////////////////////////////////////
         var currentUser;
         var privacyStatus;
         var connectionsStatus;
@@ -152,16 +172,16 @@
                 currentUser = db.collection("userdata").doc(user.uid);
                 console.log("User: " + user);
                 currentUser.get()
-                        .then(userDoc => {
-                            //get the data fields of the user
-                            userSettingsId = userDoc.data().settings;
-                            console.log(userSettingsId + typeof(userSettingsId));
-                        })
+                    .then(userDoc => {
+                        //get the data fields of the user
+                        userSettingsId = userDoc.data().settings;
+                        console.log(userSettingsId + typeof (userSettingsId));
+                    })
             } else {
                 console.log("User is not logged in.");
             }
         });
-        //////////////////////////////////////////////
+
         function privacyToggle() {
             db.collection("settings").doc(userSettingsId)
                 .get()
