@@ -81,7 +81,7 @@
 
             <div class="mb-0 p-2">
                 <label for="exampleFormControlInput1" class="form-label">Profile Picture</label>
-                <input id="fileUpload" type="file" class="form-control" aria-label="file example">
+                <input id="fileUpload" type="file" onchange="loadImageFile();" class="form-control" aria-label="file example">
             </div>
 
             <div class="mb-0 p-2">
@@ -123,14 +123,16 @@
     <script>
         var userId = localStorage.getItem("userId");
         console.log("Current User: " + userId);
+
         function handleFileSelect(e) {
             let file = e.target.files[0];
             let userID = localStorage.getItem('userId');
             console.log(userID);
-            firebase.app().storage().ref("users").child(userID + "/profile.jpg").put(file).then(function() {
+            firebase.app().storage().ref("users").child(userID + "/profile.jpg").put(file).then(function () {
                 console.log("File Uploaded!");
             })
         }
+
         function checkValidityForm() {
             const forms = document.querySelectorAll('.needs-validation');
             // Loop over them and prevent submission
@@ -148,6 +150,7 @@
                 }, false);
             });
         }
+
         function updateUser() {
             if (userId) {
                 db.collection("userdata").doc(userId)
@@ -159,7 +162,7 @@
                         languages: String(document.getElementById("languages").value),
                         nationality: String(document.getElementById("nationality").value),
                         profilepicture: String("/uesrs/default/profile.jpg"),
-                        volunteer: String(document.getElementById("volunteer").checked),
+                        volunteer: Boolean(document.getElementById("volunteer").checked),
                         quote: String(document.getElementById("quote").value),
                         occupation: String(document.getElementById("occupation").value),
                         fieldofstudy: String(getFieldOfStudy(document.getElementById("fieldofstudy").value)),
@@ -195,7 +198,7 @@
                 // updateUser();
             }
         }
-        
+
         function getFieldOfStudy(number) {
             if (number == 1) {
                 return "Applied & Natural Sciences";
@@ -212,8 +215,60 @@
             }
             return "ERROR";
         }
+        var fileReader = new FileReader();
+        var filterType =
+            /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+
+        fileReader.onload = function (event) {
+            var image = new Image();
+
+            image.onload = function () {
+                // document.getElementById("original-Img").src = image.src;
+                var canvas = document.createElement("canvas");
+                var context = canvas.getContext("2d");
+                // canvas.width = image.width / 4;
+                // canvas.height = image.height / 4;
+                canvas.width = 200;
+                canvas.height = 200;
+                context.drawImage(image,
+                    0,
+                    0,
+                    image.width,
+                    image.height,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                );
+                let userID = localStorage.getItem('userId');
+                canvas.toBlob(function(blob) {
+                    firebase.app().storage().ref("users").child(userID + "/profile.jpg").put(blob).then(function () {
+                        console.log("File Uploaded!");
+                    })
+                })
+
+            }
+            image.src = event.target.result;
+        };
+
+        var loadImageFile = function () {
+            var uploadImage = document.getElementById("fileUpload");
+
+            //check and retuns the length of uploded file.
+            if (uploadImage.files.length === 0) {
+                return;
+            }
+
+            //Is Used for validate a valid file.
+            var uploadFile = document.getElementById("fileUpload").files[0];
+            if (!filterType.test(uploadFile.type)) {
+                alert("Please select a valid image.");
+                return;
+            }
+            fileReader.readAsDataURL(uploadFile);
+        }
         document.getElementById("submit-button").addEventListener("click", handleButtonClick, false);
-        document.getElementById("fileUpload").addEventListener("change", handleFileSelect, false);
+        // document.getElementById("fileUpload").addEventListener("change", loadImageFile(), false);
         console.log("Loaded");
     </script>
 

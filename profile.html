@@ -43,9 +43,15 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid justify-content-evenly">
-      <img src="./images/house-icon.png" style="width: 45px; height: auto">
-      <img src="./images/group-people.png" style="width: 45px; height: auto">
-      <img src="./images/bell-icon.png" style="width: 45px; height: auto">
+        <a href="home.html" class="home">
+          <img src="./images/house-icon.png" style="width: 45px; height: auto">
+        </a>
+        <a href="connect.html" class="home">
+        <img src="./images/group-people.png" style="width: 45px; height: auto">
+        </a>
+        <a href="notifications.html" class="home">
+        <img src="./images/bell-icon.png" style="width: 45px; height: auto">
+        </a>
     </div>
   </nav>
 
@@ -53,6 +59,7 @@
     <div id="heading" class="text-center">
       <h1 id="fullname">Profile</h1>
     </div>
+    <button id="edit-profile" type="button" class="btn btn-primary btn-lg">Edit Profile</button>
     <div id="picture" class="text-center">
       <img id="profilePicture" src="images/profile_image_placeholder.jpeg" alt="" />
     </div>
@@ -147,6 +154,9 @@
 
     }
     insertData();
+    document.getElementById("edit-profile").addEventListener("click", function(e) {
+      window.location.assign("editprofile.html");
+    }, false);
   </script>
 </body>
 
