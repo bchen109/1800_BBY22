@@ -95,13 +95,13 @@
                             }).then(function () {
                                 console.log("New user added to firestore");
                                 localStorage.setItem("userId", user.uid);
-                                window.location.assign("survey.html?user=" + user
-                                .uid); //re-direct to main.html after signup
+                                window.location.assign("survey.html?user=" + user.uid); //re-direct to main.html after signup
                             })
                             .catch(function (error) {
                                 console.log("Error adding new user: " + error);
                             });
-                        db.collection("settings").add({
+                        //////JUST ADDED//////////  
+                        /*db.collection("settings").add({
                                 privacy: false,
                                 connections: true,
                                 comments: true
@@ -109,13 +109,12 @@
                             .then(function (docRef) {
                                 db.collection("userdata").doc(user.uid).set({
                                     settings: docRef.id
-                                }, {
-                                    merge: true
-                                });
+                                }, { merge: true });
                             })
                             .catch(function (error) {
                                 console.error("Error adding document: ", error);
-                            });
+                            });*/
+                        //////////////////////////////
                     } else {
                         localStorage.setItem("userId", user.uid);
                         return true;
