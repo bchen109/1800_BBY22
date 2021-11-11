@@ -89,16 +89,32 @@
                     var user = authResult.user; // get the user object from the Firebase authentication database
                     if (authResult.additionalUserInfo.isNewUser) { //if new user
                         db.collection("userdata").doc(user.uid)
-                        .set({ //write to firestore. We are using the UID for the ID in users collection
+                            .set({ //write to firestore. We are using the UID for the ID in users collection
                                 fullname: user.displayName, //"users" collection
                                 email: user.email //with authenticated user's ID (user.uid)
                             }).then(function () {
                                 console.log("New user added to firestore");
-                                window.location.assign("survey.html?user=" + user.uid); //re-direct to main.html after signup
+                                window.location.assign("survey.html?user=" + user
+                                .uid); //re-direct to main.html after signup
                             })
                             .catch(function (error) {
                                 console.log("Error adding new user: " + error);
                             });
+                        //////JUST ADDED//////////  
+                        /*db.collection("settings").add({
+                                privacy: false,
+                                connections: true,
+                                comments: true
+                            })
+                            .then(function (docRef) {
+                                db.collection("userdata").doc(user.uid).set({
+                                    settings: docRef.id
+                                }, { merge: true });
+                            })
+                            .catch(function (error) {
+                                console.error("Error adding document: ", error);
+                            });*/
+                        //////////////////////////////
                     } else {
                         return true;
                     }
