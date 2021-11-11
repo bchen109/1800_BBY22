@@ -103,6 +103,8 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
   <!-- Link to the api keys for your firebase project -->
   <script src="scripts/firebaseAPI.js"></script>
@@ -136,9 +138,16 @@
         document.getElementById("languages").innerText = data.languages;
         document.getElementById("volunteer").innerText = data.volunteer;
         document.getElementById("hobbies").innerText = data.hobbies;
+        firebase.app().storage().ref("users").child(userId + "/profile.jpg").getDownloadURL().then(imgUrl => {
+          document.getElementById("profilePicture").src = imgUrl;
+        }).catch(function (error) {
+          console.log("No profile picture found so using default picture");
+        });
       }
+
     }
     insertData();
   </script>
 </body>
+
 </html>

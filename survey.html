@@ -81,7 +81,7 @@
 
             <div class="mb-0 p-2">
                 <label for="exampleFormControlInput1" class="form-label">Profile Picture</label>
-                <input type="file" class="form-control" aria-label="file example">
+                <input id="fileUpload" type="file" class="form-control" aria-label="file example">
             </div>
 
             <div class="mb-0 p-2">
@@ -110,6 +110,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
 
     <!-- Link to the api keys for your firebase project -->
@@ -119,6 +121,16 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script>
+        var userId = localStorage.getItem("userId");
+        console.log("Current User: " + userId);
+        function handleFileSelect(e) {
+            let file = e.target.files[0];
+            let userID = localStorage.getItem('userId');
+            console.log(userID);
+            firebase.app().storage().ref("users").child(userID + "/profile.jpg").put(file).then(function() {
+                console.log("File Uploaded!");
+            })
+        }
         function checkValidityForm() {
             const forms = document.querySelectorAll('.needs-validation');
             // Loop over them and prevent submission
@@ -137,7 +149,6 @@
             });
         }
         function updateUser() {
-            var userId = getParameter("user");
             if (userId) {
                 db.collection("userdata").doc(userId)
                     .update({ //write to firestore. We are using the UID for the ID in users collection
@@ -147,12 +158,12 @@
                         hobbies: String(document.getElementById("hobbies").value),
                         languages: String(document.getElementById("languages").value),
                         nationality: String(document.getElementById("nationality").value),
-                        profilepicture: String("temp"),
+                        profilepicture: String("/uesrs/default/profile.jpg"),
                         volunteer: String(document.getElementById("volunteer").checked),
                         quote: String(document.getElementById("quote").value),
                         occupation: String(document.getElementById("occupation").value),
                         fieldofstudy: String(getFieldOfStudy(document.getElementById("fieldofstudy").value)),
-                        connections: "",
+                        connections: [],
                         notifications: "",
                         settings: ""
                     }).then(function () {
@@ -168,9 +179,9 @@
             }
         }
 
-        function getUserDocument(id) {
-            return db.doc("userdata/" + id);
-        }
+        // function getUserDocument(id) {
+        //     return db.doc("userdata/" + id);
+        // }
 
         function getParameter(name) {
             var url_string = window.location.href;
@@ -182,8 +193,10 @@
         function handleButtonClick(e) {
             if (e instanceof MouseEvent) {
                 checkValidityForm();
+                // updateUser();
             }
         }
+        
         function getFieldOfStudy(number) {
             if (number == 1) {
                 return "Applied & Natural Sciences";
@@ -201,6 +214,7 @@
             return "ERROR";
         }
         document.getElementById("submit-button").addEventListener("click", handleButtonClick, false);
+        document.getElementById("fileUpload").addEventListener("change", handleFileSelect, false);
         console.log("Loaded");
     </script>
 
