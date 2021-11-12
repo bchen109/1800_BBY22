@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+#container {
+    display: grid;
+    justify-items: center;
+    row-gap: 2vh;
+    margin: auto;
+    width: 90%;
+}
+
+h1 {
+    padding: 3vh 0 5vh 0;
+}
+
+.notification {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    border: 1px solid black;
+    padding: 1vh;
+}
+
+.notification img {
+    width: 100px;
+    border-radius: 50%;
+}
+
+.notification h3 {
+    max-width: 300px;
+}
+
+@media (max-width: 400px) {
+    .notification h3 {
+        padding-left: 11px;
+    }
+}
