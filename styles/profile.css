@@ -1,8 +1,9 @@
-#container {
+#inner {
   display: grid;
   row-gap: 10px;
   justify-items: center;
   align-items: center;
+  margin-top: 20px;
   margin-bottom: 40px;
 }
 
@@ -14,24 +15,19 @@
   border-radius: 50%;
 }
 
-#container2 {
+
+.needs-validation{
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
   font-size: 18px !important;
-}
-
-.needs-validation{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  row-gap: 1vw;
+  row-gap: 1vh;
   column-gap: 2vw;
 }
-
-.font {
-  width: 100%;
-}
  
+/* No volunteer checkbox anymore?
 #volunteer{
   display: grid;
   grid-auto-flow: column;
@@ -43,7 +39,7 @@
 #check {
   width: 25px;
   height: 25px;
-}
+}*/
 
 .submission {
   display: grid;
