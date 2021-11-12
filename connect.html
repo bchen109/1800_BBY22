@@ -80,7 +80,7 @@
     </div>
 
     <section id="buttons">
-        <button type="button" class="btn btn-success btn-lg">Connect!</button>
+        <button type="button" id="connect-button" class="btn btn-success btn-lg">Connect!</button>
         <button id="next-button" type="button" class="btn btn-primary btn-lg">Next</button>
     </section>
 
@@ -244,6 +244,12 @@
             currentIndex++;
         }
 
+        async function sendConnectRequest() {
+            let currentVolunteerId = volunteerIds[currentIndex];
+            let volunteerDoc = db.collection("userdata").doc(currentVolunteerId);
+            volunteerDoc = await volunteerDoc.get();
+
+        }
         var currentIndex;
         var maxIndex;
         var volunteers;
@@ -255,6 +261,7 @@
             console.log(volunteers);
             onLoad();
             document.getElementById("next-button").addEventListener('click', onLoad, false);
+            document.getElementById("connect-button").addEventListener('click', sendConnectRequest, false);
         }
         main();
     </script>

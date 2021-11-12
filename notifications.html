@@ -2,106 +2,162 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Student Connect</title>
-    <meta name="comp1800 boilerplate code" content="Studnet Connect Application">
-    <meta name="BBY22" content="Student Connect">
+  <meta charset="utf-8">
+  <title>Student Connect</title>
+  <meta name="comp1800 boilerplate code" content="Studnet Connect Application">
+  <meta name="BBY22" content="Student Connect">
 
-    <!-- Bootstrap -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <!-- Bootstrap -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-    <!-- FirebaseUI CSS -->
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.css" />
+  <!-- FirebaseUI CSS -->
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.css" />
 
-    <!-- Optional styles and scripts of your own -->
-    <link rel="stylesheet" href="styles/notifications.css">
-    
+  <!-- Optional styles and scripts of your own -->
+  <link rel="stylesheet" href="styles/notifications.css">
+
 </head>
 
 <body>
 
-    <!-------------------------------------->
-    <!-- The following is HTML for layout -->
-    <!-------------------------------------->
-    <!-- Header Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Logo</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="profile.html">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="settings.html">Settings</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Logout</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="container-fluid justify-content-evenly">
-            <a href="home.html" class="home">
-              <img src="./images/house-icon.png" style="width: 45px; height: auto">
-            </a>
-            <a href="connect.html" class="home">
-            <img src="./images/group-people.png" style="width: 45px; height: auto">
-            </a>
-            <a href="notifications.html" class="home">
-            <img src="./images/bell-icon.png" style="width: 45px; height: auto">
-            </a>
-        </div>
-      </nav>
+  <!-------------------------------------->
+  <!-- The following is HTML for layout -->
+  <!-------------------------------------->
+  <!-- Header Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Logo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="profile.html">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="settings.html">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid justify-content-evenly">
+      <a href="home.html" class="home">
+        <img src="./images/house-icon.png" style="width: 45px; height: auto">
+      </a>
+      <a href="connect.html" class="home">
+        <img src="./images/group-people.png" style="width: 45px; height: auto">
+      </a>
+      <a href="notifications.html" class="home">
+        <img src="./images/bell-icon.png" style="width: 45px; height: auto">
+      </a>
+    </div>
+  </nav>
 
-    <!-- welcome and main part of the page -->
+  <!-- welcome and main part of the page -->
 
-    <div id="container">
-        <h1>Notifications</h1>
-        <div class="notification">
-            <img src="images/random_guy.jpg">
-            <h3>Someone connected with you!</h3>
-        </div>
-        <div class="notification">
-            <img src="images/random_guy.jpg">
-            <h3>Someone commented in one of your posts</h3>
-        </div>
+  <div id="container" class="container">
+    <h1>Notifications</h1>
 
+    <div class="card text-center mb-2">
+      <div class="card-header">
+        2days ago
+      </div>
+      <div class="card-body d-flex justify-content-evenly vertical-center">
+        <img src="images/random_guy.jpg">
+        <p class="card-text">New connection request with Brytton Tsai</p>
+      </div>
+      <div class="d-flex justify-content-evenly mb-2">
+        <button type="button" onclick="dismissNotification();" class="btn btn-info btn-sm">Accept</button>
+        <button type="button" onclick="dismissNotification();" class="btn btn-primary btn-sm">Dismiss</button>
+      </div>
     </div>
 
-    <!----------------------------------------------->
-    <!-- JS: Boostrap, Firebase, API related, add Jquery    -->
-    <!----------------------------------------------->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
+  </div>
 
-    <script src="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <!----------------------------------------------->
+  <!-- JS: Boostrap, Firebase, API related, add Jquery    -->
+  <!----------------------------------------------->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+  </script>
 
-    <!-- Link to the api keys for your firebase project -->
-    <script src="scripts/firebaseAPI.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
-    <!--------------------------------------------------------------------->
-    <!-- JS files: Your own JavaScript functions included here    -->
-    <!--------------------------------------------------------------------->
-    <script>
+  <!-- Link to the api keys for your firebase project -->
+  <script src="scripts/firebaseAPI.js"></script>
 
-    </script>
+  <!--------------------------------------------------------------------->
+  <!-- JS files: Your own JavaScript functions included here    -->
+  <!--------------------------------------------------------------------->
+  <script>
+    function createCard() {
+      // Create the card container
+      let cardBody = document.createElement("div");
+      cardBody.className = "card text-center mb-2";
+      // Create the card header
+      let cardHeader = document.createElement("div");
+      cardHeader.className = "card-header";
+      cardHeader.innerText = "2021-11-11";
+      cardBody.appendChild(cardHeader);
+      // Create card content container
+      let cardContent = document.createElement("div");
+      cardContent.className = "card-body d-flex justify-content-evenly vertical-center";
+      // Create image child
+      let image = document.createElement("img");
+      image.src = "images/random_guy.jpg";
+      // Create text child
+      let content = document.createElement("p");
+      content.className = "card-text";
+      content.innerText = "New connection request Benjamin Chen";
+      // Create button container
+      let buttonContainer = document.createElement("div");
+      buttonContainer.className = "d-flex justify-content-evenly mb-2"
+      // Create Dimiss button
+      let buttonDismiss = document.createElement("button");
+      buttonDismiss.className = "btn btn-secondary btn-sm"
+      buttonDismiss.innerText = "Dismiss";
+      buttonDismiss.onclick = "dismissNotification();";
+      buttonDismiss.nodeType = "button";
+      // Create Accept button
+      let buttonAccept = document.createElement("button");
+      buttonAccept.className = "btn btn-success btn-sm"
+      buttonAccept.innerText = "Accept";
+      buttonAccept.onclick = "dismissNotification();";
+      buttonAccept.nodeType = "button";
+      // Add content to content container
+      cardContent.appendChild(image);
+      cardContent.appendChild(content);
+      // Add buttons to button container
+      buttonContainer.appendChild(buttonAccept);
+      buttonContainer.appendChild(buttonDismiss);
+      // Add to main contianer
+      cardBody.appendChild(cardContent);
+      cardBody.appendChild(buttonContainer);
+
+      const element = document.getElementById("container");
+      element.appendChild(cardBody);
+    }
+
+    createCard();
+  </script>
 
 </body>
 
