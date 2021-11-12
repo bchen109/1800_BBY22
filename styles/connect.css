@@ -19,9 +19,25 @@ h3 {
     transform: translate(1vw, 0px);
 }
 
+.card-img-top {
+    height: 100px;
+    width: 100px;
+    clip-path: circle(50%);
+}
+
+.card-spacing {
+    padding: 1rem 1rem;
+}
+
 #toast-logo {
     width: 20px;
     height: 20px;
+}
+
+.card-body {
+    padding: 0 0;
+    padding-left: 1rem;
+    padding-right: 0.5rem;
 }
 
 .connect {

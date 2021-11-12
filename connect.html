@@ -70,7 +70,9 @@
 
     <div class="connect">
         <div class="img-container">
-            <img alt="" id="volunteer-img" src="images/random_guy.jpg">
+            <a id="profilelink" href=".">
+                <img alt="" id="volunteer-img" src="images/random_guy.jpg">
+            </a>
         </div>
         <div class="volunteer-info">
             <h4 id="fullname">Name</h4>
@@ -84,69 +86,23 @@
         <button id="next-button" type="button" class="btn btn-primary btn-lg">Next</button>
     </section>
 
-    <h3>Your connections</h3>
-    <section id="connection-list">
-        <!-- <div class="connection">
-            <div class="img-connection">
-                <img alt="" class="connection-img" src="images/random_guy.jpg">
-            </div>
-            <div class="connection-info">
-                <h4>Name</h4>
-                <h4>Program / College</h4>
-                <h4>Nationality / Languages</h4>
-            </div>
-        </div>
-        <div class="connection">
-            <div class="img-connection">
-                <img alt="" class="connection-img" src="images/random_guy.jpg">
-            </div>
-            <div class="connection-info">
-                <h4>Name</h4>
-                <h4>Program / College</h4>
-                <h4>Nationality / Languages</h4>
+    <h2>Your connections</h2>
+    <div id="connection-conatiner" class="container">
+        <div class="card mb-2">
+            <div class="container d-flex card-spacing">
+                <div>
+                    <img src="./images/random_guy.jpg" style="width: 100px; height: 100px;" class="card-img-top"
+                        alt="...">
+                </div>
+                <div class="card-body text-start">
+                    <h5 style="margin-bottom: 0;">Random Guy</h5>
+                    <div>Canadian/ English, French</div>
+                    <div>I love to play baseball.</div>
+                    <p class="card-text">Studying Computer Science</p>
+                </div>
             </div>
         </div>
-        <div class="connection">
-            <div class="img-connection">
-                <img alt="" class="connection-img" src="images/random_guy.jpg">
-            </div>
-            <div class="connection-info">
-                <h4>Name</h4>
-                <h4>Program / College</h4>
-                <h4>Nationality / Languages</h4>
-            </div>
-        </div>
-        <div class="connection">
-            <div class="img-connection">
-                <img alt="" class="connection-img" src="images/random_guy.jpg">
-            </div>
-            <div class="connection-info">
-                <h4>Name</h4>
-                <h4>Program / College</h4>
-                <h4>Nationality / Languages</h4>
-            </div>
-        </div>
-        <div class="connection">
-            <div class="img-connection">
-                <img alt="" class="connection-img" src="images/random_guy.jpg">
-            </div>
-            <div class="connection-info">
-                <h4>Name</h4>
-                <h4>Program / College</h4>
-                <h4>Nationality / Languages</h4>
-            </div>
-        </div>
-        <div class="connection">
-            <div class="img-connection">
-                <img alt="" class="connection-img" src="images/random_guy.jpg">
-            </div>
-            <div class="connection-info">
-                <h4>Name</h4>
-                <h4>Program / College</h4>
-                <h4>Nationality / Languages</h4>
-            </div>
-        </div> -->
-    </section>
+    </div>
     <!-- Flexbox container for aligning the toasts -->
     <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center"
         style="min-height: 200px;">
@@ -183,6 +139,8 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script>
+
+
         function insertData() {
             firebase.auth().onAuthStateChanged(user => {
                 // Check if user is signed in:
@@ -243,6 +201,7 @@
             document.getElementById("nationality-languages").innerText = volunteerData.nationality + "/ " +
                 volunteerData.languages;
             document.getElementById("quote").innerText = volunteerData.quote;
+            document.getElementById("profilelink").setAttribute("href", "viewprofile.html?userid=" + volunteerId);
 
             console.log(volunteerId + "/profile.jpg");
 

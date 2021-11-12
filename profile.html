@@ -131,8 +131,8 @@
       });
     }
     async function getUserDoc(userId) {
-      const cityRef = db.collection('userdata').doc(userId);
-      const doc = await cityRef.get();
+      const userRef = db.collection('userdata').doc(userId);
+      const doc = await userRef.get();
       if (!doc.exists) {
         console.log('No such document!');
       } else {
@@ -152,12 +152,13 @@
           console.log("No profile picture found so using default picture");
         });
       }
-
     }
+    
     insertData();
     document.getElementById("edit-profile").addEventListener("click", function(e) {
       window.location.assign("editprofile.html");
     }, false);
+
   </script>
 </body>
 
