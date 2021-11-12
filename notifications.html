@@ -108,19 +108,23 @@
   <!-- JS files: Your own JavaScript functions included here    -->
   <!--------------------------------------------------------------------->
   <script>
-    function createCard(type, imageLink, time, description) {
-      let buttonLeft, buttonRight, processFunction;
+    function createCard(type, imageLink, time, description, user, notificationId) {
+      let buttonLeft, buttonRight, processFunction, notificationType, dismissFunction;
       if (type == "connection") {
         buttonLeft = "Accept";
         buttonRight = "Decline";
-        processFunction = "acceptConnection();";
+        processFunction = "acceptConnection('" + user + "', '" + notificationId + "');";
+        dismissFunction = "declineConnection('" + user + "', '" + notificationId + "');";
       } else {
         buttonLeft = "View";
         buttonRight = "Dismiss";
+        notificationType = "notification";
         processFunction = "viewNotification();";
+        dismissFunction = "dismissNotification();";
       }
       // Create the card container
       let cardBody = document.createElement("div");
+      cardBody.setAttribute("id", String(notificationId));
       cardBody.className = "card text-center mb-2";
       // Create the card header
       let cardHeader = document.createElement("div");
@@ -144,7 +148,7 @@
       let buttonDismiss = document.createElement("button");
       buttonDismiss.className = "btn btn-secondary btn-sm";
       buttonDismiss.innerText = buttonRight;
-      buttonDismiss.setAttribute("onclick", "dismissNotification();");
+      buttonDismiss.setAttribute("onclick", dismissFunction);
       buttonDismiss.nodeType = "button";
       // Create Accept button
       let buttonAccept = document.createElement("button");
@@ -167,8 +171,54 @@
     }
     // createCard();
 
-    function acceptConnection() {
-      console.log("Connection Accepted");
+    function acceptConnection(user, notificationId) {
+      let currentUser = localStorage.getItem("userId");
+
+      // Add new connection to current user
+      db.collection("userdata").doc(currentUser).update({
+        connections: firebase.firestore.FieldValue.arrayUnion(user),
+        notifications: firebase.firestore.FieldValue.arrayRemove(notificationId)
+      }).then(function () {
+        console.log("New connection added " + user);
+      });
+
+      // Add new connection to the opposing user
+      db.collection("userdata").doc(user).update({
+        connections: firebase.firestore.FieldValue.arrayUnion(currentUser),
+        pending: firebase.firestore.FieldValue.arrayRemove(currentUser)
+      }).then(function() {
+        console.log("Connection accepted by " + currentUser);
+      })
+
+      // Delete the notification document
+      db.collection("notifications").doc(notificationId).delete().then(function() {
+        console.log("Notification deleted " + notificationId);
+        deleteCard(notificationId);
+      });
+    }
+
+    function declineConnection(user, notificationId) {
+      let currentUser = localStorage.getItem("userId");
+
+      // Add new connection to current user
+      db.collection("userdata").doc(currentUser).update({
+        notifications: firebase.firestore.FieldValue.arrayRemove(notificationId)
+      }).then(function () {
+        console.log("New connection declined " + user);
+      });
+
+      // Add new connection to the opposing user
+      db.collection("userdata").doc(user).update({
+        pending: firebase.firestore.FieldValue.arrayRemove(currentUser)
+      }).then(function() {
+        console.log("Connection declined by " + currentUser);
+      })
+
+      // Delete the notification document
+      db.collection("notifications").doc(notificationId).delete().then(function() {
+        console.log("Notification deleted " + notificationId);
+        deleteCard(notificationId);
+      });
     }
 
     function viewNotification() {
@@ -177,6 +227,10 @@
 
     function dismissNotification() {
       console.log("Notification Dismissed");
+    }
+
+    function deleteCard(notificaitonId) {
+      document.getElementById(notificaitonId).remove();
     }
 
     async function getNotifications() {
@@ -190,11 +244,13 @@
           let time = notificationData.date;
           let description = notificationData.description;
           let type = notificationData.type;
+          let user = notificationData.fromuser;
+          let notificationId = item;
           let imageLink;
-          firebase.app().storage().ref("users").child(notificationData.fromuser + "/profile.jpg").getDownloadURL().then(imgUrl => {
+          firebase.app().storage().ref("users").child(user + "/profile.jpg").getDownloadURL().then(imgUrl => {
               console.log("Retrieved image" + imgUrl);
               imageLink = imgUrl;
-              createCard(type, imageLink, time, description);
+              createCard(type, imageLink, time, description, user, notificationId);
           }).catch(function (error) {
               console.log("No profile picture found");
           });
