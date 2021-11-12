@@ -244,12 +244,41 @@
             currentIndex++;
         }
 
-        async function sendConnectRequest() {
-            let currentVolunteerId = volunteerIds[currentIndex];
-            let volunteerDoc = db.collection("userdata").doc(currentVolunteerId);
-            volunteerDoc = await volunteerDoc.get();
-
+        function getDate() {
+            let today = new Date();
+            let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            let time = today.getHours() + ":" + today.getMinutes();
+            let dateTime = date + ' ' + time;
+            return dateTime;
         }
+
+        async function sendConnectRequest() {
+            let currentVolunteerId = volunteerIds[currentIndex - 1];
+            let userId = localStorage.getItem("userId");
+
+            // Testing
+            // let volunteerDoc = await db.collection("userdata").doc(currentVolunteerId).get();
+            // volunteerDoc = volunteerDoc.data();
+            // volunteerDoc.notifications.forEach((item) => {
+            //     console.log(item);
+            // })
+
+            db.collection("notifications").add({
+                date: String(getDate()),
+                description: String("New connection request from " + volunteers[currentIndex - 1].fullname),
+                type: String("connection"),
+                title: String("Connection Request!"),
+                touser: String(currentVolunteerId),
+                fromuser: String(userId) 
+            }).then((docRef) => {
+                db.collection("userdata").doc(currentVolunteerId).update({
+                    notifications: firebase.firestore.FieldValue.arrayUnion(String(docRef.id))
+                }).then(function () {
+                    console.log("Notification sent successfully to -> " + currentVolunteerId);
+                });
+            });
+        }
+
         var currentIndex;
         var maxIndex;
         var volunteers;
