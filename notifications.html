@@ -66,11 +66,11 @@
   </nav>
 
   <!-- welcome and main part of the page -->
-
   <div id="container" class="container">
     <h1>Notifications</h1>
 
-    <div class="card text-center mb-2">
+    <!-- This is card template for reference -->
+    <!-- <div class="card text-center mb-2">
       <div class="card-header">
         2days ago
       </div>
@@ -82,7 +82,7 @@
         <button type="button" onclick="dismissNotification();" class="btn btn-info btn-sm">Accept</button>
         <button type="button" onclick="dismissNotification();" class="btn btn-primary btn-sm">Dismiss</button>
       </div>
-    </div>
+    </div> -->
 
   </div>
 
@@ -108,39 +108,49 @@
   <!-- JS files: Your own JavaScript functions included here    -->
   <!--------------------------------------------------------------------->
   <script>
-    function createCard() {
+    function createCard(type, imageLink, time, description) {
+      let buttonLeft, buttonRight, processFunction;
+      if (type == "connection") {
+        buttonLeft = "Accept";
+        buttonRight = "Decline";
+        processFunction = "acceptConnection();";
+      } else {
+        buttonLeft = "View";
+        buttonRight = "Dismiss";
+        processFunction = "viewNotification();";
+      }
       // Create the card container
       let cardBody = document.createElement("div");
       cardBody.className = "card text-center mb-2";
       // Create the card header
       let cardHeader = document.createElement("div");
       cardHeader.className = "card-header";
-      cardHeader.innerText = "2021-11-11";
+      cardHeader.innerText = time;
       cardBody.appendChild(cardHeader);
       // Create card content container
       let cardContent = document.createElement("div");
       cardContent.className = "card-body d-flex justify-content-evenly vertical-center";
       // Create image child
       let image = document.createElement("img");
-      image.src = "images/random_guy.jpg";
+      image.src = imageLink;
       // Create text child
       let content = document.createElement("p");
       content.className = "card-text";
-      content.innerText = "New connection request Benjamin Chen";
+      content.innerText = description;
       // Create button container
       let buttonContainer = document.createElement("div");
-      buttonContainer.className = "d-flex justify-content-evenly mb-2"
+      buttonContainer.className = "d-flex justify-content-evenly mb-2";
       // Create Dimiss button
       let buttonDismiss = document.createElement("button");
-      buttonDismiss.className = "btn btn-secondary btn-sm"
-      buttonDismiss.innerText = "Dismiss";
-      buttonDismiss.onclick = "dismissNotification();";
+      buttonDismiss.className = "btn btn-secondary btn-sm";
+      buttonDismiss.innerText = buttonRight;
+      buttonDismiss.setAttribute("onclick", "dismissNotification();");
       buttonDismiss.nodeType = "button";
       // Create Accept button
       let buttonAccept = document.createElement("button");
       buttonAccept.className = "btn btn-success btn-sm"
-      buttonAccept.innerText = "Accept";
-      buttonAccept.onclick = "dismissNotification();";
+      buttonAccept.innerText = buttonLeft;
+      buttonAccept.setAttribute("onclick", processFunction);
       buttonAccept.nodeType = "button";
       // Add content to content container
       cardContent.appendChild(image);
@@ -155,8 +165,43 @@
       const element = document.getElementById("container");
       element.appendChild(cardBody);
     }
+    // createCard();
 
-    createCard();
+    function acceptConnection() {
+      console.log("Connection Accepted");
+    }
+
+    function viewNotification() {
+      console.log("Notification Viewed");
+    }
+
+    function dismissNotification() {
+      console.log("Notification Dismissed");
+    }
+
+    async function getNotifications() {
+      let userId = localStorage.getItem("userId");
+      let userDoc = await db.collection("userdata").doc(userId).get();
+      userDoc = userDoc.data();
+      userDoc.notifications.forEach((item) => {
+        console.log("Notification ID: " + item);
+        db.collection("notifications").doc(item).get().then((doc) => {
+          let notificationData = doc.data();
+          let time = notificationData.date;
+          let description = notificationData.description;
+          let type = notificationData.type;
+          let imageLink;
+          firebase.app().storage().ref("users").child(notificationData.fromuser + "/profile.jpg").getDownloadURL().then(imgUrl => {
+              console.log("Retrieved image" + imgUrl);
+              imageLink = imgUrl;
+              createCard(type, imageLink, time, description);
+          }).catch(function (error) {
+              console.log("No profile picture found");
+          });
+        })
+        });
+    }
+    getNotifications();
   </script>
 
 </body>

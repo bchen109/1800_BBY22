@@ -268,7 +268,7 @@
             let userId = localStorage.getItem("userId");
             let duplicate = false;
 
-            // Testing
+            // Checking if the a pending connection already exists
             let userDoc = await db.collection("userdata").doc(userId).get();
             userDoc = userDoc.data();
             userDoc.pending.forEach((item) => {
