@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-  <link type="text/css" rel="stylesheet" href="styles/profile.css" />
+  <!-- <link type="text/css" rel="stylesheet" href="styles/profile.css"/> -->
 
 </head>
 
@@ -31,7 +30,7 @@
             <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="settings.html">Settings</a>
+            <a class="nav-link" href="#">Settings</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Logout</a>
@@ -40,102 +39,263 @@
       </div>
     </div>
   </nav>
+
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid justify-content-evenly">
-      <a href="home.html" class="home">
-        <img src="./images/house-icon.png" style="width: 45px; height: auto">
-      </a>
-      <a href="connect.html" class="home">
-        <img src="./images/group-people.png" style="width: 45px; height: auto">
-      </a>
-      <a href="notifications.html" class="home">
-        <img src="./images/bell-icon.png" style="width: 45px; height: auto">
-      </a>
+      <img src="./images/house-icon.png" style="width: 45px; height: auto">
+      <img src="./images/group-people.png" style="width: 45px; height: auto">
+      <img src="./images/bell-icon.png" style="width: 45px; height: auto">
     </div>
   </nav>
 
-  <div id="container">
-    <div id="heading">
+  <div id="container" class="container">
+    <div id="heading" class="text-center">
       <h1>Profile</h1>
     </div>
-    <div id="picture">
+    <div id="picture" class="text-center">
       <img id="profilePicture" src="images/profile_image_placeholder.jpeg" alt="" />
     </div>
-    <div id="button">
-      <button type="button" class="btn btn-primary btn-lg">Change photo</button>
+    <div id="fileInput" class="text-center mt-2">
+      <!-- <button type="button" class="btn btn-primary btn-lg">Change photo<input type="file" hidden></button> -->
+      <!-- <input class="form-control" type="file" id="formFile"> -->
+      <label class="btn btn-primary btn-lg">
+        Change Photo<input type="file" id="fileUpload" onchange="loadImageFile();" hidden>
+      </label>
+    </div>
+    <form class="needs-validation">
+      <fieldset class="mb-3" id="personalInfoFields" disabled>
+        <div class="p-2 form-group">
+          <label>Full Name</label>
+          <input type="text" id="nameInput" class="form-control" placeholder="Enter your name">
+        </div>
+        <div class="p-2 form-group">
+          <label>Age</label>
+          <input type="number" id="ageInput" class="form-control" placeholder="Enter your age">
+        </div>
+        <div class="p-2 form-group">
+          <label for="exampleFormControlInput1" class="form-label">Area of Study:</label>
+          <select id="fieldofstudy" class="form-select" aria-label="Default select example" required>
+            <option id="fieldofstudyInput" selected value="">Click here to select an option</option>
+            <option value="1">Applied &amp; Natural Sciences</option>
+            <option value="2">Business &amp; Media</option>
+            <option value="3">Computing &amp; Information Technology</option>
+            <option value="4">Engineering</option>
+            <option value="5">Health Sciences</option>
+            <option value="6">Trades</option>
+          </select>
+        </div>
+        <div class="p-2 form-group">
+          <label>Hobbies</label>
+          <input type="text" id="hobbiesInput" class="form-control" placeholder="Enter your hobbies">
+        </div>
+        <div class="p-2 form-group">
+          <label>Occupation</label>
+          <input type="text" id="occupationInput" class="form-control" placeholder="Enter your occupation">
+        </div>
+        <div class="p-2 form-group">
+          <label>Nationality</label>
+          <input type="text" id="nationalityInput" class="form-control" placeholder="Enter your nationality">
+        </div>
+        <div class="p-2 form-group">
+          <label>Languages</label>
+          <input type="text" id="languagesInput" class="form-control" placeholder="Enter your languages">
+        </div>
+        <div class="p-2 form-group">
+          <label>Quote</label>
+          <input type="text" id="quoteInput" class="form-control" placeholder="Enter your quote">
+        </div>
+        <div class="p-2 form-group">
+          <label>Bio</label>
+          <textarea type="text" id="bioInput" class="form-control" placeholder="Enter your biography"
+            rows="4"></textarea>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="submission container-fluid d-flex justify-content-evenly pb-3">
+      <div>
+        <button type="submit" id="submit" class="btn btn-success btn-lg">Submit</button>
+      </div>
+      <div>
+        <button type="button" id="cancel" class="btn btn-primary btn-lg">Cancel</button>
+      </div>
     </div>
   </div>
 
-  <div id="container2">
-    <form class="needs-validation">
-      <div id="firstName" class="font">
-        <label class="form-label">First name</label>
-        <input type="text" placeholder="First name" value="" class="form-control" />
-      </div>
-      <div id="lastName" class="font">
-        <label class="form-label">Last name</label>
-        <input type="text" placeholder="Last name" value="" class="form-control" />
-      </div>
-      <div id="age" class="font">
-        <label class="form-label">Age</label>
-        <input type="number" placeholder="18" min="11" max="120" class="form-control" />
-      </div>
-      <div id="occupation" class="font">
-        <label class="form-label">Occupation</label>
-        <input type="text" placeholder="Occupation" value="" class="form-control" />
-      </div>
-      <div id="education" class="font">
-        <label class="form-label">Education</label>
-        <input type="text" placeholder="Education" value="" class="form-control" />
-      </div>
-      <div id="fieldOfStudy" class="font">
-        <label class="form-label">Field of study</label>
-        <input type="text" placeholder="Field of study" value="" class="form-control" />
-      </div>
-      <div id="nationality" class="font">
-        <label class="form-label">Nationality</label>
-        <input type="text" placeholder="Nationality" value="" class="form-control" />
-      </div>
-      <div id="languages" class="font">
-        <label class="form-label">Languages</label>
-        <input type="text" placeholder="Languages" value="" class="form-control" />
-      </div>
-      <div id="hobbiesActivities" class="font">
-        <label class="form-label">Hobbies & Activities</label>
-        <input type="text" placeholder="Hobbies & Activities" value="" class="form-control" />
-      </div>
-      <div id="volunteer" class="font">
-        <input class="form-check-input" type="checkbox" value="" id="check">
-        <label class="form-check-label" for="defaultCheck1">Volunteer?</label>
-      </div>
-      <div id="bio" class="font">
-        <label class="form-label">Bio</label>
-        <textarea rows="5" cols="40" class="form-control"></textarea>
-      </div>
-      <div class="submission">
-        <input type="button" value="Cancel" id="cancel" class="btn btn-primary btn-lg" />
-        <input type="submit" value="Submit" id="submit" class="btn btn-success btn-lg" />
-      </div>
-    </form>
-
-  </div>
-
-  <br><br><br>
   <!----------------------------------------------->
   <!-- JS: Boostrap, Firebase, API related, add Jquery-->
   <!----------------------------------------------->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
+  </script>
 
   <script src="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
   <!-- Link to the api keys for your firebase project -->
   <script src="scripts/firebaseAPI.js"></script>
+
+  <script>
+    function cancelButton() {
+      window.location.assign('profile.html');
+    }
+
+    function updateUser() {
+      let x = (document.getElementById("nameInput").value == "") ? "default" : "newvalue";
+      console.log(x);
+      // console.log(document.getElementById("nameInput").value);
+      // console.log(document.getElementById("nameInput").value == "");
+      // console.log(document.getElementById("nameInput").placeholder);
+      let nameInput = (document.getElementById("nameInput").value == "") ? document.getElementById("nameInput")
+        .placeholder : document.getElementById("nameInput").value;
+      let ageInput = (document.getElementById("ageInput").value == "") ? document.getElementById("ageInput")
+        .placeholder : document.getElementById("ageInput").value;
+      let hobbiesInput = (document.getElementById("hobbiesInput").value == "") ? document.getElementById("hobbiesInput")
+        .placeholder : document.getElementById("hobbiesInput").value;
+      let languagesInput = (document.getElementById("languagesInput").value == "") ? document.getElementById(
+        "languagesInput").placeholder : document.getElementById("languagesInput").value;
+      let occupationInput = (document.getElementById("occupationInput").value == "") ? document.getElementById(
+        "occupationInput").placeholder : document.getElementById("occupationInput").value;
+      let nationalityInput = (document.getElementById("nationalityInput").value == "") ? document.getElementById(
+        "nationalityInput").placeholder : document.getElementById("nationalityInput").value;
+      let quoteInput = (document.getElementById("quoteInput").value == "") ? document.getElementById("quoteInput")
+        .placeholder : document.getElementById("quoteInput").value;
+      let bioInput = (document.getElementById("bioInput").value == "") ? "" : document.getElementById("bioInput").value;
+      let fieldofstudyInput = (document.getElementById("fieldofstudyInput").value == "") ? document.getElementById(
+        "fieldofstudyInput").innerText : String(getFieldOfStudy(document.getElementById("fieldofstudyInput")).value);
+      console.log(nameInput, ageInput, hobbiesInput, languagesInput, occupationInput, nationalityInput, quoteInput,
+        bioInput, fieldofstudyInput);
+      let userId = localStorage.getItem("userId");
+      if (userId) {
+        db.collection("userdata").doc(userId)
+          .update({ //write to firestore. We are using the UID for the ID in users collection
+            fullname: nameInput, //"users" collection
+            age: ageInput,
+            hobbies: hobbiesInput,
+            languages: languagesInput,
+            nationality: nationalityInput,
+            quote: quoteInput,
+            occupation: occupationInput,
+            fieldofstudy: fieldofstudyInput,
+            bio: bioInput
+          }).then(function () {
+            console.log("User data updated");
+            window.location.assign("profile.html"); //re-direct to main.html after signup
+          })
+          .catch(function (error) {
+            window.location.assign("login.html"); //re-direct to main.html after signup
+            console.log("Error updating user data: " + error);
+          });
+      } else {
+        console.log("Error no user parameter detected");
+      }
+    }
+
+    function insertData() {
+      firebase.auth().onAuthStateChanged(user => {
+        // Check if user is signed in:
+        if (user) {
+          // Do something for the current logged-in user here: 
+          console.log("Current User: " + user.uid);
+          getUserDoc(user.uid);
+        } else {
+          document.getElementById("name-goes-here").innerText = "Nobody";
+        }
+      });
+    }
+
+    async function getUserDoc(userId) {
+      const cityRef = db.collection('userdata').doc(userId);
+      const doc = await cityRef.get();
+      if (!doc.exists) {
+        console.log('No such document!');
+      } else {
+        const data = doc.data();
+        document.getElementById("nameInput").placeholder = data.fullname;
+        document.getElementById("quoteInput").placeholder = data.quote;
+        document.getElementById("ageInput").placeholder = data.age;
+        document.getElementById("bioInput").placeholder = data.bio;
+        document.getElementById("occupationInput").placeholder = data.occupation;
+        document.getElementById("fieldofstudyInput").innerText = data.fieldofstudy;
+        document.getElementById("nationalityInput").placeholder = data.nationality;
+        document.getElementById("languagesInput").placeholder = data.languages;
+        document.getElementById("hobbiesInput").placeholder = data.hobbies;
+        firebase.app().storage().ref("users").child(userId + "/profile.jpg").getDownloadURL().then(imgUrl => {
+          document.getElementById("profilePicture").src = imgUrl;
+          document.getElementById("personalInfoFields").disabled = false
+        }).catch(function (error) {
+          console.log("No profile picture found so using default picture");
+        });
+      }
+    }
+
+    var fileReader = new FileReader();
+    var filterType =
+      /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+
+    fileReader.onload = function (event) {
+      var image = new Image();
+
+      image.onload = function () {
+        // document.getElementById("original-Img").src = image.src;
+        var canvas = document.createElement("canvas");
+        var context = canvas.getContext("2d");
+        // canvas.width = image.width / 4;
+        // canvas.height = image.height / 4;
+        canvas.width = 200;
+        canvas.height = 200;
+        context.drawImage(image,
+          0,
+          0,
+          image.width,
+          image.height,
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+        let userID = localStorage.getItem('userId');
+        canvas.toBlob(function (blob) {
+          firebase.app().storage().ref("users").child(userID + "/profile.jpg").put(blob).then(function () {
+            console.log("File Uploaded!");
+            firebase.app().storage().ref("users").child(userID + "/profile.jpg").getDownloadURL().then(
+              imgUrl => {
+                document.getElementById("profilePicture").src = imgUrl;
+                document.getElementById("personalInfoFields").disabled = false
+              }).catch(function (error) {
+              console.log("No profile picture found so using default picture");
+            });
+          })
+        })
+
+      }
+      image.src = event.target.result;
+    };
+    var loadImageFile = function () {
+      var uploadImage = document.getElementById("fileUpload");
+
+      //check and retuns the length of uploded file.
+      if (uploadImage.files.length === 0) {
+        return;
+      }
+
+      //Is Used for validate a valid file.
+      var uploadFile = document.getElementById("fileUpload").files[0];
+      if (!filterType.test(uploadFile.type)) {
+        alert("Please select a valid image.");
+        return;
+      }
+      fileReader.readAsDataURL(uploadFile);
+    }
+    insertData();
+    document.getElementById("cancel").addEventListener('click', cancelButton, false);
+    document.getElementById("submit").addEventListener('click', updateUser, false);
+  </script>
 </body>
 
 </html>

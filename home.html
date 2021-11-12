@@ -54,7 +54,7 @@
 
   <h1 id="title">Home</h1>
   <section id="banner">
-    <h3>Welcome back John!</h3>
+    <h3>Welcome back <span id="welcomeName"></span></h3>
     <form action="post.html">
       <button id="newPost" type="submit" class="btn btn-primary btn-lg">New Post</button>
     </form>
@@ -63,17 +63,18 @@
   <div id="post">
     <div id="postHeader">
       <img id="profileImage" src="images/profile_image_placeholder.jpeg" alt="" width="48px" height="48px">
-      <p id="name">John Doe</p>
+      <p id="name"></p>
       <img id="menu" src="images/menu.png" alt="" width="24px" height="24px">
     </div>
     <div id="body">
-      <p name="postText" id="postText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, cum numquam.
+      <div id="postText">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, cum numquam.
         Itaque vel illum libero magni perferendis, officiis,
         ipsam quod error reprehenderit illo natus deleniti architecto suscipit corrupti exercitationem sapiente.
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
         In enim, aliquid consequatur quas maiores animi dolorum! Repellat autem quo, soluta dolore,
         deserunt recusandae iusto impedit eveniet nihil nesciunt, facilis qui?
-      </p>
+      </div>
       <img id="postPic" src="images/post.jpg" alt="" width="400px" height="400px">
     </div>
     <div id="bottom">
@@ -103,11 +104,13 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <!-- Included the Quill library -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
     <!-- Link to the api keys for your firebase project -->
     <script src="scripts/firebaseAPI.js"></script>
+    <script src="scripts/home.js"></script>
   </body>
 </html>

@@ -62,7 +62,7 @@
         </div>
     </nav>
     <!-- welcome and main part of the page -->
-    <br>
+
     <h1>Connect</h1>
 
     <h3 id="quote">Choose who to connect to from a personalized list of volunteers.</h3>
@@ -80,7 +80,7 @@
     </div>
 
     <section id="buttons">
-        <button type="button" class="btn btn-success btn-lg">Connect!</button>
+        <button type="button" id="connect-button" class="btn btn-success btn-lg">Connect!</button>
         <button id="next-button" type="button" class="btn btn-primary btn-lg">Next</button>
     </section>
 
@@ -147,11 +147,22 @@
             </div>
         </div> -->
     </section>
-
-    <br><br>
-
-
-
+    <!-- Flexbox container for aligning the toasts -->
+    <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center"
+        style="min-height: 200px;">
+        <!-- Then put toasts within -->
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img id="toast-logo" src="./images/logo.jpg" class="rounded me-2" alt="...">
+                <strong class="me-auto">Student Connect</strong>
+                <small>Now</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div id="toast-notification" class="toast-body">
+                Notification shown here
+            </div>
+        </div>
+    </div>
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related, add Jquery    -->
     <!----------------------------------------------->
@@ -244,6 +255,58 @@
             currentIndex++;
         }
 
+        function getDate() {
+            let today = new Date();
+            let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            let time = today.getHours() + ":" + today.getMinutes();
+            let dateTime = date + ' ' + time;
+            return dateTime;
+        }
+
+        async function sendConnectRequest() {
+            let currentVolunteerId = volunteerIds[currentIndex - 1];
+            let userId = localStorage.getItem("userId");
+            let duplicate = false;
+
+            // Checking if the a pending connection already exists
+            let userDoc = await db.collection("userdata").doc(userId).get();
+            userDoc = userDoc.data();
+            userDoc.pending.forEach((item) => {
+                if (String(item) == String(currentVolunteerId)) {
+                    duplicate = true;
+                }
+            })
+            if (!duplicate) {
+                db.collection("notifications").add({
+                    date: String(getDate()),
+                    description: String("New connection request from " + volunteers[currentIndex - 1]
+                        .fullname),
+                    type: String("connection"),
+                    title: String("Connection Request!"),
+                    touser: String(currentVolunteerId),
+                    fromuser: String(userId)
+                }).then((docRef) => {
+                    db.collection("userdata").doc(currentVolunteerId).update({
+                        notifications: firebase.firestore.FieldValue.arrayUnion(String(docRef.id))
+                    }).then(function () {
+                        console.log("Notification sent successfully to -> " + currentVolunteerId);
+                    });
+                    db.collection("userdata").doc(userId).update({
+                        pending: firebase.firestore.FieldValue.arrayUnion(String(
+                            currentVolunteerId))
+                    }).then(function () {
+                        console.log("Pending connections added " + currentVolunteerId);
+                    });
+                });
+                document.getElementById("toast-notification").innerText = "Connection sent!";
+                $('.toast').toast('show');
+            } else {
+                document.getElementById("toast-notification").innerText = "There is already a pending connection.";
+                $('.toast').toast('show');
+                console.log("Duplicate connection request");
+            }
+        }
+
         var currentIndex;
         var maxIndex;
         var volunteers;
@@ -255,6 +318,7 @@
             console.log(volunteers);
             onLoad();
             document.getElementById("next-button").addEventListener('click', onLoad, false);
+            document.getElementById("connect-button").addEventListener('click', sendConnectRequest, false);
         }
         main();
     </script>

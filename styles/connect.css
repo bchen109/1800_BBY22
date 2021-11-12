@@ -13,6 +13,16 @@ h3 {
     padding: 0 7vw 0 7vw;
     margin-bottom: 5vh;
 }
+.toast {
+    top: 20vh;
+    position: absolute;
+    transform: translate(1vw, 0px);
+}
+
+#toast-logo {
+    width: 20px;
+    height: 20px;
+}
 
 .connect {
     width: 600px;
