@@ -1,157 +1,71 @@
 #container {
-  height: 350px;
   display: grid;
-  grid-template-rows: 20% 55% 20%;
-  text-align: left;
   row-gap: 10px;
-
   justify-items: center;
   align-items: center;
-}
-
-#heading  {
-  grid-row: 1;
+  margin-bottom: 40px;
 }
 
 #heading h1 {
-  font-size: 3vw;
-}
-
-#picture {
-  grid-row: 2;
+  font-size: 45px;
 }
 
 #profilePicture {
-  width: 100%;
-  height: auto;
   border-radius: 50%;
 }
 
-#button {
-  grid-row: 3;
+#container2 {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 18px !important;
 }
 
-#container2 {
-  height: 2150px;
+.needs-validation{
   display: grid;
-  grid-template-rows: repeat(3, 7%) 21.75% repeat(8, 7%);
-  row-gap: 10px;
-
-  justify-items: center;
-  align-self: center;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1vw;
+  column-gap: 2vw;
 }
 
 .font {
-  font-size: 1.5vw;
+  width: 100%;
 }
-
-.inputFormat {
-  background: #f1f1f1;
-  display: inline-block;
-  width: 600px;
-}
-
-#firstName {
-  grid-row: 1;
-}
-
-#lastName {
-  grid-row: 2;
-}
-
-#age {
-  grid-row: 3;
-}
-
-#bio {
-  grid-row: 4;
-}
-
-#occupation {
-  grid-row: 5;
-}
-
-#education {
-  grid-row: 6;
-}
-
-#fieldOfStudy {
-  grid-row: 7;
-}
-
-#nationality {
-  grid-row: 8;
-}
-
-#languages {
-  grid-row: 9;
-}
-
-#hobbiesActivities {
-  grid-row: 10;
-}
-
-#volunteer {
-  grid-row: 11;
+ 
+#volunteer{
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: left;
+  column-gap: 7px;
+  align-items: center;
 }
 
 #check {
-  width:600px;
-  height:40px;
-  border-radius:5px;
-  border:2px solid #555;
+  width: 25px;
+  height: 25px;
 }
 
 .submission {
-  height: auto;
-  width: 600px;
-  grid-row: 12;
   display: grid;
-  grid-template-columns: repeat(4, 25%);
+  grid-auto-flow: column;
+  justify-content: left;
+  column-gap: 20px;
+  align-items: center;
 }
 
-#submit {
-  grid-column: 1;
-  height: 80%;
+.submission input{
+  width: 120px;
+  height: 50px;
 }
 
-#cancel {
-  grid-column: 4;
-  height: 80%;
-}
-
-@media (max-width: 1250px) {
-  #heading h1 {
-    font-size: 5vw;
-  }
-  .font {
-    font-size: 3.5vw;
-  }
-}
-
-@media (max-width: 750px) {
-  #heading h1 {
-    font-size: 7vw;
-  }
-  .font {
-    font-size: 5vw;
-  }
-}
-
-@media (max-width: 650px) {
-  #container2 {
-    height: 1200px;
-  }
-
-  .inputFormat {
-    width: 400px;
-  }
-
-  #check {
-    width: 400px;
-  }
-
+@media (max-width: 700px){
+  .needs-validation{
+      grid-template-columns: 1fr;
+      row-gap: 3vh;
+  }    
   .submission {
-    width: 400px;
+    margin-top: 4vh;
+    justify-content: center;
+    column-gap: 20px;
   }
 }
