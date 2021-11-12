@@ -25,13 +25,13 @@ form {
 }
 
 #post {
-  height: 1100px;
+  height: 2150px;
   width: 60%;
   margin: 0 auto 30px auto;
   border: 1px solid black;
   border-radius: 10px;
   display: grid;
-  grid-template-rows: 5% 70% 10% 9%;
+  grid-template-rows: 5% 75% 5% 9%;
 }
 
 #postHeader {
@@ -68,7 +68,7 @@ form {
 #body {
   grid-row: 2;
   display: grid;
-  grid-template-rows: 20% 80%;
+  grid-template-rows: 59% 41%;
   grid-template-columns: 5% 90% 5%;
 }
 
