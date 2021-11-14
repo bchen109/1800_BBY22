@@ -40,6 +40,11 @@ h3 {
     padding-right: 0.5rem;
 }
 
+.vertical-align {
+    display: grid;
+    place-items: center;
+}
+
 .connect {
     width: 600px;
     margin: auto;
@@ -50,13 +55,21 @@ h3 {
 }
 
 #volunteer-img {
+    max-height: 300px;
+    max-width: 200px;
+    min-width: 200px;
+    object-fit: contain;
+}
+
+.volunteer-img {
     /* width: 250px;
     padding-right: 3vw; */
     max-height: 300px;
-    max-width: 250px;
-    min-width: 250px;
+    max-width: 100px;
+    min-width: 100px;
+    height: 100px;
+    width: 100px;
     object-fit: contain;
-
 }
 
 #buttons {

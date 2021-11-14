@@ -87,10 +87,10 @@
     </section>
 
     <h2>Your connections</h2>
-    <div id="connection-conatiner" class="container">
-        <div class="card mb-2">
+    <div id="connection-container" class="container">
+        <!-- <div class="card mb-2">
             <div class="container d-flex card-spacing">
-                <div>
+                <div class="vertical-align">
                     <img src="./images/random_guy.jpg" style="width: 100px; height: 100px;" class="card-img-top"
                         alt="...">
                 </div>
@@ -101,7 +101,7 @@
                     <p class="card-text">Studying Computer Science</p>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <!-- Flexbox container for aligning the toasts -->
     <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center"
@@ -139,7 +139,57 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script>
+        function connectionCard(userName, userNationality, userLanguage, userStudy, userHobby, imageLink) {
+            // Create the Card container
+            let cardContainer = document.createElement("div");
+            cardContainer.classList = "card mb-2";
 
+            // Create flex box
+            let flexContainer = document.createElement("div");
+            flexContainer.classList = "d-flex container card-spacing";
+
+            // Create image container
+            let imageDiv = document.createElement("div");
+            imageDiv.classList = "vertical-align";
+
+            // Create image object
+            let image = document.createElement("img");
+            image.setAttribute("src", String(imageLink));
+            image.setAttribute("alt", "profile");
+            image.classList = "volunteer-image card-img-top";
+
+            // Create card body
+            let cardBody = document.createElement("div");
+            cardBody.classList = "card-body text-start";
+
+            // Create card title
+            let cardTitle = document.createElement("h5");
+            cardTitle.innerText = userName;
+
+            // Create card natinality/ language
+            let cardNationality = document.createElement("div");
+            cardNationality.innerText = userNationality + "/ " + userLanguage
+
+            // Create card hobby
+            let cardHobby = document.createElement("div");
+            cardHobby.innerText = userHobby;
+
+            // Create card fieldofstudy
+            let cardStudy = document.createElement("p");
+            cardStudy.classList = "card-text";
+            cardStudy.innerText = userStudy;
+
+            cardContainer.appendChild(flexContainer);
+            flexContainer.appendChild(imageDiv);
+            imageDiv.appendChild(image);
+            flexContainer.append(cardBody);
+            cardBody.appendChild(cardTitle);
+            cardBody.appendChild(cardNationality);
+            cardBody.appendChild(cardHobby);
+            cardBody.appendChild(cardStudy);
+
+            document.getElementById("connection-container").appendChild(cardContainer);
+        }
 
         function insertData() {
             firebase.auth().onAuthStateChanged(user => {
@@ -208,8 +258,6 @@
             firebase.app().storage().ref("users").child(volunteerId + "/profile.jpg").getDownloadURL().then(imgUrl => {
                 console.log(imgUrl);
                 document.getElementById("volunteer-img").src = imgUrl;
-            }).catch(function (error) {
-                console.log("No profile picture found so using default picture");
             });
             currentIndex++;
         }
@@ -266,12 +314,37 @@
             }
         }
 
+        async function loadConnections() {
+            let userId = localStorage.getItem("userId");
+            let userDoc = await db.collection("userdata").doc(userId).get();
+            userDoc = userDoc.data();
+            userDoc.connections.forEach((item) => {
+                console.log("Connection User ID: " + item);
+                db.collection("userdata").doc(item).get().then((doc) => {
+                    let connectionData = doc.data();
+                    let userName = connectionData.fullname;
+                    let userStudy = connectionData.fieldofstudy;
+                    let userLanguage = connectionData.languages;
+                    let userNationality = connectionData.nationality;
+                    let userHobby = connectionData.hobbies;
+                    let imageLink;
+                    firebase.app().storage().ref("users").child(doc.id + "/profile.jpg")
+                        .getDownloadURL().then(imgUrl => {
+                            console.log("Retrieved image" + imgUrl);
+                            imageLink = imgUrl;
+                            connectionCard(userName, userNationality, userLanguage, userStudy, userHobby, imageLink);
+                        });
+                })
+            });
+        }
+
         var currentIndex;
         var maxIndex;
         var volunteers;
         var volunteerIds = [];
         async function main() {
             volunteers = await getVolunteers();
+            loadConnections();
             currentIndex = 0;
             maxIndex = volunteers.length - 1;
             console.log(volunteers);
