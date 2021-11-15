@@ -286,8 +286,7 @@
             if (!duplicate) {
                 db.collection("notifications").add({
                     date: String(getDate()),
-                    description: String("New connection request from " + volunteers[currentIndex - 1]
-                        .fullname),
+                    description: String("New connection request from " + userDoc.fullname),
                     type: String("connection"),
                     title: String("Connection Request!"),
                     touser: String(currentVolunteerId),
