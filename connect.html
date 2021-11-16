@@ -275,12 +275,20 @@
             let userId = localStorage.getItem("userId");
             let duplicate = false;
 
-            // Checking if the a pending connection already exists
+            // Checking if the a pending connection already exists or if the connection has already been made
             let userDoc = await db.collection("userdata").doc(userId).get();
+            let notificationMessage;
             userDoc = userDoc.data();
             userDoc.pending.forEach((item) => {
                 if (String(item) == String(currentVolunteerId)) {
                     duplicate = true;
+                    notificationMessage = "There is already a pending connection.";
+                }
+            })
+            userDoc.connections.forEach((item) => {
+                if (String(item) == String(currentVolunteerId)) {
+                    duplicate = true;
+                    notificationMessage = "You are already connected with this user.";
                 }
             })
             if (!duplicate) {
@@ -307,7 +315,7 @@
                 document.getElementById("toast-notification").innerText = "Connection sent!";
                 $('.toast').toast('show');
             } else {
-                document.getElementById("toast-notification").innerText = "There is already a pending connection.";
+                document.getElementById("toast-notification").innerText = notificationMessage;
                 $('.toast').toast('show');
                 console.log("Duplicate connection request");
             }

@@ -115,6 +115,12 @@
         buttonRight = "Decline";
         processFunction = "acceptConnection('" + user + "', '" + notificationId + "');";
         dismissFunction = "declineConnection('" + user + "', '" + notificationId + "');";
+      } else if (type == "connection-accept") {
+        buttonLeft = "View";
+        buttonRight = "Dismiss";
+        processFunction = "viewNotification()";
+        dismissFunction = "dismissNotification('" + notificationId + "');";
+
       } else {
         buttonLeft = "View";
         buttonRight = "Dismiss";
@@ -170,8 +176,15 @@
       element.appendChild(cardBody);
     }
     // createCard();
+    function getDate() {
+      let today = new Date();
+      let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+      let time = today.getHours() + ":" + today.getMinutes();
+      let dateTime = date + ' ' + time;
+      return dateTime;
+    }
 
-    function acceptConnection(user, notificationId) {
+    async function acceptConnection(user, notificationId) {
       let currentUser = localStorage.getItem("userId");
 
       // Add new connection to current user
@@ -186,12 +199,31 @@
       db.collection("userdata").doc(user).update({
         connections: firebase.firestore.FieldValue.arrayUnion(currentUser),
         pending: firebase.firestore.FieldValue.arrayRemove(currentUser)
-      }).then(function() {
+      }).then(function () {
         console.log("Connection accepted by " + currentUser);
-      })
+      });
+
+      // Add new notification to opposing user
+      let userName = await db.collection("userdata").doc(user).get(); 
+      userName = userName.data();
+      db.collection("notifications").add({
+        date: String(getDate()),
+        description: String("Connection accepted by " + userName.fullname),
+        type: String("connection-accept"),
+        title: String("Connection Accepted!"),
+        touser: String(user),
+        fromuser: String(currentUser)
+      }).then((docRef) => {
+        db.collection("userdata").doc(user).update({
+          notifications: firebase.firestore.FieldValue.arrayUnion(String(docRef.id))
+        }).then(function () {
+          console.log("Notification sent successfully to -> " + user);
+        })
+      });
+
 
       // Delete the notification document
-      db.collection("notifications").doc(notificationId).delete().then(function() {
+      db.collection("notifications").doc(notificationId).delete().then(function () {
         console.log("Notification deleted " + notificationId);
         deleteCard(notificationId);
       });
@@ -210,12 +242,12 @@
       // Add new connection to the opposing user
       db.collection("userdata").doc(user).update({
         pending: firebase.firestore.FieldValue.arrayRemove(currentUser)
-      }).then(function() {
+      }).then(function () {
         console.log("Connection declined by " + currentUser);
       })
 
       // Delete the notification document
-      db.collection("notifications").doc(notificationId).delete().then(function() {
+      db.collection("notifications").doc(notificationId).delete().then(function () {
         console.log("Notification deleted " + notificationId);
         deleteCard(notificationId);
       });
@@ -225,8 +257,17 @@
       console.log("Notification Viewed");
     }
 
-    function dismissNotification() {
-      console.log("Notification Dismissed");
+    function dismissNotification(notificationId) {
+      let currentUser = localStorage.getItem("userId");
+      db.collection("userdata").doc(currentUser).update({
+        notifications: firebase.firestore.FieldValue.arrayRemove(notificationId)
+      }).then(function () {
+        console.log("Notification Dismissed");
+      });
+      db.collection("notifications").doc(notificationId).delete().then(function () {
+        console.log("Notification deleted " + notificationId);
+        deleteCard(notificationId);
+      });
     }
 
     function deleteCard(notificaitonId) {
@@ -247,15 +288,16 @@
           let user = notificationData.fromuser;
           let notificationId = item;
           let imageLink;
-          firebase.app().storage().ref("users").child(user + "/profile.jpg").getDownloadURL().then(imgUrl => {
+          firebase.app().storage().ref("users").child(user + "/profile.jpg").getDownloadURL().then(
+            imgUrl => {
               console.log("Retrieved image" + imgUrl);
               imageLink = imgUrl;
               createCard(type, imageLink, time, description, user, notificationId);
-          }).catch(function (error) {
-              console.log("No profile picture found");
+            }).catch(function (error) {
+            console.log("No profile picture found");
           });
         })
-        });
+      });
     }
     getNotifications();
   </script>
