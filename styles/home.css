@@ -11,7 +11,6 @@
 
 #banner h3 {
   grid-column: 1;
-  font-size: 2vw;
 }
 
 form {
@@ -19,138 +18,15 @@ form {
   justify-self: end;
 }
 
-#newPost {
-  width: auto;
-  height: 100%;
-}
-
-#post {
-  height: 2150px;
-  width: 60%;
-  margin: 0 auto 30px auto;
-  border: 1px solid black;
-  border-radius: 10px;
-  display: grid;
-  grid-template-rows: 5% 75% 5% 9%;
-}
-
-#postHeader {
-  margin-top: 1em;
-  grid-row: 1;
-  display: grid;
-  grid-template-columns: 5% 5% 20% 65%;
-}
-
 #profileImage {
-  max-width: 48px;
-  max-height: 48px;
+  max-width: 100px;
+  max-height: 100px;
   width: 100%;
   height: auto;
-  grid-column: 2;
   border-radius: 50%;
 }
 
 #name {
-  grid-column: 3;
-  justify-self: start;
-  font-size: 1vw;
-}
-
-#menu {
-  grid-column: 4;
-  justify-self: end;
-  max-height: 24px;
-  max-width: 24px;
-  width: 100%;
-  height: auto;
-}
-
-#body {
-  grid-row: 2;
-  display: grid;
-  grid-template-rows: 59% 41%;
-  grid-template-columns: 5% 90% 5%;
-}
-
-#postText {
-  grid-row: 1;
-  grid-column: 2;
-  align-self: center;
-  font-size: 1vw;
-}
-
-#postPic {
-  width: 100%;
-  height: auto;
-  max-height: 600px;
-  grid-row: 2;
-  grid-column: 2;
   justify-self: center;
-}
-
-#bottom {
-  grid-row: 3;
-  display: grid;
-  grid-template-columns: 5% 5% 40% 45% 5%;
-}
-
-#like {
-  max-width: 48px;
-  max-height: 48px;
-  width: 100%;
-  height: auto;
-  grid-column: 2;
-
-}
-
-#counter {
-  grid-column: 3;
-  justify-self: start;
-  font-size: 1vw;
-}
-#comment {
-  grid-column: 4;
-  justify-self: end;
-  font-size: 1vw;
-}
-
-#comments {
-  grid-row: 4;
-  display: grid;
-  grid-template-columns: 5% 5% 10% 75% 5%;
-}
-
-#commenter {
-  max-width: 48px;
-  max-height: 48px;
-  width: 100%;
-  height: auto;
-  grid-column: 2;
-  border-radius: 50%;
-}
-
-#commenterName {
-  grid-column: 3;
-  font-size: 1vw;
-}
-
-#commentText {
-  grid-column: 4;
-  font-size: 1vw;
-}
-
-/* TODO: I need to get the media query working */
-@media (max-width: 650px) {
-  #post {
-    height: 800px;
-  }
-
-  #postHeader {
-    grid-template-columns: 5% 20% 10% 65%;
-  }
-
-  #profileImage {
-    height: 24px;
-    width: 24px;
-  }
+  align-self: center;
 }

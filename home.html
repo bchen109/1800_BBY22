@@ -15,6 +15,54 @@
 </head>
 
 <body>
+  <template id="CardTemplate">
+    <div class="card m-4">
+      <div class="row row-cols-auto">
+        <img class="card-img-top" src="images/profile_image_placeholder.jpeg" alt="" width="100px" height="100px">
+        <p class="card-text"></p>
+      </div>
+      <div class="text-center">
+        <img src="images/random_guy.jpg" class="card-img-top" alt="...">
+      </div>
+      <div class="card-body">
+        <div>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+            card's content.</p>
+        </div>
+        <div class="d-flex justify-content-between">
+          <div class="d-flex" style="display: gird; place-items: center;">
+            <img src="images/like-icon.png" alt="" width="30px" height="30px">
+            <p> 18</p>
+          </div>
+          <div style="display: grid; place-items: center;">
+            <p>Comments</p>
+          </div>
+        </div>
+        <div class="card text-center" style="border: 0;">
+          <div class="card-body author-message d-flex">
+            <div>
+              <img src="images/random_guy.jpg" style="height:50px; width:50px;">
+              <p>Random</p>
+            </div>
+            <p class="card-text">New connection request with Brytton Tsai</p>
+          </div>
+        </div>
+        <div class="card text-center" style="border: 0;">
+          <div class="card-body author-message d-flex">
+            <div>
+              <img src="images/random_guy.jpg" style="height:50px; width:50px;">
+              <p>Random</p>
+            </div>
+            <p class="card-text">New connection request with Brytton Tsai</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+        Show More
+      </div>
+    </div>
+  </template>
+
   <nav class="navbar navbar-expand-lg navbar-light bg-info">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Logo</a>
@@ -56,68 +104,45 @@
 
   <h1 id="title">Home</h1>
   <section id="banner">
-    <h3>Welcome back <span id="welcomeName"></span></h3>
+    <h3 class="card-title">Welcome back <span id="welcomeName"></span></h3>
     <form action="post.html">
       <button id="newPost" type="submit" class="btn btn-primary btn-lg">New Post</button>
     </form>
   </section>
 
-  <div id="post">
-    <div id="postHeader">
-      <img id="profileImage" src="images/profile_image_placeholder.jpeg" alt="" width="48px" height="48px">
-      <p id="name"></p>
-      <img id="menu" src="images/menu.png" alt="" width="24px" height="24px">
-    </div>
-    <div id="body">
-      <div id="postText">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, cum numquam.
-        Itaque vel illum libero magni perferendis, officiis,
-        ipsam quod error reprehenderit illo natus deleniti architecto suscipit corrupti exercitationem sapiente.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        In enim, aliquid consequatur quas maiores animi dolorum! Repellat autem quo, soluta dolore,
-        deserunt recusandae iusto impedit eveniet nihil nesciunt, facilis qui?
-      </div>
-      <img id="postPic" src="images/post.jpg" alt="" width="400px" height="400px">
-    </div>
-    <div id="bottom">
-      <img id="like" src="images/like-icon.png" alt="" width="48px" height="48px">
-      <p id="counter">16</p>
-      <p id="comment">Comments</p>
-    </div>
-    <div id="comments">
-      <img id="commenter" src="images/commenter.jpg" alt="" width="48px" height="48px">
-      <p id="commenterName">Jim Rayner</p>
-      <p id="commentText">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Blanditiis, error tempora veritatis esse est amet temporibus numquam suscipit accusamus consequuntur ducimus
-        aliquam voluptates,
-        ipsam illum minima dicta facilis, sunt fuga!
-      </p>
-    </div>
+  <div id="postContainer">
+
   </div>
+
   <!-- Card 1 Template -->
   <div class="card m-4">
+    <div class="row row-cols-auto">
+      <img id="profileImage" class="card-img-top" src="images/profile_image_placeholder.jpeg" alt="" width="100px" height="100px">
+      <p id="name" class="card-text"></p>
+    </div>
     <div class="text-center">
-      <img src="images/random_guy.jpg" class="card-img-top" alt="...">
+      <img id="postPic" src="images/random_guy.jpg" class="card-img-top" alt="...">
     </div>
     <div class="card-body">
       <div>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+        <p id="postText" class="card-text">Some quick example text to build on the card title and make up the bulk of the
           card's content.</p>
       </div>
       <div class="d-flex justify-content-between">
-        <div class="d-flex" style="display: gird; place-items: center;">
+        <div class="d-flex row row-cols-auto" >
           <img src="images/like-icon.png" alt="" width="30px" height="30px">
-          <p>18</p>
+          <p id="counter"> 18</p>
         </div>
-        <div style="display: grid; place-items: center;">
+        <!-- <div style="display: grid; place-items: center;"> -->
+        <div class="row row-cols-auto">
           <p>Comments</p>
         </div>
       </div>
       <div class="card text-center" style="border: 0;">
         <div class="card-body author-message d-flex">
           <div>
-            <img src="images/random_guy.jpg" style="height:50px; width:50px;">
-            <p>Random</p>
+            <img id="commenterImg" src="images/random_guy.jpg" style="height:50px; width:50px;">
+            <p id="commenterName">Random</p>
           </div>
           <p class="card-text">New connection request with Brytton Tsai</p>
         </div>

@@ -54,10 +54,11 @@ document.querySelector('#submit').addEventListener("click", function (e) {
   console.log(html);
 
   firebase.auth().onAuthStateChanged(async user => {
+    // Check if the user is logged in.
     if (user) {
       console.log(user.uid);
       var postID = date + user.uid;
-      // Get a post image and store it in firebase storage
+      // Get a post image and store it in firebase storage.
       let storageRef = firebase.storage().ref("posts").child(postID + ".jpg");
       console.log("Check Diff: " + storageRef);
 
@@ -66,7 +67,7 @@ document.querySelector('#submit').addEventListener("click", function (e) {
       // Create the post document
       writePosts(html, user.uid, date, postID);
 
-      // Get the URL of stored file
+      // Get the URL of stored file and store it in the image field.
       await storageRef.getDownloadURL()
         .then(function (url) {
           console.log("URL:" + url);
@@ -81,7 +82,10 @@ document.querySelector('#submit').addEventListener("click", function (e) {
   })
 })
 
+// This function is used to write to the firebase.
 function writePosts(text, userValue, date, postID) {
+  // Writing to the collection post and assigning document postID (timestamp + user.uid)
+  // Setting the value of the posts.
   var postsRef = db.collection("posts").doc(postID);
   postsRef.set({
     date: date,
@@ -92,6 +96,8 @@ function writePosts(text, userValue, date, postID) {
     comments: ""
   })
     .then(() => {
+      // Checking if writing to the firebase is complete.
+      // If it is return to the home page.
       postsRef.onSnapshot(snapshot => {
         if (snapshot.exists) {
           window.location.href = "./home.html";
