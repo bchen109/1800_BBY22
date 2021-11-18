@@ -28,7 +28,7 @@ function getPostUserInfo() {
       const postRef = db.collection("posts")
         .where('user', '==', user.uid)
         .orderBy('date', 'desc')
-        .limit(5)
+        .limit(1)
         .get();
       postRef.then(userDoc => {
         userDoc.docs.forEach(doc => {
@@ -51,7 +51,7 @@ function getPostUserInfo() {
             console.log("No profile picture found so using default picture");
           });
         }
-      });
+      }); // put .then // third .then to populate the variable // or populate at the .then level.
     } else {
       console.log("User not logged in");
     }
@@ -65,7 +65,7 @@ function getPostInformation() {
       const postRef = db.collection("posts")
         .where('user', '==', user.uid)
         .orderBy('date', 'desc')
-        .limit(5)
+        .limit(1)
         .get();
       postRef.then(userDoc => {
         userDoc.docs.forEach(doc => {
@@ -191,16 +191,85 @@ function postCard(profileImg, userName, postImg, postContent, likeNumber) {
 function getConnections() {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
+      console.log("User value: " + user.uid)
+      console.log("User" + user);
       const connectRef = db.collection("userdata")
-        .where('user', '==', user.uid)
-        .get();
-      connectRef.then(userDoc => {
-        userDoc.docs.forEach(doc => {
+        .doc(user.uid)
+        .get().then(doc => {
+          console.log(doc);
           let a = doc.data().connections;
           console.log("Check: " + a);
         });
-      })
     }
   })
 }
-getConnections();
+
+var totalPosts = [];
+var totalPostId = [];
+async function grabPostInfo() {
+  let connection;
+  let userId = localStorage.getItem("userId");
+
+  const connectRef = await db.collection("userdata")
+    .doc(userId)
+    .get().then(doc => {
+      console.log(doc);
+      connection = doc.data().connections;
+      connection.push(userId);
+      console.log("Check: " + connection, typeof connection);
+    });
+  // Grab all posts for each of the users
+  await db.collection("posts")
+    .orderBy('date', 'desc')
+    .get().then(function (queryDoc) {
+      queryDoc.forEach((doc) => {
+        // console.log(`${doc.id} => ${doc.data()}`);
+        for (let i = 0; i < connection.length; i++) {
+          if (doc.data().user == connection[i]) {
+            totalPosts.push(doc.data());
+            totalPostId.push(doc.id);
+            console.log(`${doc.id} => ${doc.data()}`);
+          }
+        }
+      })
+  });
+  console.log(totalPostId[1])
+  console.log(totalPosts[1].user);
+}
+
+async function displayPost() {
+    for (let i = 0; i < info.length; i++) {
+      let newPost = CardTemplate.content.cloneNode(true);
+      const userInfo = db.collection("userdata").doc(totalPosts[i].user)
+      const doc = await userInfo.get();
+        if (!doc.exists) {
+          console.log('Document does not exist.');
+        } else {
+          const data = doc.data();
+          newPost.querySelector('.card m-4').setAttribute("id", "postID" + totalPostId[i]);
+          newPost.querySelector('.card-img-top').setAttribute("src", String(profileImg));
+          newPost.querySelector('.card-img-top').setAttribute("alt", "Profile Pic");
+          newPost.querySelector('car')
+          newPost.querySelector("#postID", '.top')
+
+        }
+    }
+  }
+
+  profileName.classList = "card-text";
+  profileName.innerText = userName;
+
+  // connection.forEach(element => {
+  //   console.log(element);
+  //   const postRef = db.collection("posts")
+  //     .where('user', '==', element)
+  //     .orderBy('date', 'desc')
+  //     .get();
+  //   postRef.then(postDoc => {
+  //     postDoc.docs.forEach(doc => {
+  //       console.log(`${doc.id} => ${doc.data()}`);
+  //       totalPosts.push(doc.data());
+  //     })
+  //   })
+  //   console.log("Total Posts: " + totalPosts.length);
+  // })
