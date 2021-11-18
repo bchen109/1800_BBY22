@@ -1,100 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post</title>
 
-    <!-- Third party CSS source for header-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css" />
-    <link rel="stylesheet" href="styles/post.css"/>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post</title>
 
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Logo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="profile.html">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="settings.html">Settings</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Logout</a>
-            </li>
-          </ul>
-        </div>
+  <!-- Third party CSS source for header-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css" />
+  <link rel="stylesheet" href="styles/post.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Logo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="profile.html">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="settings.html">Settings</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
+          </li>
+        </ul>
       </div>
-    </nav>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-      <div class="container-fluid justify-content-evenly">
-          <a href="home.html" class="home">
-            <img src="./images/house-icon.png" style="width: 45px; height: auto">
-          </a>
-          <a href="connect.html" class="home">
-          <img src="./images/group-people.png" style="width: 45px; height: auto">
-          </a>
-          <a href="notifications.html" class="home">
-          <img src="./images/bell-icon.png" style="width: 45px; height: auto">
-          </a>
-      </div>
-    </nav>
+    </div>
+  </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid justify-content-evenly">
+      <a href="home.html" class="home">
+        <span class="material-icons" style="font-size: 45px;">
+          home
+        </span>
+      </a>
+      <a href="connect.html" class="home" style="color: black;">
+        <span class="material-icons" style="font-size: 45px;">
+          people
+        </span>
+      </a>
+      <a href="notifications.html" class="home" style="color: black;">
+        <span class="material-icons" style="font-size: 45px;">
+          notifications
+        </span>
+      </a>
+    </div>
+  </nav>
 
-    <div id="container">
-      <h1 id="title">Post</h1>
-      <!-- Create the editor container -->
-      <div id="editor">
-        <p>Start a post...</p>
-      </div>
+  <div id="container">
+    <h1 id="title">Post</h1>
+    <!-- Create the editor container -->
+    <div id="editor">
+      <p>Start a post...</p>
+    </div>
 
-      <div class="field">
-        <div id= "innerField" class="ui left icon input large">
-          <i class="image icon"></i>
-          <input type="file" id="fileUploader" accept="image/*" />
-        </div>
-        <div class="pic">
-          <img id="picture" src="dummy.jpg" alt="" width="100" height="100" />
-        </div>
+    <div class="field">
+      <div id="innerField" class="ui left icon input large">
+        <i class="image icon"></i>
+        <input type="file" id="fileUploader" accept="image/*" />
       </div>
-
-      <div class="submission mb-0 p-2">
-        <input type="submit" value="Submit" id="submit" class="btn btn-success btn-lg"/>
+      <div class="pic">
+        <img id="picture" src="dummy.jpg" alt="" width="100" height="100" />
       </div>
     </div>
 
-    <!----------------------------------------------->
-    <!-- JS: Boostrap, Firebase, API related, add Jquery-->
-    <!----------------------------------------------->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
+    <div class="submission mb-0 p-2">
+      <input type="submit" value="Submit" id="submit" class="btn btn-success btn-lg" />
+    </div>
+  </div>
 
-    <script src="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+  <!----------------------------------------------->
+  <!-- JS: Boostrap, Firebase, API related, add Jquery-->
+  <!----------------------------------------------->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+  </script>
 
-    <!-- Included the Quill library -->
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
-    <!-- Link to the api keys for your firebase project -->
-    <script src="scripts/firebaseAPI.js"></script>
-    <script src="scripts/post.js"></script>
-  </body>
+  <!-- Included the Quill library -->
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- Link to the api keys for your firebase project -->
+  <script src="scripts/firebaseAPI.js"></script>
+  <script src="scripts/post.js"></script>
+</body>
+
 </html>
