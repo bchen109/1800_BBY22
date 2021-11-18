@@ -17,6 +17,7 @@
 
   <!-- Optional styles and scripts of your own -->
   <link rel="stylesheet" href="styles/notifications.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 </head>
 
@@ -53,14 +54,20 @@
   </nav>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid justify-content-evenly">
-      <a href="home.html" class="home">
-        <img src="./images/house-icon.png" style="width: 45px; height: auto">
+      <a href="home.html" class="home" style="color: black;">
+        <span class="material-icons" style="font-size: 45px;">
+          home
+        </span>
       </a>
-      <a href="connect.html" class="home">
-        <img src="./images/group-people.png" style="width: 45px; height: auto">
+      <a href="connect.html" class="home" style="color: black;">
+        <span class="material-icons" style="font-size: 45px;">
+          people
+        </span>
       </a>
       <a href="notifications.html" class="home">
-        <img src="./images/bell-icon.png" style="width: 45px; height: auto">
+        <span class="material-icons" style="font-size: 45px;">
+          notifications
+        </span>
       </a>
     </div>
   </nav>
@@ -204,7 +211,7 @@
       });
 
       // Add new notification to opposing user
-      let userName = await db.collection("userdata").doc(user).get(); 
+      let userName = await db.collection("userdata").doc(user).get();
       userName = userName.data();
       db.collection("notifications").add({
         date: String(getDate()),
