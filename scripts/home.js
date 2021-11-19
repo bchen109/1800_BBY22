@@ -64,11 +64,18 @@ async function grabPostInfo() {
   console.log(totalPosts[1].user);
 }
 
+async function getUserProfileImg(url) {
+  const imgUrl = await firebase.app().storage().ref("users").child(url).getDownloadURL();
+  console.log("url: " + imgUrl);
+  return imgUrl;
+}
+
+var newPost
 async function displayPost() {
   await grabPostInfo();
 
   for (let i = 0; i < totalPosts.length; i++) {
-    let newPost = CardTemplate.content.cloneNode(true);
+    newPost = CardTemplate.content.cloneNode(true);
     const userInfo = db.collection("userdata").doc(totalPosts[i].user)
     const doc = await userInfo.get();
     if (!doc.exists) {
@@ -76,11 +83,8 @@ async function displayPost() {
     } else {
       const data = doc.data();
       let postId = "a" + totalPostId[i];
-      console.log
-      firebase.app().storage().ref("users").child(totalPosts[i].user + "/profile.jpg").getDownloadURL().then(imgUrl => {
-        console.log("url: " + imgUrl + " PostId: " + totalPostId[i]);
-        newPost.querySelector('.profileImg').setAttribute("src", String(imgUrl));
-      });
+      const imgUrl = await getUserProfileImg(totalPosts[i].user + "/profile.jpg");
+      newPost.querySelector('.profileImg').setAttribute("src", String(imgUrl));
       newPost.querySelector('.profileImg').setAttribute("alt", "Profile Pic");
       newPost.querySelector('.profileName').innerText = data.fullname;
       newPost.querySelector('.postImg').src = totalPosts[i].image;
@@ -121,7 +125,7 @@ function loadComments(postId) {
     while (elements.length > 0) {
         elements[0].parentNode.removeChild(elements[0]);
     }
-    
+
     document.querySelector("#" + postId + " .show-comments").addEventListener("click", loadComments.bind(null, postId));
     document.querySelector("#" + postId + " .show-comments").removeEventListener("click", removeComments);
 }*/
