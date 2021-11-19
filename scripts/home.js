@@ -64,6 +64,7 @@ async function grabPostInfo() {
   console.log(totalPosts[1].user);
 }
 
+
 async function displayPost() {
   await grabPostInfo();
 
@@ -89,9 +90,28 @@ async function displayPost() {
       newPost.querySelector('.likeCounter').innerText = totalPosts[i].likes;
       newPost.querySelector('.post-container').setAttribute("id", postId);
       document.getElementById("container").appendChild(newPost);
-
+      
       document.querySelector("#" + postId + " .add-comment").addEventListener("click", newComment.bind(null, postId));
-      document.querySelector("#" + postId + " .show-comments").addEventListener("click", loadComments.bind(null, postId));
+      
+      //document.querySelector("#" + postId + " .show-comments").addEventListener("click", loadComments.bind(null, postId));
+      $toggle = $("#" + postId + " .show-comments");
+      $toggle.click(function () {
+
+        $comments = $("#" + postId + " .comments-go-here");
+        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+        $comments.slideToggle(500, function () {
+            //execute this after slideToggle is done
+            //change text of header based on visibility of content div
+            if(document.querySelector("#" + postId + " .show-comments").innerHTML =="Show Comments"){
+              document.querySelector("#" + postId + " .show-comments").innerHTML = "Hide Comments";
+            }else{
+              document.querySelector("#" + postId + " .show-comments").innerHTML = "Show Comments";
+            }
+        });
+    
+    });
+
+      loadComments(postId);
     }
   }
 }
@@ -110,21 +130,8 @@ function loadComments(postId) {
         populateComment(item, postId);
       });
     });
-  //document.querySelector("#" + postId + " .show-comments").addEventListener("click", removeComments);
-  document.querySelector("#" + postId + " .show-comments").removeEventListener("click", loadComments.bind(null, postId));
-
+  
 }
-
-/*function removeComments(postId) {
-    let elements = document.querySelector("#" + postId + " .deleteComment");
-    console.log("elements: " + elements);
-    while (elements.length > 0) {
-        elements[0].parentNode.removeChild(elements[0]);
-    }
-    
-    document.querySelector("#" + postId + " .show-comments").addEventListener("click", loadComments.bind(null, postId));
-    document.querySelector("#" + postId + " .show-comments").removeEventListener("click", removeComments);
-}*/
 
 function populateComment(commentId, postId) {
   let commentTemplate = document.querySelector("#comment-template");
@@ -149,6 +156,10 @@ function populateComment(commentId, postId) {
 
 function newComment(postId) {
   let commentInput = document.querySelector("#" + postId + " .comment-input").value;
+  if (!commentInput.trim()){
+    window.alert("Empty comment.")
+    return 1;
+  }
   console.log(commentInput);
   let directory = postId.substring(1, 13) + "." + postId.substring(13, postId.length);
   db.collection("comments").add({
