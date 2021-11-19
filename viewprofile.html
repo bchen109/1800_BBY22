@@ -121,7 +121,7 @@
                     <p id="nationality" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
                 </div>
             </div>
-            <div class="card">
+            <div class="card" id="contact-card">
                 <div class="card-header fw-bold">
                     Contact Information
                 </div>
@@ -192,8 +192,8 @@
                     document.getElementById("contactinfo").innerText = data.email;
                     document.getElementById("connectButton").remove();
                 } else {
-                    document.getElementById("contactinfo").remove();
                     document.getElementById("connectButton").addEventListener('click', sendConnectRequest, false);
+                    document.getElementById("contact-card").remove();
                 }
 
                 document.getElementById("quote").innerText = data.quote;

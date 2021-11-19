@@ -147,6 +147,10 @@
       // Create card content container
       let cardContent = document.createElement("div");
       cardContent.className = "card-body d-flex justify-content-evenly vertical-center";
+
+      // Create image link
+      let profileLink = document.createElement("a");
+      profileLink.setAttribute("href", "viewprofile.html?userid=" + user);
       // Create image child
       let image = document.createElement("img");
       image.src = imageLink;
@@ -170,7 +174,8 @@
       buttonAccept.setAttribute("onclick", processFunction);
       buttonAccept.nodeType = "button";
       // Add content to content container
-      cardContent.appendChild(image);
+      profileLink.appendChild(image);
+      cardContent.appendChild(profileLink);
       cardContent.appendChild(content);
       // Add buttons to button container
       buttonContainer.appendChild(buttonAccept);
@@ -300,9 +305,7 @@
               console.log("Retrieved image" + imgUrl);
               imageLink = imgUrl;
               createCard(type, imageLink, time, description, user, notificationId);
-            }).catch(function (error) {
-            console.log("No profile picture found");
-          });
+            });
         })
       });
     }
