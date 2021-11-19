@@ -18,15 +18,59 @@ form {
   justify-self: end;
 }
 
-#profileImage {
-  max-width: 100px;
-  max-height: 100px;
+.profileImg {
+  max-width: 80px;
+  max-height: 80px;
   width: 100%;
   height: auto;
   border-radius: 50%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  justify-self: end;
 }
 
-#name {
+.profileName {
   justify-self: center;
   align-self: center;
+}
+
+.likediv {
+  padding-top: 15px;
+  padding-left: 5px;
+}
+
+#container {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.likes {
+  display: grid !important;
+  align-items: center !important;
+}
+
+.description {
+  padding-left: 5px;
+}
+
+.commenter-img {
+  width: 60px;
+}
+
+.show-comments:hover {
+  cursor: pointer;
+}
+
+#add-comment {
+  height: 40px !important;
+}
+
+#new-comment {
+  display: grid;
+  justify-items: center;
+}
+
+#new-comment button {
+  margin-top: 10px;
 }
