@@ -11,6 +11,7 @@
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <link type="text/css" rel="stylesheet" href="styles/viewprofile.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 </head>
 
@@ -42,60 +43,111 @@
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid justify-content-evenly">
-            <a href="home.html" class="home">
-                <img src="./images/house-icon.png" style="width: 45px; height: auto">
+            <a href="home.html" class="home" style="color: black;">
+                <span class="material-icons" style="font-size: 45px;">
+                    home
+                </span>
             </a>
-            <a href="connect.html" class="home">
-                <img src="./images/group-people.png" style="width: 45px; height: auto">
+            <a href="connect.html" class="home" style="color: black;">
+                <span class="material-icons" style="font-size: 45px;">
+                    people
+                </span>
             </a>
-            <a href="notifications.html" class="home">
-                <img src="./images/bell-icon.png" style="width: 45px; height: auto">
+            <a href="notifications.html" class="home" style="color: black;">
+                <span class="material-icons" style="font-size: 45px;">
+                    notifications
+                </span>
             </a>
         </div>
     </nav>
 
-    <div id="container" class="container">
-        <div id="heading" class="text-center">
-            <h1 id="fullname">Profile</h1>
-        </div>
-        <div id="picture" class="text-center">
-            <img id="profilePicture" src="images/profile_image_placeholder.jpeg" alt="" />
-        </div>
-        <div class="font">
-            <label>Bio: </label>
-            <p id="bio"></p>
-        </div>
-        <div class="font">
-            <label>Quote: </label>
-            <p id="quote"></p>
-        </div>
-        <div class="font">
-            <label>Occupation: </label>
-            <p id="occupation"></p>
-        </div>
-        <div class="font">
-            <label>Field of study</label>
-            <p id="fieldofstudy"></p>
-        </div>
-        <div class="font">
-            <label>Nationality: </label>
-            <p id="nationality"></p>
-        </div>
-        <div class="font">
-            <label>Languages: </label>
-            <p id="languages"></p>
-        </div>
-        <div id="hobbiesActivities" class="font">
-            <label>Hobbies: </label>
-            <p id="hobbies"></p>
-        </div>
-        <div class="font">
-            <label>Volunteer: </label>
-            <p id="volunteer"></p>
+    <div id="container" class="container text-center">
+        <div class="wrapper">
+            <div class="top-icons">
+                <i class="fas fa-long-arrow-alt-left"></i>
+                <i class="fas fa-ellipsis-v"></i>
+                <i class="far fa-heart"></i>
+            </div>
+
+            <div class="profile">
+                <img src="https://images.unsplash.com/photo-1484186139897-d5fc6b908812?ixlib=rb-0.3.5&s=9358d797b2e1370884aa51b0ab94f706&auto=format&fit=crop&w=200&q=80%20500w"
+                    class="thumbnail" id="profilePicture">
+                <div class="check"><i class="fas fa-check"></i></div>
+                <h3 class="name" id="fullname">Beverly Little</h3>
+                <p class="title" id="occupation">Javascript Developer</p>
+                <p class="description" id="quote">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque aliquam
+                    aliquid
+                    porro!</p>
+                <button type="button" class="btn" id="connectButton">Connect</button>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header fw-bold">
+                    Bio
+                </div>
+                <div>
+                    <p id="bio" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header fw-bold">
+                    Field Of Study
+                </div>
+                <div>
+                    <p id="fieldofstudy" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header fw-bold">
+                    Hobbies
+                </div>
+                <div>
+                    <p id="hobbies" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header fw-bold">
+                    Languages
+                </div>
+                <div>
+                    <p id="languages" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header fw-bold">
+                    Nationality
+                </div>
+                <div>
+                    <p id="nationality" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header fw-bold">
+                    Contact Information
+                </div>
+                <div>
+                    <p id="contactinfo" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                </div>
+            </div>
         </div>
     </div>
-
-
+    <div style="width: auto; height: 1px; overflow: hidden;">
+        <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center"
+            style="min-height: 200px;">
+            <!-- Then put toasts within -->
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img id="toast-logo" src="./images/logo.jpg" class="rounded me-2" alt="...">
+                    <strong class="me-auto">Student Connect</strong>
+                    <small>Now</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div id="toast-notification" class="toast-body">
+                    Notification shown here
+                </div>
+            </div>
+        </div>
+    </div>
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related, add Jquery-->
     <!----------------------------------------------->
@@ -125,27 +177,91 @@
         async function getUserDoc(userId) {
             const cityRef = db.collection('userdata').doc(userId);
             const doc = await cityRef.get();
+            let currentUser = localStorage.getItem("userId");
             if (!doc.exists) {
                 console.log('No such document!');
             } else {
                 const data = doc.data();
-                document.getElementById("fullname").innerText = data.fullname;
+                if (data.volunteer == true) {
+                    document.getElementById("fullname").innerText = data.fullname + " (Volunteer)";
+                } else {
+                    document.getElementById("fullname").innerText = data.fullname;
+                }
+
+                if (data.connections.includes(currentUser)) {
+                    document.getElementById("contactinfo").innerText = data.email;
+                    document.getElementById("connectButton").remove();
+                } else {
+                    document.getElementById("contactinfo").remove();
+                    document.getElementById("connectButton").addEventListener('click', sendConnectRequest, false);
+                }
+
                 document.getElementById("quote").innerText = data.quote;
                 document.getElementById("bio").innerText = data.bio;
                 document.getElementById("occupation").innerText = data.occupation;
                 document.getElementById("fieldofstudy").innerText = data.fieldofstudy;
                 document.getElementById("nationality").innerText = data.nationality;
                 document.getElementById("languages").innerText = data.languages;
-                document.getElementById("volunteer").innerText = data.volunteer;
                 document.getElementById("hobbies").innerText = data.hobbies;
                 firebase.app().storage().ref("users").child(userId + "/profile.jpg").getDownloadURL().then(
-                imgUrl => {
-                    document.getElementById("profilePicture").src = imgUrl;
-                }).catch(function (error) {
+                    imgUrl => {
+                        document.getElementById("profilePicture").src = imgUrl;
+                    }).catch(function (error) {
                     console.log("No profile picture found so using default picture");
                 });
             }
         }
+        async function sendConnectRequest() {
+            let currentVolunteerId = getParameter("userid");
+            let userId = localStorage.getItem("userId");
+            let duplicate = false;
+
+            // Checking if the a pending connection already exists or if the connection has already been made
+            let userDoc = await db.collection("userdata").doc(userId).get();
+            let notificationMessage;
+            userDoc = userDoc.data();
+            userDoc.pending.forEach((item) => {
+                if (String(item) == String(currentVolunteerId)) {
+                    duplicate = true;
+                    notificationMessage = "There is already a pending connection.";
+                }
+            })
+            userDoc.connections.forEach((item) => {
+                if (String(item) == String(currentVolunteerId)) {
+                    duplicate = true;
+                    notificationMessage = "You are already connected with this user.";
+                }
+            })
+            if (!duplicate) {
+                db.collection("notifications").add({
+                    date: String(getDate()),
+                    description: String("New connection request from " + userDoc.fullname),
+                    type: String("connection"),
+                    title: String("Connection Request!"),
+                    touser: String(currentVolunteerId),
+                    fromuser: String(userId)
+                }).then((docRef) => {
+                    db.collection("userdata").doc(currentVolunteerId).update({
+                        notifications: firebase.firestore.FieldValue.arrayUnion(String(docRef.id))
+                    }).then(function () {
+                        console.log("Notification sent successfully to -> " + currentVolunteerId);
+                    });
+                    db.collection("userdata").doc(userId).update({
+                        pending: firebase.firestore.FieldValue.arrayUnion(String(
+                            currentVolunteerId))
+                    }).then(function () {
+                        console.log("Pending connections added " + currentVolunteerId);
+                    });
+                });
+                document.getElementById("toast-notification").innerText = "Connection sent!";
+                $('.toast').toast('show');
+            } else {
+                document.getElementById("toast-notification").innerText = notificationMessage;
+                $('.toast').toast('show');
+                console.log("Duplicate connection request");
+            }
+        }
+
         async function main() {
             await getUserDoc(getParameter("userid"));
         }

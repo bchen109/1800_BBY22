@@ -60,51 +60,83 @@
       </a>
     </div>
   </nav>
+  <div id="container" class="container text-center">
+    <div class="wrapper">
+      <div class="top-icons">
+        <i class="fas fa-long-arrow-alt-left"></i>
+        <i class="fas fa-ellipsis-v"></i>
+        <i class="far fa-heart"></i>
+      </div>
 
-  <div id="container" class="container">
-    <div id="heading" class="text-center">
-      <h1 id="fullname">Profile</h1>
-    </div>
-    <div id="picture" class="text-center">
-      <img id="profilePicture" src="images/profile_image_placeholder.jpeg" alt="" />
-    </div>
-    <div class="text-center">
-      <button id="edit-profile" type="button" class="btn btn-primary btn-lg">Edit Profile</button>
-    </div>
-    <div class="font">
-      <label>Bio: </label>
-      <p id="bio"></p>
-    </div>
-    <div class="font">
-      <label>Quote: </label>
-      <p id="quote"></p>
-    </div>
-    <div class="font">
-      <label>Occupation: </label>
-      <p id="occupation"></p>
-    </div>
-    <div class="font">
-      <label>Field of study</label>
-      <p id="fieldofstudy"></p>
-    </div>
-    <div class="font">
-      <label>Nationality: </label>
-      <p id="nationality"></p>
-    </div>
-    <div class="font">
-      <label>Languages: </label>
-      <p id="languages"></p>
-    </div>
-    <div id="hobbiesActivities" class="font">
-      <label>Hobbies: </label>
-      <p id="hobbies"></p>
-    </div>
-    <div class="font">
-      <label>Volunteer: </label>
-      <p id="volunteer"></p>
+      <div class="profile">
+        <img
+          src="https://images.unsplash.com/photo-1484186139897-d5fc6b908812?ixlib=rb-0.3.5&s=9358d797b2e1370884aa51b0ab94f706&auto=format&fit=crop&w=200&q=80%20500w"
+          class="thumbnail" id="profilePicture">
+        <div class="check"><i class="fas fa-check"></i></div>
+        <h3 class="name" id="fullname">Beverly Little</h3>
+        <p class="title" id="occupation">Javascript Developer</p>
+        <p class="description" id="quote">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque aliquam
+          aliquid
+          porro!</p>
+        <button type="button" class="btn" id="edit-profile">Edit Profile</button>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-header fw-bold">
+          Bio
+        </div>
+        <div>
+          <p id="bio" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+            posuere erat a ante.</p>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header fw-bold">
+          Field Of Study
+        </div>
+        <div>
+          <p id="fieldofstudy" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing
+            elit. Integer posuere erat a ante.</p>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header fw-bold">
+          Hobbies
+        </div>
+        <div>
+          <p id="hobbies" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Integer posuere erat a ante.</p>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header fw-bold">
+          Languages
+        </div>
+        <div>
+          <p id="languages" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Integer posuere erat a ante.</p>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header fw-bold">
+          Nationality
+        </div>
+        <div>
+          <p id="nationality" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Integer posuere erat a ante.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header fw-bold">
+          Contact Information
+        </div>
+        <div>
+          <p id="contactinfo" class="mb-0 pt-1 pb-1 font-style">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Integer posuere erat a ante.</p>
+        </div>
+      </div>
     </div>
   </div>
-
 
   <!----------------------------------------------->
   <!-- JS: Boostrap, Firebase, API related, add Jquery-->
@@ -144,15 +176,19 @@
         console.log('No such document!');
       } else {
         const data = doc.data();
-        document.getElementById("fullname").innerText = data.fullname;
+        if (data.volunteer == true) {
+          document.getElementById("fullname").innerText = data.fullname + " (Volunteer)";
+        } else {
+          document.getElementById("fullname").innerText = data.fullname;
+        }
         document.getElementById("quote").innerText = data.quote;
         document.getElementById("bio").innerText = data.bio;
         document.getElementById("occupation").innerText = data.occupation;
         document.getElementById("fieldofstudy").innerText = data.fieldofstudy;
         document.getElementById("nationality").innerText = data.nationality;
         document.getElementById("languages").innerText = data.languages;
-        document.getElementById("volunteer").innerText = data.volunteer;
         document.getElementById("hobbies").innerText = data.hobbies;
+        document.getElementById("contactinfo").innerText = data.email;
         firebase.app().storage().ref("users").child(userId + "/profile.jpg").getDownloadURL().then(imgUrl => {
           document.getElementById("profilePicture").src = imgUrl;
         }).catch(function (error) {
