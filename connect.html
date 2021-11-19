@@ -111,18 +111,20 @@
         </div> -->
     </div>
     <!-- Flexbox container for aligning the toasts -->
-    <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center"
-        style="min-height: 200px;">
-        <!-- Then put toasts within -->
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <img id="toast-logo" src="./images/logo.jpg" class="rounded me-2" alt="...">
-                <strong class="me-auto">Student Connect</strong>
-                <small>Now</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div id="toast-notification" class="toast-body">
-                Notification shown here
+    <div style="width: auto; height: 1px; overflow: hidden;">
+        <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center"
+            style="min-height: 200px;">
+            <!-- Then put toasts within -->
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img id="toast-logo" src="./images/logo.jpg" class="rounded me-2" alt="...">
+                    <strong class="me-auto">Student Connect</strong>
+                    <small>Now</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div id="toast-notification" class="toast-body">
+                    Notification shown here
+                </div>
             </div>
         </div>
     </div>
@@ -158,6 +160,8 @@
         redirectIfNotLoggedIn();
         
         function connectionCard(userName, userNationality, userLanguage, userStudy, userHobby, imageLink) {
+        function connectionCard(userName, userNationality, userLanguage, userStudy, userHobby, imageLink,
+        connectionId) {
             // Create the Card container
             let cardContainer = document.createElement("div");
             cardContainer.classList = "card mb-2";
@@ -170,11 +174,16 @@
             let imageDiv = document.createElement("div");
             imageDiv.classList = "vertical-align";
 
+
             // Create image object
             let image = document.createElement("img");
             image.setAttribute("src", String(imageLink));
             image.setAttribute("alt", "profile");
             image.classList = "volunteer-image card-img-top";
+
+            // Create link to wrap around image
+            let connectionLink = document.createElement("a");
+            connectionLink.setAttribute("href", "viewprofile.html?userid=" + connectionId);
 
             // Create card body
             let cardBody = document.createElement("div");
@@ -199,7 +208,8 @@
 
             cardContainer.appendChild(flexContainer);
             flexContainer.appendChild(imageDiv);
-            imageDiv.appendChild(image);
+            connectionLink.appendChild(image);
+            imageDiv.appendChild(connectionLink);
             flexContainer.append(cardBody);
             cardBody.appendChild(cardTitle);
             cardBody.appendChild(cardNationality);
@@ -352,13 +362,14 @@
                     let userLanguage = connectionData.languages;
                     let userNationality = connectionData.nationality;
                     let userHobby = connectionData.hobbies;
+                    let connectionId = doc.id;
                     let imageLink;
                     firebase.app().storage().ref("users").child(doc.id + "/profile.jpg")
                         .getDownloadURL().then(imgUrl => {
                             console.log("Retrieved image" + imgUrl);
                             imageLink = imgUrl;
                             connectionCard(userName, userNationality, userLanguage, userStudy,
-                                userHobby, imageLink);
+                                userHobby, imageLink, connectionId);
                         });
                 })
             });

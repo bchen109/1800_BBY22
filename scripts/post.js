@@ -69,6 +69,7 @@ document.querySelector('#submit').addEventListener("click", function (e) {
     if (user) {
       console.log(user.uid);
       var postID = date + user.uid;
+      postID = "a" + postID.replace(".", "");
       // Get a post image and store it in firebase storage.
       let storageRef = firebase.storage().ref("posts").child(postID + ".jpg");
       console.log("Check Diff: " + storageRef);
@@ -99,6 +100,7 @@ function writePosts(text, userValue, date, postID) {
   // Setting the value of the posts.
   var postsRef = db.collection("posts").doc(postID);
   postsRef.set({
+    postID: postID,
     date: date,
     user: userValue,
     description: text,

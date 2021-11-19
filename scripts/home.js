@@ -59,8 +59,8 @@ async function grabPostInfo() {
         }
       })
     });
-  console.log(totalPostId[1]);
-  console.log(totalPosts[1].user);
+  // console.log(totalPostId[1]);
+  // console.log(totalPosts[1].user);
 }
 
 async function getUserProfileImg(url) {
@@ -81,7 +81,7 @@ async function displayPost() {
       console.log('Document does not exist.');
     } else {
       const data = doc.data();
-      let postId = "a" + totalPostId[i];
+      let postId = totalPostId[i];
       const imgUrl = await getUserProfileImg(totalPosts[i].user + "/profile.jpg");
       newPost.querySelector('.profileImg').setAttribute("src", String(imgUrl));
       newPost.querySelector('.profileImg').setAttribute("alt", "Profile Pic");
@@ -89,6 +89,8 @@ async function displayPost() {
       newPost.querySelector('.postImg').src = totalPosts[i].image;
       newPost.querySelector('.postImg').setAttribute("alt", "Post image");
       newPost.querySelector('.postText').innerHTML = totalPosts[i].description;
+      newPost.querySelector('.likeIcon').onclick = () => incrementLikes(postId);
+
       newPost.querySelector('.likeCounter').innerText = totalPosts[i].likes;
       newPost.querySelector('.post-container').setAttribute("id", postId);
       document.getElementById("container").appendChild(newPost);
@@ -118,6 +120,18 @@ async function displayPost() {
   }
 }
 displayPost();
+
+function incrementLikes(postID) {
+  console.log("PostID for like: " + postID);
+  db.collection("posts").doc(postID).update({
+    likes : firebase.firestore.FieldValue.increment(1)
+  }).then(() => {
+    console.log("Document successfully updated!");
+  })
+  .catch((error) => {
+    console.error("Error updating document: ", error);
+});
+}
 
 function loadComments(postId) {
   //CHANGE DOC HERE TO THE CURRENT POST ID!!!
