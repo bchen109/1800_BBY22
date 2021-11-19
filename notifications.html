@@ -115,6 +115,9 @@
   <!-- JS files: Your own JavaScript functions included here    -->
   <!--------------------------------------------------------------------->
   <script>
+    /**
+     * Checks if the user is logged in, if not they are redirected to the login.html page
+     */
     function redirectIfNotLoggedIn() {
       firebase.auth().onAuthStateChanged(user => {
         // Check if the user is signed in:
@@ -126,6 +129,9 @@
     }
     redirectIfNotLoggedIn();
 
+    /**
+     * Create a bootstrap card that will display noficiation information to the user
+     */
     function createCard(type, imageLink, time, description, user, notificationId) {
       let buttonLeft, buttonRight, processFunction, notificationType, dismissFunction;
       if (type == "connection") {
@@ -199,6 +205,10 @@
       element.appendChild(cardBody);
     }
     // createCard();
+
+    /**
+     * Retrieves the current date.
+     */
     function getDate() {
       let today = new Date();
       let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -207,6 +217,9 @@
       return dateTime;
     }
 
+    /**
+     * Function that handles the "Accept" button when the user decides to accept a connection request.
+     */
     async function acceptConnection(user, notificationId) {
       let currentUser = localStorage.getItem("userId");
 
@@ -252,6 +265,9 @@
       });
     }
 
+    /**
+     * Function that handles the "Decline" button when the user wants to decline a volunteer request.
+     */
     function declineConnection(user, notificationId) {
       let currentUser = localStorage.getItem("userId");
 
@@ -276,10 +292,16 @@
       });
     }
 
+    /**
+     * Function that redirects the user to the correct page which shows more information about this notification
+     */
     function viewNotification() {
       console.log("Notification Viewed");
     }
 
+    /**
+     * Function that handles the "Dismiss" button when the user wants to dismiss a notification
+     */
     function dismissNotification(notificationId) {
       let currentUser = localStorage.getItem("userId");
       db.collection("userdata").doc(currentUser).update({
@@ -293,10 +315,16 @@
       });
     }
 
+    /**
+     * Function that deletes the notification card from the DOM once it is no longer needed
+     */
     function deleteCard(notificaitonId) {
       document.getElementById(notificaitonId).remove();
     }
 
+    /**
+     * Function retreives all the notification the current user has and displayed it on the DOM.
+     */
     async function getNotifications() {
       let userId = localStorage.getItem("userId");
       let userDoc = await db.collection("userdata").doc(userId).get();

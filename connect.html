@@ -148,6 +148,10 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
     <script>
+        /**
+         * This function redirects the user to the login page if they are not signed in
+         * 
+         */
         function redirectIfNotLoggedIn() {
             firebase.auth().onAuthStateChanged(user => {
                 // Check if the user is signed in:
@@ -159,6 +163,9 @@
         }
         redirectIfNotLoggedIn();
         
+        /**
+         * This function creates a boot strap card and adds it to the DOM to show a list of connections that this user is currently connected to
+         */
         function connectionCard(userName, userNationality, userLanguage, userStudy, userHobby, imageLink,
         connectionId) {
             // Create the Card container
@@ -218,19 +225,10 @@
             document.getElementById("connection-container").appendChild(cardContainer);
         }
 
-        function insertData() {
-            firebase.auth().onAuthStateChanged(user => {
-                // Check if user is signed in:
-                if (user) {
-                    // Do something for the current logged-in user here: 
-                    console.log("Current User: " + user.uid);
-                    getUserDoc(user.uid);
-                } else {
-                    window.location.assign("login.html");
-                }
-            });
-        }
-
+        /**
+         * This function deletes all the randomly generated volunteer accounts in the database.
+         * SHOULD ONLY BE RUN THROUGH CONSOLE!!!
+         */
         function deleteVolunteers() {
             var volunteers = db.collection('userdata');
             volunteers.get().then((querySnapshot) => {
@@ -246,6 +244,10 @@
             })
         }
 
+        /**
+         * This function retreives a list of volunteers based on the current useres field of study and saves them
+         * inside an array
+         */
         async function getVolunteers() {
             let userId = localStorage.getItem("userId");
             let userDoc = db.collection('userdata').doc(userId);
@@ -269,6 +271,11 @@
             }
         }
 
+        /**
+         * This function loads the basic volunteer profile onto the page.
+         * 
+         * Precondition: getVolunteers() must be called before calling this function
+         */
         function onLoad() {
             currentIndex = currentIndex % maxIndex;
             let volunteerData = volunteers[currentIndex];
@@ -289,6 +296,9 @@
             currentIndex++;
         }
 
+        /**
+         * This function retrieves the current date.
+         */
         function getDate() {
             let today = new Date();
             let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -297,6 +307,9 @@
             return dateTime;
         }
 
+        /**
+         * This function handles what happens when the user wants to connect with a voluntter.
+         */
         async function sendConnectRequest() {
             let currentVolunteerId = volunteerIds[currentIndex - 1];
             let userId = localStorage.getItem("userId");
@@ -348,6 +361,10 @@
             }
         }
 
+        /**
+         * This function is in charge of retreiving a list of connections with the current user and displaying it onto
+         * the screen.
+         */
         async function loadConnections() {
             let userId = localStorage.getItem("userId");
             let userDoc = await db.collection("userdata").doc(userId).get();
@@ -374,10 +391,21 @@
             });
         }
 
+        // Current index for the list of volunteers
         var currentIndex;
+
+        // The maximum size of array
         var maxIndex;
+
+        // List of volunteers and their data
         var volunteers;
+
+        // List of volunteer ids
         var volunteerIds = [];
+
+        /**
+         * Main function which drives the program and stiches all the fuctions together
+         */
         async function main() {
             volunteers = await getVolunteers();
             loadConnections();
