@@ -30,3 +30,40 @@ form {
   justify-self: center;
   align-self: center;
 }
+#container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.likes {
+  display: grid !important;
+  align-items: center !important;
+}
+
+.description {
+  padding-left: 5px;
+}
+
+.commenter-img {
+  width: 60px;
+}
+
+.show-comments:hover {
+  cursor: pointer;
+}
+
+#add-comment {
+  height: 40px !important;
+}
+
+#new-comment {
+  display: grid;
+  justify-items: center;
+}
+
+#new-comment button {
+  margin-top: 10px;
+}
+.comments-go-here{
+  display: none;
+}
