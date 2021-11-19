@@ -135,9 +135,8 @@ function incrementLikes(postID) {
 
 function loadComments(postId) {
   //CHANGE DOC HERE TO THE CURRENT POST ID!!!
-  let directory = postId.substring(1, 13) + "." + postId.substring(13, postId.length);
-  console.log(directory, " and ", postId)
-  db.collection("posts").doc(directory)
+  console.log(postId);
+  db.collection("posts").doc(postId)
     .get()
     .then(function (doc) {
       let comments = doc.data()["comments"];
@@ -177,7 +176,6 @@ function newComment(postId) {
     return 1;
   }
   console.log(commentInput);
-  let directory = postId.substring(1, 13) + "." + postId.substring(13, postId.length);
   db.collection("comments").add({
       user: userId,
       fullName: userName,
@@ -186,7 +184,7 @@ function newComment(postId) {
     })
     .then(function (docRef) {
       console.log(docRef.id);
-      db.collection('posts').doc(directory).update({
+      db.collection('posts').doc(postId).update({
         comments: firebase.firestore.FieldValue.arrayUnion(docRef.id)
       });
     })
