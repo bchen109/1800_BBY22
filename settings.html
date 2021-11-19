@@ -50,25 +50,25 @@
             </div>
         </div>
     </nav>
-      <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <div class="container-fluid justify-content-evenly">
-      <a href="home.html" class="home" style="color: black;">
-        <span class="material-icons" style="font-size: 45px;">
-          home
-        </span>
-      </a>
-      <a href="connect.html" class="home" style="color: black;">
-        <span class="material-icons" style="font-size: 45px;">
-          people
-        </span>
-      </a>
-      <a href="notifications.html" class="home" style="color: black;">
-        <span class="material-icons" style="font-size: 45px;">
-          notifications
-        </span>
-      </a>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container-fluid justify-content-evenly">
+            <a href="home.html" class="home" style="color: black;">
+                <span class="material-icons" style="font-size: 45px;">
+                    home
+                </span>
+            </a>
+            <a href="connect.html" class="home" style="color: black;">
+                <span class="material-icons" style="font-size: 45px;">
+                    people
+                </span>
+            </a>
+            <a href="notifications.html" class="home" style="color: black;">
+                <span class="material-icons" style="font-size: 45px;">
+                    notifications
+                </span>
+            </a>
+        </div>
+    </nav>
     <!-- welcome and main part of the page -->
 
     <h1>Settings</h1>
@@ -134,7 +134,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-    </script>
+        </script>
 
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
@@ -167,6 +167,16 @@
         
     -->
     <script>
+        function redirectIfNotLoggedIn() {
+            firebase.auth().onAuthStateChanged(user => {
+                // Check if the user is signed in:
+                if (!user) {
+                    console.log("User not logged in");
+                    window.location.replace("login.html");
+                }
+            })
+        }
+        redirectIfNotLoggedIn();
         ///////////To be implemented in  signup page/////////////////
 
         //////////////////////////////////////////////

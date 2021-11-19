@@ -42,7 +42,7 @@
     </div>
   </nav>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid justify-content-evenly">
       <a href="home.html" class="home" style="color: black;">
         <span class="material-icons" style="font-size: 45px;">
@@ -156,6 +156,17 @@
   <script src="scripts/firebaseAPI.js"></script>
 
   <script>
+    function redirectIfNotLoggedIn() {
+      firebase.auth().onAuthStateChanged(user => {
+        // Check if the user is signed in:
+        if (!user) {
+          console.log("User not logged in");
+          window.location.replace("login.html");
+        }
+      })
+    }
+    redirectIfNotLoggedIn();
+
     function cancelButton() {
       window.location.assign('profile.html');
     }

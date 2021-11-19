@@ -12,6 +12,7 @@ function welcomeName() {
         })
     } else {
       console.log("User not logged in");
+      window.location.replace("login.html");
     }
   })
 }
@@ -27,9 +28,7 @@ if (userId) {
       userName = doc.data()["fullname"];
       userImg = doc.data()["profilepicture"];
     });
-} else {
-  window.location.replace("login.html");
-}
+} 
 
 var totalPosts = [];
 var totalPostId = [];

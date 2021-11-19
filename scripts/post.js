@@ -1,3 +1,14 @@
+function redirectIfNotLoggedIn() {
+  firebase.auth().onAuthStateChanged(user => {
+    // Check if the user is signed in:
+    if (!user) {
+      console.log("User not logged in");
+      window.location.replace("login.html");
+    }
+  })
+}
+redirectIfNotLoggedIn();
+
 let Font = Quill.import('formats/font');
 Font.whitelist = ['calibri', 'arial', 'times-new-roman', 'verdana'];
 Quill.register(Font, true);
@@ -93,7 +104,7 @@ function writePosts(text, userValue, date, postID) {
     description: text,
     image: "",
     likes: 0,
-    comments: ""
+    comments: []
   })
     .then(() => {
       // Checking if writing to the firebase is complete.

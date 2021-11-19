@@ -125,6 +125,17 @@
   <script src="scripts/firebaseAPI.js"></script>
 
   <script>
+    function redirectIfNotLoggedIn() {
+      firebase.auth().onAuthStateChanged(user => {
+        // Check if the user is signed in:
+        if (!user) {
+          console.log("User not logged in");
+          window.location.replace("login.html");
+        }
+      })
+    }
+    redirectIfNotLoggedIn();
+    
     function insertData() {
       firebase.auth().onAuthStateChanged(user => {
         // Check if user is signed in:
