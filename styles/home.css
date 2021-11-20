@@ -73,7 +73,14 @@ form {
 
 #new-comment button {
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 .comments-go-here{
   display: none;
+}
+.comment-body{
+  padding: 0;
+}
+.populate-new-comment{
+  display: block !important;
 }

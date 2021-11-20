@@ -19,16 +19,14 @@ function welcomeName() {
 welcomeName();
 
 var userName;
-var userImg;
 var userId = localStorage.getItem("userId");
 if (userId) {
   db.collection("userdata").doc(userId)
     .get()
     .then(function (doc) {
       userName = doc.data()["fullname"];
-      userImg = doc.data()["profilepicture"];
     });
-} 
+}
 
 var totalPosts = [];
 var totalPostId = [];
@@ -94,9 +92,10 @@ async function displayPost() {
       newPost.querySelector('.likeCounter').innerText = totalPosts[i].likes;
       newPost.querySelector('.post-container').setAttribute("id", postId);
       document.getElementById("container").appendChild(newPost);
-      
+
       document.querySelector("#" + postId + " .add-comment").addEventListener("click", newComment.bind(null, postId));
-      
+
+
       //document.querySelector("#" + postId + " .show-comments").addEventListener("click", loadComments.bind(null, postId));
       $toggle = $("#" + postId + " .show-comments");
       $toggle.click(function () {
@@ -104,16 +103,16 @@ async function displayPost() {
         $comments = $("#" + postId + " .comments-go-here");
         //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
         $comments.slideToggle(500, function () {
-            //execute this after slideToggle is done
-            //change text of header based on visibility of content div
-            if(document.querySelector("#" + postId + " .show-comments").innerHTML =="Show Comments"){
-              document.querySelector("#" + postId + " .show-comments").innerHTML = "Hide Comments";
-            }else{
-              document.querySelector("#" + postId + " .show-comments").innerHTML = "Show Comments";
-            }
+          //execute this after slideToggle is done
+          //change text of header based on visibility of content div
+          if (document.querySelector("#" + postId + " .show-comments").innerHTML == "Show Comments") {
+            document.querySelector("#" + postId + " .show-comments").innerHTML = "Hide Comments";
+          } else {
+            document.querySelector("#" + postId + " .show-comments").innerHTML = "Show Comments";
+          }
         });
-    
-    });
+
+      });
 
       loadComments(postId);
     }
@@ -124,13 +123,13 @@ displayPost();
 function incrementLikes(postID) {
   console.log("PostID for like: " + postID);
   db.collection("posts").doc(postID).update({
-    likes : firebase.firestore.FieldValue.increment(1)
-  }).then(() => {
-    console.log("Document successfully updated!");
-  })
-  .catch((error) => {
-    console.error("Error updating document: ", error);
-});
+      likes: firebase.firestore.FieldValue.increment(1)
+    }).then(() => {
+      console.log("Document successfully updated!");
+    })
+    .catch((error) => {
+      console.error("Error updating document: ", error);
+    });
 }
 
 function loadComments(postId) {
@@ -145,16 +144,18 @@ function loadComments(postId) {
         populateComment(item, postId);
       });
     });
-  
+
 }
 
-function populateComment(commentId, postId) {
+async function populateComment(commentId, postId) {
   let commentTemplate = document.querySelector("#comment-template");
   db.collection("comments").doc(commentId)
     .get()
-    .then(function (doc) {
+    .then(async function (doc) {
       let description = doc.data()["description"];
       let fullName = doc.data().fullName;
+      let currentUserId = doc.data().user;
+      let profilePic = await getUserProfileImg(currentUserId + "/profile.jpg");
       console.log(description);
 
       let newComment = commentTemplate.content.cloneNode(true);
@@ -162,16 +163,17 @@ function populateComment(commentId, postId) {
       //update title and text and image
       // newComment.classList.add("deleteComment");
       newComment.querySelector('.user-name').innerHTML = fullName;
-      newComment.querySelector('.card-body').classList.add("deleteComment");
       newComment.querySelector('.description').innerHTML = description;
+      newComment.querySelector('.commenter-img').setAttribute("src", profilePic);
+
       document.querySelector("#" + postId + " .comments-go-here").appendChild(newComment);
 
     });
 }
 
-function newComment(postId) {
+async function newComment(postId) {
   let commentInput = document.querySelector("#" + postId + " .comment-input").value;
-  if (!commentInput.trim()){
+  if (!commentInput.trim()) {
     window.alert("Empty comment.")
     return 1;
   }
@@ -193,4 +195,15 @@ function newComment(postId) {
     });
 
   document.querySelector("#" + postId + " .comment-input").value = "";
+
+  let commentTemplate = document.querySelector("#comment-template");
+  let newComment = commentTemplate.content.cloneNode(true);
+  newComment.querySelector('.user-name').innerHTML = userName;
+  newComment.querySelector('.description').innerHTML = commentInput;
+  let profilePic = await getUserProfileImg(userId + "/profile.jpg");
+  newComment.querySelector('.commenter-img').setAttribute("src", profilePic);
+
+  document.querySelector("#" + postId + " .user-made-comments-go-here").prepend(newComment);
+
+  //newComment.querySelector('.commenter-img').setAttribute("src", profilePic);
 }
