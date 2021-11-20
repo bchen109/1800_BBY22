@@ -157,6 +157,9 @@
   <script src="scripts/firebaseAPI.js"></script>
 
   <script>
+    /**
+     * Function redirects the user to the login.html page if they are not logged in.
+     */
     function redirectIfNotLoggedIn() {
       firebase.auth().onAuthStateChanged(user => {
         // Check if the user is signed in:
@@ -168,6 +171,10 @@
     }
     redirectIfNotLoggedIn();
     
+    /**
+     * If there is currently a logged in user then update the DOM with their
+     * data.
+     */
     function insertData() {
       firebase.auth().onAuthStateChanged(user => {
         // Check if user is signed in:
@@ -180,6 +187,10 @@
         }
       });
     }
+
+    /**
+     * Retrieves the user document from firebase and populates it onto the DOM
+     */
     async function getUserDoc(userId) {
       const userRef = db.collection('userdata').doc(userId);
       const doc = await userRef.get();
@@ -209,6 +220,7 @@
     }
 
     insertData();
+    // Redirects the "Edit Profile" button to the editprofile.html page
     document.getElementById("edit-profile").addEventListener("click", function (e) {
       window.location.assign("editprofile.html");
     }, false);
