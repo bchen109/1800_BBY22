@@ -156,6 +156,9 @@
   <script src="scripts/firebaseAPI.js"></script>
 
   <script>
+    /**
+     * If the user is not logged in then redirect them to the login page.
+     */
     function redirectIfNotLoggedIn() {
       firebase.auth().onAuthStateChanged(user => {
         // Check if the user is signed in:
@@ -167,10 +170,16 @@
     }
     redirectIfNotLoggedIn();
 
+    /**
+     * Handles the cancel button on the page.
+     */
     function cancelButton() {
       window.location.assign('profile.html');
     }
 
+    /**
+     * Updates the user information with the new information the user has entered
+     */
     function updateUser() {
       let x = (document.getElementById("nameInput").value == "") ? "default" : "newvalue";
       console.log(x);
@@ -222,6 +231,9 @@
       }
     }
 
+    /**
+     * This function inserts data onto the page depending on if a user is logged in
+     */
     function insertData() {
       firebase.auth().onAuthStateChanged(user => {
         // Check if user is signed in:
@@ -235,6 +247,9 @@
       });
     }
 
+    /**
+     * This function retrieves the user document from firebase and populates onto the DOM.
+     */
     async function getUserDoc(userId) {
       const cityRef = db.collection('userdata').doc(userId);
       const doc = await cityRef.get();
@@ -258,10 +273,13 @@
       }
     }
 
+    // Initializes a file reader object
     var fileReader = new FileReader();
+    // File types to accept
     var filterType =
       /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
 
+    // Resizes the image to 200x200 when a user uploads a new photo for their profile picture
     fileReader.onload = function (event) {
       var image = new Image();
 
@@ -284,6 +302,7 @@
           canvas.height
         );
         let userID = localStorage.getItem('userId');
+        // Upload the photo to firestore
         canvas.toBlob(function (blob) {
           firebase.app().storage().ref("users").child(userID + "/profile.jpg").put(blob).then(function () {
             console.log("File Uploaded!");

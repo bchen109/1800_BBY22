@@ -142,7 +142,7 @@
       } else if (type == "connection-accept") {
         buttonLeft = "View";
         buttonRight = "Dismiss";
-        processFunction = "viewNotification()";
+        processFunction = "viewNotification(" + "'connect.html'" + ", '" + notificationId + "');";
         dismissFunction = "dismissNotification('" + notificationId + "');";
 
       } else {
@@ -295,8 +295,9 @@
     /**
      * Function that redirects the user to the correct page which shows more information about this notification
      */
-    function viewNotification() {
-      console.log("Notification Viewed");
+    function viewNotification(page, notificationId) {
+      window.location.replace(page);
+      // dismissNotification(notificationId);
     }
 
     /**

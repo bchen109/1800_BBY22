@@ -125,15 +125,9 @@
         var userId = localStorage.getItem("userId");
         console.log("Current User: " + userId);
 
-        function handleFileSelect(e) {
-            let file = e.target.files[0];
-            let userID = localStorage.getItem('userId');
-            console.log(userID);
-            firebase.app().storage().ref("users").child(userID + "/profile.jpg").put(file).then(function () {
-                console.log("File Uploaded!");
-            })
-        }
-
+        /**
+         * Checks if the form is valid before allows submission and changes to firestore.
+         */
         function checkValidityForm() {
             const forms = document.querySelectorAll('.needs-validation');
             // Loop over them and prevent submission
@@ -152,6 +146,9 @@
             });
         }
 
+        /**
+         * Updates the user information to firebase.
+         */
         function updateUser() {
             if (userId) {
                 db.collection("userdata").doc(userId)
@@ -183,10 +180,10 @@
             }
         }
 
-        // function getUserDocument(id) {
-        //     return db.doc("userdata/" + id);
-        // }
 
+        /**
+         * This function retrieves parameter values from the url.
+         */
         function getParameter(name) {
             var url_string = window.location.href;
             var url = new URL(url_string);
@@ -194,6 +191,9 @@
             return paramValue;
         }
 
+        /**
+         * This function handles the button click when the user tries to subit the survey form
+         */
         function handleButtonClick(e) {
             if (e instanceof MouseEvent) {
                 checkValidityForm();
@@ -201,6 +201,9 @@
             }
         }
 
+        /**
+         * Thie function returns the field of study that corresponds with the number given.
+         */
         function getFieldOfStudy(number) {
             if (number == 1) {
                 return "Applied & Natural Sciences";
@@ -217,13 +220,17 @@
             }
             return "ERROR";
         }
+
+        // Initializes a FileReader object
         var fileReader = new FileReader();
+        // File types to accept from the upload button
         var filterType =
             /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
 
         fileReader.onload = function (event) {
             var image = new Image();
 
+            // Resizes the images the user uploads to 200x200
             image.onload = function () {
                 // document.getElementById("original-Img").src = image.src;
                 var canvas = document.createElement("canvas");
@@ -243,6 +250,7 @@
                     canvas.height
                 );
                 let userID = localStorage.getItem('userId');
+                // Uploads the user photo into firestore
                 canvas.toBlob(function(blob) {
                     firebase.app().storage().ref("users").child(userID + "/profile.jpg").put(blob).then(function () {
                         console.log("File Uploaded!");

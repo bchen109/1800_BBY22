@@ -167,6 +167,9 @@
     <script src="scripts/firebaseAPI.js"></script>
 
     <script>
+        /**
+         * This function retrieves the parameters from the url
+         */
         function getParameter(name) {
             var url_string = window.location.href;
             var url = new URL(url_string);
@@ -174,6 +177,10 @@
             console.log(paramValue);
             return paramValue;
         }
+
+        /**
+         * This function retrieves the user document from firebase and populates it onto the DOM.
+         */
         async function getUserDoc(userId) {
             const cityRef = db.collection('userdata').doc(userId);
             const doc = await cityRef.get();
@@ -211,6 +218,21 @@
                 });
             }
         }
+
+        /**
+         * This function retrieves the current date.
+         */
+        function getDate() {
+            let today = new Date();
+            let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            let time = today.getHours() + ":" + today.getMinutes();
+            let dateTime = date + ' ' + time;
+            return dateTime;
+        }
+
+        /**
+         * This function handles what happens when the user decides to send a connection request to another user.
+         */
         async function sendConnectRequest() {
             let currentVolunteerId = getParameter("userid");
             let userId = localStorage.getItem("userId");
@@ -262,6 +284,9 @@
             }
         }
 
+        /**
+         * This is the main function for the program and is then entry point.
+         */
         async function main() {
             await getUserDoc(getParameter("userid"));
         }

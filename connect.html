@@ -258,13 +258,16 @@
                 console.log('No such user document!');
             } else {
                 let data = doc.data();
+                let userConnections = data.connections;
                 let volunteerData;
                 let volunteerId;
                 await db.collection('userdata').where("volunteer", "==", true).where("fieldofstudy",
                     "==", data.fieldofstudy).get().then(function (queryVolunteers) {
                         queryVolunteers.forEach((doc) => {
-                            result.push(doc.data());
-                            volunteerIds.push(doc.id);
+                            if (doc.id != userId && !userConnections.includes(doc.id)) {
+                                result.push(doc.data());
+                                volunteerIds.push(doc.id);
+                            }
                         })
                     });
                 return result;
