@@ -31,6 +31,15 @@ form {
   align-self: center;
 }
 
+.timestamp {
+  justify-self: end;
+  align-self: center;
+}
+
+.likeIcon {
+  cursor: pointer;
+}
+
 .likediv {
   padding-top: 15px;
   padding-left: 5px;

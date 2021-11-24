@@ -84,12 +84,24 @@ async function displayPost() {
       newPost.querySelector('.profileImg').setAttribute("src", String(imgUrl));
       newPost.querySelector('.profileImg').setAttribute("alt", "Profile Pic");
       newPost.querySelector('.profileName').innerText = data.fullname;
+      const date = new Date(totalPosts[i].date.seconds * 1000);
+      const dateValue = date.toDateString() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+      newPost.querySelector('.timestamp').innerText = dateValue;
       newPost.querySelector('.postImg').src = totalPosts[i].image;
       newPost.querySelector('.postImg').setAttribute("alt", "Post image");
       newPost.querySelector('.postText').innerHTML = totalPosts[i].description;
-      newPost.querySelector('.likeIcon').onclick = () => incrementLikes(postId);
+      newPost.querySelector('.likeIcon').onclick = async () => await incrementLikes(postId, newPost);
 
-      newPost.querySelector('.likeCounter').innerText = totalPosts[i].likes;
+
+      // db.collection("posts").doc(postId)
+      //   .onSnapshot((doc) => {
+      //     //console.log("Checking onsnapshot: " + `${doc.id} => ${doc.data()}`);
+      //     console.log(postId);
+      //     console.log("Checking onsnapshot data: " + doc.data());
+      //     //newPost.querySelector(".likeCounter").innterText = doc.data().likes;
+      // })
+
+      // newPost.querySelector('.likeCounter').innerText = totalPosts[i].likes;
       newPost.querySelector('.post-container').setAttribute("id", postId);
       document.getElementById("container").appendChild(newPost);
 
@@ -120,7 +132,7 @@ async function displayPost() {
 }
 displayPost();
 
-function incrementLikes(postID) {
+async function incrementLikes(postID, postTemplate) {
   console.log("PostID for like: " + postID);
   db.collection("posts").doc(postID).update({
       likes: firebase.firestore.FieldValue.increment(1)
@@ -129,7 +141,20 @@ function incrementLikes(postID) {
     })
     .catch((error) => {
       console.error("Error updating document: ", error);
-    });
+    })
+}
+
+async function getUserProfileImg(url) {
+  const imgUrl = await firebase.app().storage().ref("users").child(url).getDownloadURL();
+  //console.log("url: " + imgUrl);
+  return imgUrl;
+}
+
+async function updateLikeCounter(postID) {
+  const docRef = await db.collection("posts").doc(postID).get();
+  let value = docRef.data().likes;
+  console.log("Likes data: " + value);
+  return value;
 }
 
 function loadComments(postId) {
@@ -206,4 +231,19 @@ async function newComment(postId) {
   document.querySelector("#" + postId + " .user-made-comments-go-here").prepend(newComment);
 
   //newComment.querySelector('.commenter-img').setAttribute("src", profilePic);
+}
+
+/**
+ * Attach an event listener to the logout button which will call the logout function to log the user out
+ * and redirect them back to the login.html page.
+ */
+document.getElementById("logout").addEventListener("click", logout);
+function logout() {
+  console.log("logging out user");
+  firebase.auth().signOut().then(() => {
+    // Sign-out successful.
+    window.location.href = "login.html";
+  }).catch((error) => {
+    console.log(error)
+  });
 }
