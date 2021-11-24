@@ -65,6 +65,9 @@ h3 {
     padding: 10px;
     max-width: 300px;
 }
+.volunteer-info h4{
+    font-size: 20px;
+}
 
 
 
@@ -169,15 +172,8 @@ h3 {
 
     }
 
-    .volunteer-img {
-        width: 60vw;
-        min-width: 220px;
-        max-width: 260px;
-        padding: 0;
-        overflow: hidden;
-    }
-
     #volunteer-img {
+        padding: 0;
         width: 150px;
         clip-path: circle();
     }
@@ -188,9 +184,8 @@ h3 {
         max-width: 300px;
     }
     
-    #img-container{
-        height: 150px;
-    }
+    
+    
     #buttons {
         width: 200px;
     }

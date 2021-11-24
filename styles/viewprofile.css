@@ -118,7 +118,7 @@
     margin-left: auto;
     margin-right: auto;
     border-radius: 70px;
-    box-shadow: 0 13px 22px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .16);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .16);
     /* background: linear-gradient(to bottom right, #c90a6d, #ff48a0); */
     background: linear-gradient(to bottom right, #0a9cc9, rgb(124, 189, 233));
 }
