@@ -3,18 +3,14 @@
 }
 
 #banner {
-  width: 60%;
-  margin: 0 auto 30px auto;
+  max-width: 700px;
+  width: 80%;
+  margin: 30px auto 30px auto;
   display: grid;
-  grid-template-columns: repeat(2, 50%);
-}
-
-#banner h3 {
-  grid-column: 1;
+  grid-template-columns: 1fr 1fr;
 }
 
 form {
-  grid-column: 2;
   justify-self: end;
 }
 
@@ -42,6 +38,7 @@ form {
 
 #container {
   margin: 0 auto;
+  width: 100%;
   max-width: 600px;
 }
 
@@ -50,14 +47,16 @@ form {
   align-items: center !important;
 }
 
-.description {
-  padding-left: 5px;
-}
-
 .commenter-img {
-  width: 60px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgb(207, 207, 207);
 }
 
+.show-comments{
+  margin-bottom: 15px;
+}
 .show-comments:hover {
   cursor: pointer;
 }
@@ -66,21 +65,106 @@ form {
   height: 40px !important;
 }
 
+.card-body {
+  padding: 8px 8px 0 8px;
+}
+
 #new-comment {
   display: grid;
   justify-items: center;
 }
 
 #new-comment button {
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-top: 15px;
 }
-.comments-go-here{
+
+.user-made-comments-go-here {
+  margin-top: 20px;
+}
+
+.comments-go-here {
   display: none;
 }
-.comment-body{
-  padding: 0;
+
+.commenter-profile {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: left;
+  align-items: center;
+  gap: 8px;
 }
-.populate-new-comment{
-  display: block !important;
+
+.user-name {
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.comment-body {
+  padding-left: 5px;
+  padding-right: 12px;
+}
+
+.description {
+  margin-top: -18px;
+  margin-left: 60px;
+}
+.btn {
+  color: #fff;
+  width: 130px;
+  height: 42px;
+  outline: none;
+  border: none;
+  display: block;
+  cursor: pointer;
+  font-weight: 300;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 17px;
+  border-radius: 70px;
+  box-shadow: 0 13px 22px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 16%);
+  background: linear-gradient(to bottom right, #0a9cc9, rgb(124, 189, 233));
+}
+
+@media (max-width: 600px) {
+
+  .comment-body {
+    padding-left: 0;
+    padding-right: 5px;
+  }
+
+  .commenter-img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .description {
+    font-size: 15px;
+    margin-top: -15px;
+    margin-left: 55px;
+  }
+
+  .user-name {
+    font-size: 15px;
+  }
+
+  body {
+    line-height: unset;
+  }
+
+  #banner {
+    margin-top: 15px;
+    width: 100%;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 10px;
+  }
+
+  form {
+    justify-self: unset;
+  }
+
+  .card-title {
+    font-size: 20px;
+  }
+
 }

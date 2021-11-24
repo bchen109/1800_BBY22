@@ -89,34 +89,34 @@
         </div>
         <div id="new-comment">
           <input type="text" class="form-control comment-input" placeholder="E.g. Amazing post!!">
-          <button class="btn btn-primary add-comment">Comment</button>
+          <button class="btn">Comment</button>
         </div>
         <div class="user-made-comments-go-here">
 
         </div>
+        <div class="card-footer text-muted text-center show-comments">Show Comments</div>
         <div class="comments-go-here">
 
         </div>
       </div>
-      <div class="card-footer text-muted text-center show-comments">Show Comments</div>
     </div>
   </template>
 
   <template id="comment-template">
-    <div class="card-body d-flex comment-body">
-      <div>
-        <img src="images/random_guy.jpg" class="commenter-img">
+    <div class="comment-body">
+      <div class="commenter-profile">
+        <img src="images/unknown-user.jpg" class="commenter-img">
         <p class="user-name"></p>
       </div>
-      <p class="card-text description"></p>
+      <p class="description"></p>
     </div>
   </template>
 
   <h1 id="title">Home</h1>
   <section id="banner">
-    <h3 class="card-title">Welcome back <span id="welcomeName"></span></h3>
+    <h3 class="card-title">Welcome back, <span id="welcomeName"></span></h3>
     <form action="post.html">
-      <button id="newPost" type="submit" class="btn btn-primary btn-lg">New Post</button>
+      <button id="newPost" type="submit" class="btn">New Post</button>
     </form>
   </section>
 
