@@ -63,7 +63,7 @@ async function grabPostInfo() {
 
 async function getUserProfileImg(url) {
   const imgUrl = await firebase.app().storage().ref("users").child(url).getDownloadURL();
-  console.log("url: " + imgUrl);
+  //console.log("url: " + imgUrl);
   return imgUrl;
 }
 
@@ -134,13 +134,13 @@ function incrementLikes(postID) {
 
 function loadComments(postId) {
   //CHANGE DOC HERE TO THE CURRENT POST ID!!!
-  console.log(postId);
+  //console.log(postId);
   db.collection("posts").doc(postId)
     .get()
     .then(function (doc) {
       let comments = doc.data()["comments"];
       comments.forEach(function (item, index) {
-        console.log(item, index);
+        //console.log(item, index);
         populateComment(item, postId);
       });
     });
@@ -156,7 +156,7 @@ async function populateComment(commentId, postId) {
       let fullName = doc.data().fullName;
       let currentUserId = doc.data().user;
       let profilePic = await getUserProfileImg(currentUserId + "/profile.jpg");
-      console.log(description);
+      //console.log(description);
 
       let newComment = commentTemplate.content.cloneNode(true);
 
@@ -177,7 +177,7 @@ async function newComment(postId) {
     window.alert("Empty comment.")
     return 1;
   }
-  console.log(commentInput);
+  //console.log(commentInput);
   db.collection("comments").add({
       user: userId,
       fullName: userName,
@@ -185,7 +185,7 @@ async function newComment(postId) {
       //INSERTING IMAGE LOCATION HERE WOULD BE A GOOD IDEA
     })
     .then(function (docRef) {
-      console.log(docRef.id);
+      //console.log(docRef.id);
       db.collection('posts').doc(postId).update({
         comments: firebase.firestore.FieldValue.arrayUnion(docRef.id)
       });
