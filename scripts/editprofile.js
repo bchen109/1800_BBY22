@@ -42,6 +42,7 @@ function cancelButton() {
  * Updates the user information with the new information the user has entered
  */
 function updateUser(event) {
+    event.preventDefault();
     let x = (document.getElementById("nameInput").value == "") ? "default" : "newvalue";
     // console.log(document.getElementById("nameInput").value);
     // console.log(document.getElementById("nameInput").value == "");
