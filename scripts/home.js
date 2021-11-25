@@ -1,4 +1,8 @@
-// Welcome banner.
+/**
+ * Function used to display the user name who is logged in. The user name information
+ * is retreived from firebase userdata collection. Insert this information as part of the
+ * welcome banner.
+ */
 function welcomeName() {
   firebase.auth().onAuthStateChanged(user => {
     // Check if the user is signed in:
@@ -28,12 +32,24 @@ if (userId) {
     });
 }
 
+/**
+ * We declared the array variables totalPosts and totalPostId as a var type global scope.
+ *
+ * We did this so it can be used in the displayPost function.
+ *
+ * The function grabPostInfo() retrieves firebase 'posts' collection information of the current user that is logged in as well as
+ * connected user.
+ *
+ * This function is called in the displayPost function.
+ */
 var totalPosts = [];
 var totalPostId = [];
 async function grabPostInfo() {
   let connection;
   let userId = localStorage.getItem("userId");
 
+  // Get function is asynchronous so we need to use async and await.
+  // Grab all connected users associate with the logged in user from userdata collection.
   const connectRef = await db.collection("userdata")
     .doc(userId)
     .get().then(doc => {
@@ -42,7 +58,10 @@ async function grabPostInfo() {
       connection.push(userId);
       console.log("Check: " + connection, typeof connection);
     });
-  // Grab all posts for each of the users
+
+  // Grab all posts collection information from firebase for the current user and
+  // all his/her list of connected users.
+  // Please note the order as we are grabbing the most recent post(s).
   await db.collection("posts")
     .orderBy('date', 'desc')
     .get().then(function (queryDoc) {
@@ -57,22 +76,40 @@ async function grabPostInfo() {
         }
       })
     });
-  // console.log(totalPostId[1]);
-  // console.log(totalPosts[1].user);
 }
 
+/**
+ * Async function that needs to use await since .getDownloadURL() from firebase is an async function.
+ *
+ * This function is called in the displayPost function.
+ *
+ * @param url the string value of the partial location path of where the image is located in firebase storage.
+ * @returns returns full URL link location of the user profile image from firebase storage.
+ */
 async function getUserProfileImg(url) {
   const imgUrl = await firebase.app().storage().ref("users").child(url).getDownloadURL();
   //console.log("url: " + imgUrl);
   return imgUrl;
 }
 
+/**
+ * This function is the core part of how our post and comment functionality is implemented, created, and displayed.
+ * 1. Retrieve information from the firebase datebase
+ * 2. Using the html templates of post and comment, inject firebase collection data using queryselector.
+ * 3. Add onclick events functionality for choosen elements.
+ */
 var newPost
 async function displayPost() {
+  // Retreive data from the firebase databse.
   await grabPostInfo();
 
+  // For loop used to create number of post based on data return by firebase.
   for (let i = 0; i < totalPosts.length; i++) {
+    // Use html post template.
     newPost = CardTemplate.content.cloneNode(true);
+
+    // Retreive the username of user who created the post from the userdata collection.
+    // Note: The post can be created by the current user or connected user.
     const userInfo = db.collection("userdata").doc(totalPosts[i].user)
     const doc = await userInfo.get();
     if (!doc.exists) {
@@ -80,6 +117,10 @@ async function displayPost() {
     } else {
       const data = doc.data();
       let postId = totalPostId[i];
+
+      // Retrieve the user profile image of the user who created the post.
+      // Assign the data to an element and make it clickable.
+      // If the user clicks on the user profile, redirect the user to the profile html page.
       const imgUrl = await getUserProfileImg(totalPosts[i].user + "/profile.jpg");
       newPost.querySelector('.profileImg').setAttribute("src", String(imgUrl));
       newPost.querySelector('.profileImg').setAttribute("alt", "Profile Pic");
@@ -87,21 +128,33 @@ async function displayPost() {
         location.href = "viewprofile.html?userid=" + totalPosts[i].user;
       }
 
+      // Assign the user name of the person who created the post.
       newPost.querySelector('.profileName').innerText = data.fullname;
+
+      // The date data provides information of when the post is created.
+      // date is from the post collection is a timestamp type.
+      // Conversion to a javascript date with the defined format.
+      // Assign the date value to the element.
       const date = new Date(totalPosts[i].date.seconds * 1000);
       const dateValue = date.toLocaleString(undefined, {
         month: "short", day: "numeric",
         hour: "numeric", minute: "numeric"
       })
       newPost.querySelector('.timestamp').innerText = dateValue;
+
+      // Assigning the main content of the post: Image and text.
       newPost.querySelector('.postImg').src = totalPosts[i].image;
       newPost.querySelector('.postImg').setAttribute("alt", "Post image");
       newPost.querySelector('.postText').innerHTML = totalPosts[i].description;
-      newPost.querySelector('.likeIcon').onclick = async () => await incrementLikes(postId, newPost);
 
+      // Creating the event where a person clicks on the link icon, it will update the value by one and write to firebase.
+      newPost.querySelector('.likeIcon').onclick = async () => await incrementLikes(postId);
+
+      // Assigning a unique id to distinguish each post. Append the template to the container that hold all posts.
       newPost.querySelector('.post-container').setAttribute("id", postId);
       document.getElementById("container").appendChild(newPost);
 
+      // Listen if anoyone clicks on the like button and will update the display to show the new total likes.
       db.collection("posts").doc(postId)
         .onSnapshot((doc) => {
           document.getElementById(postId).querySelector(".likeCounter").innerText = doc.data().likes;
@@ -134,7 +187,12 @@ async function displayPost() {
 }
 displayPost();
 
-async function incrementLikes(postID, postTemplate) {
+/**
+ * Function where a user clicks the like button it will increment the value by one and write to firebase.
+ *
+ * @param postID used to determine which like button belongs to which post.
+ */
+async function incrementLikes(postID) {
   console.log("PostID for like: " + postID);
   db.collection("posts").doc(postID).update({
       likes: firebase.firestore.FieldValue.increment(1)
@@ -144,19 +202,6 @@ async function incrementLikes(postID, postTemplate) {
     .catch((error) => {
       console.error("Error updating document: ", error);
     })
-}
-
-async function getUserProfileImg(url) {
-  const imgUrl = await firebase.app().storage().ref("users").child(url).getDownloadURL();
-  //console.log("url: " + imgUrl);
-  return imgUrl;
-}
-
-async function updateLikeCounter(postID) {
-  const docRef = await db.collection("posts").doc(postID).get();
-  let value = docRef.data().likes;
-  console.log("Likes data: " + value);
-  return value;
 }
 
 function loadComments(postId) {
