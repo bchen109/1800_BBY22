@@ -83,27 +83,29 @@ async function displayPost() {
       const imgUrl = await getUserProfileImg(totalPosts[i].user + "/profile.jpg");
       newPost.querySelector('.profileImg').setAttribute("src", String(imgUrl));
       newPost.querySelector('.profileImg').setAttribute("alt", "Profile Pic");
+      newPost.querySelector('.profileImg').onclick = function () {
+        location.href = "viewprofile.html?userid=" + totalPosts[i].user;
+      }
+
       newPost.querySelector('.profileName').innerText = data.fullname;
       const date = new Date(totalPosts[i].date.seconds * 1000);
-      const dateValue = date.toDateString() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+      const dateValue = date.toLocaleString(undefined, {
+        month: "short", day: "numeric",
+        hour: "numeric", minute: "numeric"
+      })
       newPost.querySelector('.timestamp').innerText = dateValue;
       newPost.querySelector('.postImg').src = totalPosts[i].image;
       newPost.querySelector('.postImg').setAttribute("alt", "Post image");
       newPost.querySelector('.postText').innerHTML = totalPosts[i].description;
       newPost.querySelector('.likeIcon').onclick = async () => await incrementLikes(postId, newPost);
 
-
-      // db.collection("posts").doc(postId)
-      //   .onSnapshot((doc) => {
-      //     //console.log("Checking onsnapshot: " + `${doc.id} => ${doc.data()}`);
-      //     console.log(postId);
-      //     console.log("Checking onsnapshot data: " + doc.data());
-      //     //newPost.querySelector(".likeCounter").innterText = doc.data().likes;
-      // })
-
-      // newPost.querySelector('.likeCounter').innerText = totalPosts[i].likes;
       newPost.querySelector('.post-container').setAttribute("id", postId);
       document.getElementById("container").appendChild(newPost);
+
+      db.collection("posts").doc(postId)
+        .onSnapshot((doc) => {
+          document.getElementById(postId).querySelector(".likeCounter").innerText = doc.data().likes;
+      })
 
       document.querySelector("#" + postId + " .add-comment").addEventListener("click", newComment.bind(null, postId));
 
