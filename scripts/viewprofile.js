@@ -29,7 +29,7 @@ async function getUserDoc(userId) {
         }
 
         if (data.connections.includes(currentUser)) {
-            document.getElementById("contactinfo").innerText = data.email;
+            document.getElementById("contactinfo").innerHTML = data.email;
             document.getElementById("connectButton").remove();
         } else {
             document.getElementById("connectButton").addEventListener('click', sendConnectRequest, false);
