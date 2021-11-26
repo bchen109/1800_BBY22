@@ -23,7 +23,7 @@ Technologies used for this project:
 Content of the project folder:
 
 ```
- Top level of project folder: 
+Top level of project folder: 
 ├── .gitignore               # Git ignore file
 ├── index.html               # landing HTML file but main page is home.html
 ├── login.html               # Login HTML page where users are redirected to if they are not logged in
