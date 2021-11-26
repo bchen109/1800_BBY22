@@ -211,31 +211,34 @@ function deleteCard(notificaitonId) {
  */
 async function getNotifications() {
     let userId = localStorage.getItem("userId");
-    let userDoc = await db.collection("userdata").doc(userId).get();
-    userDoc = userDoc.data();
-    console.log("Notification Length: " + userDoc.notifications.length);
-    if (userDoc.notifications.length == 0) {
-        document.getElementById("no-notifications").innerText = "No new notifications.";
-    } else {
-        userDoc.notifications.forEach((item) => {
-            console.log("Notification ID: " + item);
-            db.collection("notifications").doc(item).get().then((doc) => {
-                let notificationData = doc.data();
-                let time = notificationData.date;
-                let description = notificationData.description;
-                let type = notificationData.type;
-                let user = notificationData.fromuser;
-                let notificationId = item;
-                let imageLink;
-                firebase.app().storage().ref("users").child(user + "/profile.jpg").getDownloadURL().then(
-                    imgUrl => {
-                        console.log("Retrieved image" + imgUrl);
-                        imageLink = imgUrl;
-                        createCard(type, imageLink, time, description, user, notificationId);
-                    });
-            })
-        });
-    }
+    let doc = await db.collection("userdata").doc(userId);
+    doc.onSnapshot((userDoc) => {
+        userDoc = userDoc.data();
+        console.log("Notification Length: " + userDoc.notifications.length);
+        if (userDoc.notifications.length == 0) {
+            document.getElementById("no-notifications").innerText = "No new notifications.";
+        } else {
+            document.getElementById("no-notifications").innerText = "";
+            userDoc.notifications.forEach((item) => {
+                console.log("Notification ID: " + item);
+                db.collection("notifications").doc(item).get().then((doc) => {
+                    let notificationData = doc.data();
+                    let time = notificationData.date;
+                    let description = notificationData.description;
+                    let type = notificationData.type;
+                    let user = notificationData.fromuser;
+                    let notificationId = item;
+                    let imageLink;
+                    firebase.app().storage().ref("users").child(user + "/profile.jpg").getDownloadURL().then(
+                        imgUrl => {
+                            console.log("Retrieved image" + imgUrl);
+                            imageLink = imgUrl;
+                            createCard(type, imageLink, time, description, user, notificationId);
+                        });
+                })
+            });
+        }
+    })
 }
 getNotifications();
 
