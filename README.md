@@ -42,7 +42,14 @@ Top level of project folder:
 It has the following subfolders and files:
 ├── .git                     # Folder for git repo
 ├── images                   # Folder for images
-    /blah.jpg                # 
+    /commenter.jpg           # Image placeholder for commenters 
+    /dummy.jpg               # Image placeholder for home.html 
+    /like-icon.jpg           # Image for the like button 
+    /logo.png                # Our project logo
+    /menu.jpg                # Image used in the menu
+    /random_guy.jpg          # Image used as a default profile picture 
+    /unknown-user.jpg        # Default image when user is missing profile picture
+
 ├── scripts                  # Folder for scripts
     /about.js                # Java script file for about.html 
     /connect.js              # Java script file for connect.html 
