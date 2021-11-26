@@ -1,3 +1,6 @@
+/**
+ * Function that checks if a user is logged in. If no user is logged in, redirect to the login page.
+ */
 function redirectIfNotLoggedIn() {
   firebase.auth().onAuthStateChanged(user => {
     // Check if the user is signed in:
@@ -9,6 +12,11 @@ function redirectIfNotLoggedIn() {
 }
 redirectIfNotLoggedIn();
 
+/**
+ * This function deals with customizing the quill editor to remove certain functionality and added some functionality.
+ * The font is a combination of css and javascript in order for it to work. Customize the quill toobar to show only
+ * the functionality that we want.
+ */
 let Font = Quill.import('formats/font');
 Font.whitelist = ['calibri', 'arial', 'times-new-roman', 'verdana'];
 Quill.register(Font, true);
@@ -23,6 +31,9 @@ var toolbarOptions = [
   [{ 'list': 'ordered' }, { 'list': 'bullet' }]
 ]
 
+/**
+ * Callback function to create the quill editor with the customized toolbarOptions.
+ */
 var quill = new Quill('#editor', {
   theme: 'snow',
   modules: {
@@ -30,35 +41,40 @@ var quill = new Quill('#editor', {
   },
 });
 
+/**
+ * This function deals with the user inserting a post image and displaying it on the html page.
+ * We declare a global variable file that will be referenced when we submit the post.
+ */
+var file = {}
 function displayPicture() {
+  // Get the file input element from post.html
   const fileInput = document.getElementById("fileUploader");
+  // Get the image element from post.html
   const image = document.getElementById("picture");
 
-  // Attach listener to input file
-  // When this file changes, do something
+  // Attach listener to file input element
   fileInput.addEventListener('change', function (e) {
 
-    // The change event returns a file "e.target.files[0]"
-    let file = e.target.files[0];
+    // The change event returns a file.
+    file = e.target.files[0];
     let blob = URL.createObjectURL(file);
 
-    // Change the DOM img element source to point to this file
-    image.src = blob;    //assign the "src" property of the "img" tag
+    // Change the DOM image element source to point to this file
+    image.src = blob;
 
-    // Display the element
+    // In the post.css we have this element display none. Once the user submits the picture, display it on
+    // the html page.
     document.getElementById("picture").style.display = "block";
   })
 }
 displayPicture();
 
-// data
-let = file = {};
-document.getElementById('fileUploader').addEventListener('change', function (e) {
-  file = e.target.files[0];
-})
-
+/**
+ * The submit button when pressed will write all post information to firebase.
+ */
 document.querySelector('#submit').addEventListener("click", function (e) {
   e.preventDefault();
+  // Get the timestamp which is used to display when the post occurred.
   var myEditor = document.querySelector('#editor');
   var html = myEditor.children[0].innerHTML;
   var date = firebase.firestore.Timestamp.now();
@@ -74,12 +90,13 @@ document.querySelector('#submit').addEventListener("click", function (e) {
       let storageRef = firebase.storage().ref("posts").child(postID + ".jpg");
       console.log("Check Diff: " + storageRef);
 
+      // Asynchronous function, wait for it to finish.
       await storageRef.put(file);
 
-      // Create the post document
+      // Create the post document.
       writePosts(html, user.uid, date, postID);
 
-      // Get the URL of stored file and store it in the image field.
+      // Get the URL of stored file and store it in the image field in the post collection.
       await storageRef.getDownloadURL()
         .then(function (url) {
           console.log("URL:" + url);
@@ -94,10 +111,18 @@ document.querySelector('#submit').addEventListener("click", function (e) {
   })
 })
 
-// This function is used to write to the firebase.
+/**
+ * The writePosts function will create a document in the "posts" collection in firebase.
+ * The function parameters will be used to insert data into the post fields.
+ *
+ * @param text value is used for the post text.
+ * @param userValue value is the user who created the post.
+ * @param date value is a timestamp of when the post is created.
+ * @param postID  value is a unique identifier used to identify each post.
+ */
 function writePosts(text, userValue, date, postID) {
   // Writing to the collection post and assigning document postID (timestamp + user.uid)
-  // Setting the value of the posts.
+  // Setting the values to the post fields.
   var postsRef = db.collection("posts").doc(postID);
   postsRef.set({
     postID: postID,
@@ -110,7 +135,7 @@ function writePosts(text, userValue, date, postID) {
   })
     .then(() => {
       // Checking if writing to the firebase is complete.
-      // If it is return to the home page.
+      // If it is, return to the home page.
       postsRef.onSnapshot(snapshot => {
         if (snapshot.exists) {
           window.location.href = "./home.html";
