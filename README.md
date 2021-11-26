@@ -44,19 +44,25 @@ It has the following subfolders and files:
 ├── images                   # Folder for images
     /blah.jpg                # 
 ├── scripts                  # Folder for scripts
-    /about.js                 # 
-    /connect.js                 # 
-    /editprofile.js                 # 
-    /firebaseAPI.js                 # 
-    /home.js                 # 
-    /login.js                 # 
-    /notifications.js                 # 
-    /post.js                 # 
-    /profile.js                 # 
-    /survey.js                 # 
-    /viewprofile.js                 # 
+    /about.js                # Java script file for about.html 
+    /connect.js              # Java script file for connect.html 
+    /editprofile.js          # Java script file for editprofile.html 
+    /firebaseAPI.js          # Java script file which contains our FireBare API keys 
+    /home.js                 # Java script file for home.html
+    /login.js                # Java script file for login.html 
+    /notifications.js        # Java script file for notifications.html 
+    /post.js                 # Java script file for post.html
+    /profile.js              # Java scrtpt file for profile.html 
+    /survey.js               # Java script file for survey.html 
+    /viewprofile.js          # Java script file for viewprofile.html 
     
 ├── styles                   # Folder for styles
-    /blah.css                # 
-
+    /connect.css             # CSS for connect.html
+    /home.css                # CSS for home.html
+    /login.css               # CSS for login.html
+    /notifications.css       # CSS for notifications.html 
+    /post.css                # CSS for post.html
+    /settings.css            # CSS for settings.html
+    /survey.css              # CSS for survey.html
+    /viewprofile.css         # CSS for viewprofile.html
 ```
