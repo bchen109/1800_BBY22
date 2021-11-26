@@ -105,6 +105,8 @@ function getDate() {
  */
 async function acceptConnection(user, notificationId) {
     let currentUser = localStorage.getItem("userId");
+    let doc = await db.collection("userdata").doc(currentUser).get();
+    let currentFullName = doc.data().fullname;
 
     // Add new connection to current user
     db.collection("userdata").doc(currentUser).update({
@@ -127,7 +129,7 @@ async function acceptConnection(user, notificationId) {
     userName = userName.data();
     db.collection("notifications").add({
         date: String(getDate()),
-        description: String("Connection accepted by " + userName.fullname),
+        description: String("Connection accepted by " + currentFullName),
         type: String("connection-accept"),
         title: String("Connection Accepted!"),
         touser: String(user),
