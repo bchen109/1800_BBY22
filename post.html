@@ -11,12 +11,14 @@
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css" />
-  <link rel="stylesheet" href="styles/post.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+  <!-- Local CSS styling sheet. -->
+  <link rel="stylesheet" href="styles/post.css" />
 </head>
 
 <body>
+  <!-- Top navigation bar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-info">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Student Connect</a>
@@ -42,6 +44,8 @@
       </div>
     </div>
   </nav>
+
+  <!-- 2nd top navigation bar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid justify-content-evenly">
       <a href="home.html" class="home">
@@ -64,11 +68,12 @@
 
   <div id="container">
     <h1 id="title">Post</h1>
-    <!-- Create the editor container -->
+    <!-- Create the quill text editor container -->
     <div id="editor">
       <p></p>
     </div>
 
+    <!-- The input file button and picture display -->
     <div class="field">
       <div id="innerField" class="ui left icon input large">
         <i class="image icon"></i>
@@ -79,6 +84,7 @@
       </div>
     </div>
 
+    <!-- Submission button -->
     <div class="submission mb-0 p-2">
       <input type="submit" value="Submit" id="submit" class="btn btn-success btn-lg" />
     </div>
@@ -104,6 +110,8 @@
 
   <!-- Link to the api keys for your firebase project -->
   <script src="scripts/firebaseAPI.js"></script>
+
+  <!-- Local Javascript functions -->
   <script src="scripts/post.js"></script>
 </body>
 

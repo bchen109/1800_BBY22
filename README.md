@@ -1,11 +1,11 @@
-## My Web Application (Title)
+## Student Connect
 
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Contents](#content)
 
 ## General Info
-This browser based web application allows studnets to connect and help each other out.
+This browser based web application allows students to connect and help each other out.
 * Hi, my name is Brytton. I'm excited to work on this project!
 * Hi, my name is Pedro. I'm excited about this project because we could help a lot of students adapt to life in Canada.
 * Hi my name is Benjamin Chen. I'm excited in collborating and working on this project.

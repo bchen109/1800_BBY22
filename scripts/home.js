@@ -95,7 +95,9 @@ async function getUserProfileImg(url) {
 /**
  * This function is the core part of how our post and comment functionality is implemented, created, and displayed.
  * 1. Retrieve information from the firebase datebase
- * 2. Using the html templates of post and comment, inject firebase collection data using queryselector.
+ * 1a. Retrieval happens when we call the grabPostInfo()
+ * 1b. In the displayPost() also retreiving info()
+ * 2. Using the html templates of post and comment, injecting firebase collection data using queryselector.
  * 3. Add onclick events functionality for choosen elements.
  */
 var newPost
@@ -189,6 +191,7 @@ displayPost();
 
 /**
  * Function where a user clicks the like button it will increment the value by one and write to firebase.
+ * We are writing to the posts collection and updating the field 'likes'.
  *
  * @param postID used to determine which like button belongs to which post.
  */
