@@ -4,12 +4,16 @@
     box-sizing: border-box;
 }
 
-#second-nav {
+#both-navs {
     z-index: 1;
     position: sticky !important;
     top: 0px;
+}
+
+#second-nav {
     border-bottom: 1px solid gainsboro;
-  }
+    padding-bottom: 0;
+}
 
 .no-shadow {
     box-shadow: none !important;
@@ -139,11 +143,13 @@
     /* background: linear-gradient(to bottom right, #c90a6d, #ff48a0); */
     background: linear-gradient(to bottom right, #0a9cc9, rgb(124, 189, 233));
 }
+
 .toast {
     top: 20vh;
     position: absolute;
     transform: translate(1vw, 0px);
 }
+
 #toast-logo {
     width: 20px;
     height: 20px;

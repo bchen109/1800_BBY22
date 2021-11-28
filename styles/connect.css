@@ -4,6 +4,17 @@
     padding: 0;
 }
 
+#both-navs {
+    z-index: 1;
+    position: sticky !important;
+    top: 0px;
+}
+
+#second-nav {
+    border-bottom: 1px solid gainsboro;
+    padding-bottom: 0;
+}
+
 h1,
 h3 {
     text-align: center;
@@ -13,6 +24,7 @@ h3 {
     padding: 0 7vw 0 7vw;
     margin-bottom: 5vh;
 }
+
 .toast {
     top: 20vh;
     position: absolute;
@@ -61,11 +73,13 @@ h3 {
     width: 150px;
     border-radius: 10px;
 }
+
 .volunteer-info {
     padding: 10px;
     max-width: 300px;
 }
-.volunteer-info h4{
+
+.volunteer-info h4 {
     font-size: 20px;
 }
 
@@ -81,13 +95,13 @@ h3 {
     font-size: 17px;
     border-radius: 70px;
     box-shadow: 0 13px 22px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 16%);
-  }
+}
 
-.blue{
+.blue {
     background: linear-gradient(to bottom right, #0a9cc9, rgb(124, 189, 233));
 }
 
-.gray{
+.gray {
     background-color: rgb(182, 182, 182);
 }
 
@@ -197,15 +211,16 @@ h3 {
         width: 150px;
         clip-path: circle();
     }
+
     .volunteer-info {
-        margin:  0 auto;
+        margin: 0 auto;
         margin-top: -5px;
         padding: 10px;
         max-width: 300px;
     }
-    
-    
-    
+
+
+
     #buttons {
         width: 300px;
     }

@@ -16,50 +16,52 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-info">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Student Connect</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="profile.html">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="settings.html">Settings</a>
-          </li>
-          <li class="nav-item">
-            <a id="logout" class="nav-link logout" href="#">Logout</a>
-          </li>
-        </ul>
+  <div id="both-navs">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Student Connect</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="profile.html">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="settings.html">Settings</a>
+            </li>
+            <li class="nav-item">
+              <a id="logout" class="nav-link logout" href="#">Logout</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white" id="second-nav">
-    <div class="container-fluid justify-content-evenly">
-      <a href="home.html" class="home" style="color: black;">
-        <span class="material-icons" style="font-size: 45px;">
-          home
-        </span>
-      </a>
-      <a href="connect.html" class="home" style="color: black;">
-        <span class="material-icons" style="font-size: 45px;">
-          people
-        </span>
-      </a>
-      <a href="notifications.html" class="home" style="color: black;">
-        <span class="material-icons" style="font-size: 45px;">
-          notifications
-        </span>
-      </a>
-    </div>
-  </nav>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white" id="second-nav">
+      <div class="container-fluid justify-content-evenly">
+        <a href="home.html" class="home" style="color: black;">
+          <span class="material-icons" style="font-size: 45px;">
+            home
+          </span>
+        </a>
+        <a href="connect.html" class="home" style="color: black;">
+          <span class="material-icons" style="font-size: 45px;">
+            people
+          </span>
+        </a>
+        <a href="notifications.html" class="home" style="color: black;">
+          <span class="material-icons" style="font-size: 45px;">
+            notifications
+          </span>
+        </a>
+      </div>
+    </nav>
+  </div>
   <div id="container" class="container text-center">
     <div class="wrapper no-shadow">
       <div class="top-icons">
@@ -69,9 +71,7 @@
       </div>
 
       <div class="profile">
-        <img
-          src="images/random_guy.jpg"
-          class="thumbnail" id="profilePicture">
+        <img src="images/random_guy.jpg" class="thumbnail" id="profilePicture">
         <div class="check"><i class="fas fa-check"></i></div>
         <h3 class="name" id="fullname">Default</h3>
         <p class="title" id="occupation">Default</p>
@@ -144,7 +144,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
-  </script>
+    </script>
 
   <script src="https://www.gstatic.com/firebasejs/ui/6.0.0/firebase-ui-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>

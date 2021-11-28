@@ -4,6 +4,17 @@
     padding: 0;
 }
 
+#both-navs {
+    z-index: 1;
+    position: sticky !important;
+    top: 0px;
+}
+
+#second-nav {
+    border-bottom: 1px solid gainsboro;
+    padding-bottom: 0;
+}
+
 h1 {
     text-align: center;
     margin: 5vh;

@@ -46,6 +46,10 @@ Set the font-family content used for the HTML content.
   font-family: 'Verdana';
 }
 /******************************************************************************************************************/
+#second-nav{
+  border-bottom: 1px solid gainsboro;
+  padding-bottom: 0;
+}
 
 #title {
   text-align: center;
