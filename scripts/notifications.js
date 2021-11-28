@@ -12,6 +12,10 @@ function redirectIfNotLoggedIn() {
 }
 redirectIfNotLoggedIn();
 
+function viewComment() {
+    window.location.assign("home.html");
+}
+
 /**
  * Create a bootstrap card that will display noficiation information to the user
  */
@@ -32,8 +36,8 @@ function createCard(type, imageLink, time, description, user, notificationId) {
         buttonLeft = "View";
         buttonRight = "Dismiss";
         notificationType = "notification";
-        processFunction = "viewNotification();";
-        dismissFunction = "dismissNotification();";
+        processFunction = "viewComment();";
+        dismissFunction = "dismissNotification('" + notificationId + "');";
     }
     // Create the card container
     let cardBody = document.createElement("div");

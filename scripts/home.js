@@ -139,8 +139,10 @@ async function displayPost() {
       // Assign the date value to the element.
       const date = new Date(totalPosts[i].date.seconds * 1000);
       const dateValue = date.toLocaleString(undefined, {
-        month: "short", day: "numeric",
-        hour: "numeric", minute: "numeric"
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric"
       })
       newPost.querySelector('.timestamp').innerText = dateValue;
 
@@ -160,7 +162,7 @@ async function displayPost() {
       db.collection("posts").doc(postId)
         .onSnapshot((doc) => {
           document.getElementById(postId).querySelector(".likeCounter").innerText = doc.data().likes;
-      })
+        })
 
       document.querySelector("#" + postId + " .add-comment").addEventListener("click", newComment.bind(null, postId));
 
@@ -246,6 +248,18 @@ async function populateComment(commentId, postId) {
     });
 }
 
+/**
+ * This function returns the current date in this format YYYY-MM-DD HH:MM
+ * @returns Returns the current date
+ */
+function getDate() {
+  let today = new Date();
+  let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  let time = today.getHours() + ":" + today.getMinutes();
+  let dateTime = date + ' ' + time;
+  return dateTime;
+}
+
 async function newComment(postId) {
   let commentInput = document.querySelector("#" + postId + " .comment-input").value;
   if (!commentInput.trim()) {
@@ -253,6 +267,7 @@ async function newComment(postId) {
     return 1;
   }
   //console.log(commentInput);
+  let postUser;
   db.collection("comments").add({
       user: userId,
       fullName: userName,
@@ -268,6 +283,24 @@ async function newComment(postId) {
     .catch(function (error) {
       console.error("Error adding document: ", error);
     });
+
+  await db.collection("posts").doc(postId).get().then(function (doc) {
+    postUser = doc.data().user;
+  });
+
+
+  db.collection("notifications").add({
+    date: getDate(),
+    description: "New comment from " + userName,
+    fromuser: String(userId),
+    title: "New Comment",
+    touser: String(postUser),
+    type: "comment"
+  }).then(function (newNotificationId) {
+    db.collection("userdata").doc(postUser).update({
+      notifications: firebase.firestore.FieldValue.arrayUnion(String(newNotificationId.id))
+    })
+  });
 
   document.querySelector("#" + postId + " .comment-input").value = "";
 
@@ -288,6 +321,7 @@ async function newComment(postId) {
  * and redirect them back to the login.html page.
  */
 document.getElementById("logout").addEventListener("click", logout);
+
 function logout() {
   console.log("logging out user");
   firebase.auth().signOut().then(() => {
