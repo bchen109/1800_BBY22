@@ -150,7 +150,8 @@ function onLoad() {
 }
 
 /**
- * This function retrieves the current date.
+ * This function returns the current date in this format YYYY-MM-DD HH:MM
+ * @returns Returns the current date
  */
 function getDate() {
     let today = new Date();
