@@ -13,6 +13,10 @@
   text-align: center;
 }
 
+nav {
+  padding: 0 0 !important;
+}
+
 #banner {
   max-width: 700px;
   width: 80%;
