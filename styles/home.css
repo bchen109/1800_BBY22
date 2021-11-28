@@ -1,4 +1,15 @@
+#both-navs{
+  z-index: 1;
+  position: sticky !important;
+  top: 0px;
+}
+
+#second-nav{
+  border-bottom: 1px solid gainsboro;
+}
+
 #title {
+  margin-top: 7px;
   text-align: center;
 }
 

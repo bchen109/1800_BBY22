@@ -69,10 +69,30 @@ h3 {
     font-size: 20px;
 }
 
+.btn {
+    color: #fff;
+    width: 130px;
+    height: 42px;
+    outline: none;
+    border: none;
+    display: block;
+    cursor: pointer;
+    font-weight: 300;
+    font-size: 17px;
+    border-radius: 70px;
+    box-shadow: 0 13px 22px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 16%);
+  }
 
+.blue{
+    background: linear-gradient(to bottom right, #0a9cc9, rgb(124, 189, 233));
+}
+
+.gray{
+    background-color: rgb(182, 182, 182);
+}
 
 #buttons {
-    width: 300px;
+    width: 500px;
     padding-top: 5vh;
     padding-bottom: 10vh;
     margin: auto;
@@ -187,6 +207,6 @@ h3 {
     
     
     #buttons {
-        width: 200px;
+        width: 300px;
     }
 }

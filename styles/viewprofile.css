@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+#second-nav {
+    z-index: 1;
+    position: sticky !important;
+    top: 0px;
+    border-bottom: 1px solid gainsboro;
+  }
+
 .no-shadow {
     box-shadow: none !important;
 }
