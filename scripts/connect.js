@@ -15,6 +15,14 @@ redirectIfNotLoggedIn();
 
 /**
  * This function creates a boot strap card and adds it to the DOM to show a list of connections that this user is currently connected to
+ * 
+ * @param {String} userName to use to create the card
+ * @param {String} userNationality the nationality of the user
+ * @param {String} userLanguage languages the user speaks
+ * @param {String} userStudy the field of study of the user
+ * @param {String} userHobby hobbies of the user
+ * @param {String} imageLink the linke to the image
+ * @param {String} connectionId the id of the user
  */
 function connectionCard(userName, userNationality, userLanguage, userStudy, userHobby, imageLink,
     connectionId) {
@@ -97,6 +105,7 @@ function deleteVolunteers() {
 /**
  * This function retreives a list of volunteers based on the current useres field of study and saves them
  * inside an array
+ * @returns a list of volunteers
  */
 async function getVolunteers() {
     let userId = localStorage.getItem("userId");
@@ -162,7 +171,7 @@ function getDate() {
 }
 
 /**
- * This function handles what happens when the user wants to connect with a voluntter.
+ * This function handles what happens when the user wants to connect with a volunteer.
  */
 async function sendConnectRequest() {
     let currentVolunteerId = volunteerIds[currentIndex - 1];
@@ -278,6 +287,9 @@ main();
  */
 document.getElementById("logout").addEventListener("click", logout);
 
+/**
+ * Logs the user out.
+ */
 function logout() {
     console.log("logging out user");
     firebase.auth().signOut().then(() => {

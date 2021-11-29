@@ -1,5 +1,6 @@
 /**
  * Thie function returns the field of study that corresponds with the number given.
+ * @return the field of study the user has entered
  */
 function getFieldOfStudy(number) {
     if (number == 1) {
@@ -40,6 +41,8 @@ function cancelButton() {
 
 /**
  * Updates the user information with the new information the user has entered
+ * 
+ * @param {*} event from the button
  */
 function updateUser(event) {
     event.preventDefault();
@@ -107,6 +110,7 @@ function insertData() {
 
 /**
  * This function retrieves the user document from firebase and populates onto the DOM.
+ * @param {*} userId to retrieve the user document from
  */
 async function getUserDoc(userId) {
     const cityRef = db.collection('userdata').doc(userId);
@@ -208,6 +212,9 @@ document.getElementById("submit").addEventListener('click', updateUser, false);
  */
 document.getElementById("logout").addEventListener("click", logout);
 
+/**
+ * Logs the user out.
+ */
 function logout() {
     console.log("logging out user");
     firebase.auth().signOut().then(() => {
