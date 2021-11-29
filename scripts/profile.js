@@ -51,7 +51,7 @@ async function getUserDoc(userId) {
         document.getElementById("nationality").innerText = data.nationality;
         document.getElementById("languages").innerText = data.languages;
         document.getElementById("hobbies").innerText = data.hobbies;
-        document.getElementById("contactinfo").innerText = data.email;
+        document.getElementById("contactinfo").innerHTML = data.email;
         firebase.app().storage().ref("users").child(userId + "/profile.jpg").getDownloadURL().then(imgUrl => {
             document.getElementById("profilePicture").src = imgUrl;
         }).catch(function (error) {
