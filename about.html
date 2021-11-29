@@ -20,7 +20,19 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link type="text/css" href="styles/my_style.css">
   <style>
-    h1, h2 {
+    #both-navs {
+      z-index: 1;
+      position: sticky !important;
+      top: 0px;
+    }
+
+    #second-nav {
+      border-bottom: 1px solid gainsboro;
+      padding-bottom: 0;
+    }
+
+    h1,
+    h2 {
       text-align: center;
     }
 
@@ -48,10 +60,10 @@
       text-decoration: none;
       color: #555;
     }
-    .reduce{
+
+    .reduce {
       padding-bottom: 0 !important;
     }
-
   </style>
 </head>
 
@@ -61,50 +73,52 @@
   <!-- The following is HTML for layout -->
   <!-------------------------------------->
   <!-- Header Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-info">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Logo</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="profile.html">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="settings.html">Settings</a>
-          </li>
-          <li class="nav-item">
-            <a id="logout" class="nav-link" href="#">Logout</a>
-          </li>
-        </ul>
+  <div id="both-navs">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Logo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="settings.html">Settings</a>
+            </li>
+            <li class="nav-item">
+              <a id="logout" class="nav-link" href="#">Logout</a>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <div class="container-fluid justify-content-evenly">
-      <a href="home.html" class="home" style="color: black;">
-        <span class="material-icons" style="font-size: 45px;">
-          home
-        </span>
-      </a>
-      <a href="connect.html" class="home" style="color: black;">
-        <span class="material-icons" style="font-size: 45px;">
-          people
-        </span>
-      </a>
-      <a href="notifications.html" class="home" style="color: black;">
-        <span class="material-icons" style="font-size: 45px;">
-          notifications
-        </span>
-      </a>
-    </div>
-  </nav>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white" id="second-nav">
+      <div class="container-fluid justify-content-evenly">
+        <a href="home.html" class="home" style="color: black;">
+          <span class="material-icons" style="font-size: 45px;">
+            home
+          </span>
+        </a>
+        <a href="connect.html" class="home" style="color: black;">
+          <span class="material-icons" style="font-size: 45px;">
+            people
+          </span>
+        </a>
+        <a href="notifications.html" class="home" style="color: black;">
+          <span class="material-icons" style="font-size: 45px;">
+            notifications
+          </span>
+        </a>
+      </div>
+    </nav>
+  </div>
   <!-- welcome and main part of the page -->
 
   <div class="bg-light">

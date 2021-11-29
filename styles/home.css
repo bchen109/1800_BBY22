@@ -47,6 +47,8 @@ form {
 .timestamp {
   justify-self: end;
   align-self: center;
+  margin-right: 10px;
+  font-size: 15px;
 }
 
 .likeIcon {

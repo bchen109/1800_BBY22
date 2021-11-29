@@ -1,8 +1,22 @@
-
-
 h1 {
     text-align: center;
     margin-bottom: 30px;
+}
+
+#both-navs {
+    z-index: 1;
+    position: sticky !important;
+    top: 0px;
+}
+
+#second-nav {
+    border-bottom: 1px solid gainsboro;
+    padding-bottom: 0;
+}
+
+#second-nav {
+    border-bottom: 1px solid gainsboro;
+    padding-bottom: 0;
 }
 
 .vertical-center {
@@ -21,7 +35,7 @@ h1 {
     padding: 0.2rem 1rem;
 }
 
-.card{
+.card {
     padding-bottom: 0.5rem;
     max-width: 500px;
     margin: auto;
@@ -32,11 +46,12 @@ h1 {
     padding: 0.2rem;
 }
 
-.author-message{
+.author-message {
     display: grid;
     grid-auto-flow: column;
     align-items: center;
 }
+
 .card-text {
     margin-left: 0.1rem;
     margin-right: 0.1rem;
@@ -50,49 +65,51 @@ img {
     margin-left: 1vw;
 }
 
-.card button{
+.card button {
     font-size: 18px !important;
 }
 
 
 .btn {
-  color: #fff;
-  width: 100px;
-  height: 35px;
-  outline: none;
-  border: none;
-  display: block;
-  cursor: pointer;
-  font-weight: 300;
-  margin-left: 0 auto;
-  margin-right: 0 auto;
-  font-size: 17px;
-  border-radius: 70px;
-  box-shadow: 0 13px 22px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 16%);
+    color: #fff;
+    width: 100px;
+    height: 35px;
+    outline: none;
+    border: none;
+    display: block;
+    cursor: pointer;
+    font-weight: 300;
+    margin-left: 0 auto;
+    margin-right: 0 auto;
+    font-size: 17px;
+    border-radius: 70px;
+    box-shadow: 0 13px 22px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 16%);
 }
 
-.btn-success{
+.btn-success {
     background: linear-gradient(to bottom right, #0a9cc9, rgb(124, 189, 233));
 }
 
-.btn-secondary{
+.btn-secondary {
     background-color: rgb(182, 182, 182);
 }
 
-@media(max-width: 600px){
+@media(max-width: 600px) {
     img {
         width: 70px;
         height: 70px;
         clip-path: circle(30px);
         margin-left: 1vw;
     }
-    .card{
+
+    .card {
         font-size: 16px;
     }
-    .card button{
+
+    .card button {
         font-size: 15px !important;
     }
-    
+
     .btn-sm {
         width: 70px;
         height: 35px;
