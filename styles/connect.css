@@ -15,6 +15,17 @@
     padding-bottom: 0;
 }
 
+#title{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#quote{
+    font-size: 20px;
+    color: dimgray;
+    margin-bottom: 15px;
+}
+
 h1,
 h3 {
     text-align: center;

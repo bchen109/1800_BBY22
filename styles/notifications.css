@@ -14,9 +14,8 @@ h1 {
     padding-bottom: 0;
 }
 
-#second-nav {
-    border-bottom: 1px solid gainsboro;
-    padding-bottom: 0;
+#title{
+    margin-top: 10px;
 }
 
 .vertical-center {

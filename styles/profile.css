@@ -9,14 +9,23 @@
   padding-bottom: 0;
 }
 
+#heading{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+#heading h1{
+  font-weight: 200;
+}
+
 #inner {
   display: grid;
   row-gap: 10px;
   justify-items: center;
   align-items: center;
-  margin-top: 20px;
   margin-bottom: 40px;
 }
+
 
 #profilePicture {
   border-radius: 50%;

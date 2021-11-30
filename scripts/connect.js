@@ -146,7 +146,7 @@ function onLoad() {
     document.getElementById("occupation").innerText = volunteerData.occupation;
     document.getElementById("nationality-languages").innerText = volunteerData.nationality + "/ " +
         volunteerData.languages;
-    document.getElementById("quote").innerText = volunteerData.quote;
+    document.getElementById("quote").innerText = "\"" + volunteerData.quote + "\"";
     document.getElementById("profilelink").setAttribute("href", "viewprofile.html?userid=" + volunteerId);
 
     console.log(volunteerId + "/profile.jpg");
