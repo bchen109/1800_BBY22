@@ -1,10 +1,10 @@
-#both-navs{
+#both-navs {
   z-index: 1;
   position: sticky !important;
   top: 0px;
 }
 
-#second-nav{
+#second-nav {
   border-bottom: 1px solid gainsboro;
   padding-bottom: 0;
 }
@@ -82,9 +82,10 @@ form {
   border: 1px solid rgb(207, 207, 207);
 }
 
-.show-comments{
+.show-comments {
   margin-bottom: 15px;
 }
+
 .show-comments:hover {
   cursor: pointer;
 }
@@ -136,6 +137,7 @@ form {
   margin-top: -18px;
   margin-left: 60px;
 }
+
 .btn {
   color: #fff;
   width: 130px;

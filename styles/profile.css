@@ -1,20 +1,20 @@
-#both-navs{
+#both-navs {
   z-index: 1;
   position: sticky !important;
   top: 0px;
 }
 
-#second-nav{
+#second-nav {
   border-bottom: 1px solid gainsboro;
   padding-bottom: 0;
 }
 
-#heading{
+#heading {
   margin-top: 10px;
   margin-bottom: 20px;
 }
 
-#heading h1{
+#heading h1 {
   font-weight: 200;
 }
 
@@ -50,15 +50,15 @@
   box-shadow: 0 13px 22px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 16%);
 }
 
-.btn-success{
+.btn-success {
   background: linear-gradient(to bottom right, #0a9cc9, rgb(124, 189, 233));
 }
 
-.btn-primary{
+.btn-primary {
   background-color: rgb(182, 182, 182);
 }
 
-.needs-validation{
+.needs-validation {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
@@ -68,7 +68,7 @@
   row-gap: 1vh;
   column-gap: 2vw;
 }
- 
+
 /* No volunteer checkbox anymore?
 #volunteer{
   display: grid;
@@ -91,16 +91,17 @@
   align-items: center;
 }
 
-.submission input{
+.submission input {
   width: 120px;
   height: 50px;
 }
 
-@media (max-width: 700px){
-  .needs-validation{
-      grid-template-columns: 1fr;
-      row-gap: 3vh;
-  }    
+@media (max-width: 700px) {
+  .needs-validation {
+    grid-template-columns: 1fr;
+    row-gap: 3vh;
+  }
+
   .submission {
     margin-top: 4vh;
     justify-content: center;

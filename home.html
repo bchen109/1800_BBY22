@@ -6,16 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
 
-  <!-- Third party CSS source for header-->
+  <!--Third party CSS-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/home.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!--Local CSS and Favicon-->
+  <link rel="stylesheet" href="styles/home.css" />
   <link href="/images/favicon.ico" rel="icon" type="image/x-icon" />
 </head>
 
 <body>
+
+  <!--Navbars-->
   <div id="both-navs">
     <nav class="navbar navbar-expand-lg navbar-light bg-info">
       <div class="container-fluid">
@@ -62,6 +66,8 @@
       </div>
     </nav>
   </div>
+
+    <!--Post Template-->
   <template id="CardTemplate">
     <div class="card m-4 post-container">
       <div class="d-flex justify-content-between profile">
@@ -110,6 +116,7 @@
     </div>
   </template>
 
+  <!--Comment Template-->
   <template id="comment-template">
     <div class="comment-body">
       <div class="commenter-profile">
@@ -120,6 +127,7 @@
     </div>
   </template>
 
+  <!--Page introduction-->
   <h1 id="title">Home</h1>
   <section id="banner">
     <h3 class="card-title">Welcome back, <span id="welcomeName"></span></h3>
@@ -128,6 +136,7 @@
     </form>
   </section>
 
+  <!--Div where posts will be populated-->
   <div id="container">
 
   </div>
@@ -151,6 +160,10 @@
 
   <!-- Link to the api keys for your firebase project -->
   <script src="scripts/firebaseAPI.js"></script>
+
+  <!--------------------------------------------------------------------->
+  <!-- JS files: Your own JavaScript functions included here    -->
+  <!--------------------------------------------------------------------->
   <script src="scripts/home.js"></script>
 </body>
 

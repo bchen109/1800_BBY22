@@ -1,34 +1,34 @@
-
 #header {
     margin-top: 3vh;
     margin-bottom: 4vh;
     text-align: center;
 }
 
-#container{
+#container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.needs-validation{
+.needs-validation {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     column-gap: 1vw;
 }
 
-label, button{
+label,
+button {
     font-size: 18px !important;
 }
 
-button{
+button {
     margin-top: 15px;
 }
 
 
-@media (max-width: 700px){
-    .needs-validation{
+@media (max-width: 700px) {
+    .needs-validation {
         grid-template-columns: 1fr;
-    }    
+    }
 }
