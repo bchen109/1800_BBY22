@@ -8,7 +8,7 @@
     <meta name="author" content="BCIT">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap, firebase-auth-ui -->
+    <!-- Third party CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css" />
@@ -152,7 +152,8 @@
     <!-- JS files: Your own JavaScript functions included here    -->
     <!--------------------------------------------------------------------->
 
-    <!--For the sign up page
+    <!--For the sign up page. Every time a user signs up, add a new document to the settings collection and create a settings
+         field (FK) that references the user's settings id.
         db.collection(settings).add({
                 privacy: true,
                 connections: true,
@@ -171,19 +172,9 @@
         
     -->
     <script>
-        function redirectIfNotLoggedIn() {
-            firebase.auth().onAuthStateChanged(user => {
-                // Check if the user is signed in:
-                if (!user) {
-                    console.log("User not logged in");
-                    window.location.replace("login.html");
-                }
-            })
-        }
-        redirectIfNotLoggedIn();
-        ///////////To be implemented in  signup page/////////////////
+        ///Page is not fully functional, there are still incomplete functions and logical errors.///
 
-        //////////////////////////////////////////////
+        //Global variables will be accessed and modified in functions throughout the code
         var currentUser;
         var privacyStatus;
         var connectionsStatus;
@@ -203,10 +194,13 @@
                         console.log(userSettingsId + typeof (userSettingsId));
                     })
             } else {
+                //If user is not logged in, redirect to login.html
                 console.log("User is not logged in.");
+                window.location.replace("login.html");
             }
         });
 
+        /*This function runs when the privacy toggle button is clicked. Then read from firebase and change current setting.*/
         function privacyToggle() {
             db.collection("settings").doc(userSettingsId)
                 .get()
@@ -224,6 +218,7 @@
                 });
         }
 
+        /*This function runs when the connections toggle button is clicked. Then read from firebase and change current setting.*/
         function connectionsToggle() {
             db.collection("settings").doc(userSettingsId)
                 .get()
@@ -240,7 +235,7 @@
                     }
                 });
         }
-
+        /*This function runs when the comments toggle button is clicked. Then read from firebase and change current setting.*/
         function commentsToggle() {
             db.collection("settings").doc(userSettingsId)
                 .get()
