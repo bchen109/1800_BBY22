@@ -58,7 +58,9 @@ function updateUser() {
 
 
 /**
- * This function retrieves parameter values from the url.
+ * This function retrieves values in the url parameters.
+ * @param {*} name parameter to retrieve
+ * @returns value of the parameter specified
  */
 function getParameter(name) {
     var url_string = window.location.href;
@@ -68,7 +70,8 @@ function getParameter(name) {
 }
 
 /**
- * This function handles the button click when the user tries to subit the survey form
+ * This function handles the button click to submit the survey.
+ * @param {*} e event from the button
  */
 function handleButtonClick(e) {
     if (e instanceof MouseEvent) {
@@ -78,7 +81,9 @@ function handleButtonClick(e) {
 }
 
 /**
- * Thie function returns the field of study that corresponds with the number given.
+ * This function returns the field of study with the corresponding value given.
+ * @param {*} number to get field of study with
+ * @returns field of study as a String
  */
 function getFieldOfStudy(number) {
     if (number == 1) {

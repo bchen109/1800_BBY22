@@ -18,6 +18,12 @@ function viewComment() {
 
 /**
  * Create a bootstrap card that will display noficiation information to the user
+ * @param {*} type of notification card to create
+ * @param {*} imageLink link of the image to use in the notification
+ * @param {*} time of when the notification was sent
+ * @param {*} description of the notification
+ * @param {*} user the notification was sent from
+ * @param {*} notificationId the documnet id of the notification
  */
 function createCard(type, imageLink, time, description, user, notificationId) {
     let buttonLeft, buttonRight, processFunction, notificationType, dismissFunction;
@@ -95,6 +101,7 @@ function createCard(type, imageLink, time, description, user, notificationId) {
 
 /**
  * Retrieves the current date.
+ * @returns the current date
  */
 function getDate() {
     let today = new Date();
@@ -106,6 +113,9 @@ function getDate() {
 
 /**
  * Function that handles the "Accept" button when the user decides to accept a connection request.
+ * 
+ * @param {*} user the document id of the user who sent the connecion request
+ * @param {*} notificationId the document id of the notificaiton to delete
  */
 async function acceptConnection(user, notificationId) {
     let currentUser = localStorage.getItem("userId");
@@ -156,6 +166,8 @@ async function acceptConnection(user, notificationId) {
 
 /**
  * Function that handles the "Decline" button when the user wants to decline a volunteer request.
+ * @param {*} user the document id of the user that sent the connection request
+ * @param {*} notificationId the document id of the notification to delete
  */
 function declineConnection(user, notificationId) {
     let currentUser = localStorage.getItem("userId");
@@ -183,6 +195,8 @@ function declineConnection(user, notificationId) {
 
 /**
  * Function that redirects the user to the correct page which shows more information about this notification
+ * @param {*} page to redirect the user to
+ * @param {*} notificaitonId the document id of the notification to remove from the page
  */
 function viewNotification(page, notificationId) {
     window.location.replace(page);
@@ -191,6 +205,7 @@ function viewNotification(page, notificationId) {
 
 /**
  * Function that handles the "Dismiss" button when the user wants to dismiss a notification
+ * @param {*} notificaitonId the document id of the notification to remove from the page
  */
 function dismissNotification(notificationId) {
     let currentUser = localStorage.getItem("userId");
@@ -207,6 +222,7 @@ function dismissNotification(notificationId) {
 
 /**
  * Function that deletes the notification card from the DOM once it is no longer needed
+ * @param {*} notificaitonId the document id of the notification to remove from the page
  */
 function deleteCard(notificaitonId) {
     document.getElementById(notificaitonId).remove();

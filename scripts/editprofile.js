@@ -1,5 +1,6 @@
 /**
  * Thie function returns the field of study that corresponds with the number given.
+ * @param {*} number value to use to find the corresponding field of study
  * @return the field of study the user has entered
  */
 function getFieldOfStudy(number) {
